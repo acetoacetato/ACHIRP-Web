@@ -108,7 +108,7 @@ const httpsServer = https.createServer(/*credentials,*/ app);
 app.listen(process.env.PORT || 8080)
 
 
-httpServer.listen(80, () => {
+httpServer.listen(process.env.PORT, () => {
 	console.log('HTTP Server running on port 80');
 });
 
