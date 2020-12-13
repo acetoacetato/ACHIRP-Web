@@ -1,0 +1,12 @@
+<h2>Buscar noticias</h2>
+<form action="/authors" method="GET">
+<label for="titulo">Titulo:</label>
+<input type="text" name="titulo" id="titulo" value="<%= searchOptions.titulo %>">
+<button type="submit">Buscar</button>
+</form>
+
+<br>
+
+<% noticias.forEach(noticia => { %>
+    <div><%= noticia.titulo %> : <%= noticia.descripcion %> )</div>
+<% }) %>

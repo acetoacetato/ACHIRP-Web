@@ -1,47 +1,972 @@
-Middle
-<link type="text/css" rel="stylesheet" href="css/jqueryTerminal.css">
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<div id="term_demo"></div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<script src="js/jqueryTerminal.js"></script>
+    <title>EventUp - Event and Conference Template</title>
 
-<script>
-var terminalGui;
-jQuery(async function($, undefined) {
-    var path;
-    await $.post("/authors/path", function(response){
-        console.log(response)
-        path = response.message + '> ';
-    })
-    console.log(path)
-    terminalGui = $('#term_demo').terminal(function(command) {
-        if (command !== '') {
-            try {
-                console.log("holi");
-                that = this
-                // Ejecuta el comando
-                // TODO: meter esto a un backend para poder probar que funke
-                $.post("/authors/terminal",{
-                    comando : command
-                }, function (response){
-                    that.echo(new String(response.message));
-                    
-                    terminalGui.set_prompt(response.route);
-                });
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" >
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="assets/fonts/line-icons.css">
+    <!-- Nivo Lightbox -->
+    <link rel="stylesheet" type="text/css" href="assets/css/nivo-lightbox.css" >
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+
+  </head>
+  <body>
+
+    <!-- Count Bar Start -->
+    <section id="count">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-10">
+            <div class="count-wrapper text-center">
+              <div class="time-countdown wow fadeInUp" data-wow-delay="0.2s">
+                <div id="clock" class="time-count"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Count Bar End -->
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <!-- About Section Start -->
+    <section id="about" class="section-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-xs-12">
+            <div class="img-thumb">
+              <img class="img-fluid" src="assets/img/about/img1.jpg"  alt="">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-xs-12">
+            <div class="about-content">
+              <div>
+                <div class="about-text">  
+                  <h2>Quiénes Somos</h2>
+                  <p>La Asociación Chilena de Reconocimiento de Patrones (ACHIRP) es una asociación científica sin fines de lucro. Su propósito es contribuir al desarrollo del área de la computación denominada Reconocimiento de Patrones.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-6 col-md-12 col-xs-12">
+            <div class="about-content">
+              <div>
+                <div class="about-text">  
+                  <h2>Misión</h2>
+                  <p>Promover el estudio y difusión del área de Reconocimiento de Patrones, en temas tales como:</p>
+                </div>
+                <ul class="stylish-list mb-3">
+                  <li><i class="lni-check-mark-circle"></i>Reconocimiento de formas</li>
+                  <li><i class="lni-check-mark-circle"></i>Análisis e Interpretación de imágenes y señales</li>
+                  <li><i class="lni-check-mark-circle"></i>Modelos matemáticos para reconocimiento de patrones</li>
+                  <li><i class="lni-check-mark-circle"></i>Reconocimiento de voz</li>
+                  <li><i class="lni-check-mark-circle"></i>Visión por computador y teledetección</li>
+                  <li><i class="lni-check-mark-circle"></i>Reconocimiento de patrones en astronomía y medicina</li>
+                  <li><i class="lni-check-mark-circle"></i>Diseño de hardware y software para el reconocimiento</li>
+                  <li><i class="lni-check-mark-circle"></i>Máquinas de aprendizaje y de minería de datos</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-xs-12">
+            <div class="img-thumb">
+              <img class="img-fluid" src="assets/img/about/img2.png" alt="">
+            </div>
+          </div>
+
+
+          <div class="col-lg-6 col-md-12 col-xs-12">
+            <div class="img-thumb">
+              <img class="img-fluid" src="assets/img/about/img3.jpg" alt="">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-xs-12">
+            <div class="about-content">
+              <div>
+                <div class="about-text">  
+                  <h2>Objetivos</h2>
+                </div>
+                <ul class="stylish-list mb-3">
+                  <li><i class="lni-check-mark-circle"></i>Contribuir al desarrollo personal de sus socios</li>
+                  <li><i class="lni-check-mark-circle"></i>Establecer relaciones científicas con otras organizaciones</li>
+                  <li><i class="lni-check-mark-circle"></i>Divulgar y promover información al público</li>
+                  <li><i class="lni-check-mark-circle"></i>Crear comités y grupos especializados</li>
+                  <li><i class="lni-check-mark-circle"></i>Asesorar a organismos de gobierno</li>
+                  <li><i class="lni-check-mark-circle"></i>Estimular la creación de sociedades científicas</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <!-- About Section End -->
+
+    <!-- Video Section Start -->
+    <div class="ready-to-play">
+      <video id="bgvid" class="stop" loop>
+        <source src="assets/video/event.webm" type="video/mp4">
+      </video>
+      <div id="polina" class="video-text">
+        <div class="tb-t">
+            <div class="tb-c">
+              <div class="polina"><button><i class='lni-play'></i></button></div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- Video Section End -->
+
+    <!-- Information Bar Start -->
+    <section id="information-bar">
+      <div class="container">
+        <div class="row inforation-wrapper">
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <ul>
+              <li>
+                <i class="lni-map-marker"></i>
+              </li>
+              <li><span><b>Location</b> Maria Hall, NY, USA</span></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <ul>
+              <li>
+                <i class="lni-calendar"></i>
+              </li>
+              <li><span><b>Date & Time</b> 10am - 7pm, 15th Oct</span></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <ul>
+              <li>
+                <i class="lni-mic"></i>
+              </li>
+              <li><span><b>Speakers</b> 25 Professionals</span></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <ul>
+              <li>
+                <i class="lni-user"></i>
+              </li>
+              <li><span><b>Seats</b> 100 People</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Information Bar End -->
+
+     <!-- intro Section Start -->
+    <section id="intro" class="intro section-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="section-title-header text-center">
+              <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Why You Should Join?</h2>
+              <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
+            </div>
+          </div>
+        </div>
+        <div class="row intro-wrapper">
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="single-intro-text mb-70">
+               <i class="lni-microphone"></i>
+               <h3>Great Speakers</h3>
+               <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus mollitia, excepturi.
+               </p>
+               <span class="count-number">01</span>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="single-intro-text">
+               <i class="lni-users"></i>
+               <h3 class="ts-title">New People</h3>
+               <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus mollitia, excepturi.
+               </p>
+               <span class="count-number">02</span>
+            </div>
+            <div class="border-shap left"></div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="single-intro-text mb-70">
+               <i class="lni-bullhorn"></i>
+               <h3>Global Event</h3>
+               <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus mollitia, excepturi.
+               </p>
+               <span class="count-number">03</span>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="single-intro-text mb-70">
+               <i class="lni-heart"></i>
+               <h3>Get Inspired</h3>
+               <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus mollitia, excepturi.
+               </p>
+               <span class="count-number">04</span>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="single-intro-text mb-70">
+               <i class="lni-cup"></i>
+               <h3>Networking Session</h3>
+               <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus mollitia, excepturi.
+               </p>
+               <span class="count-number">05</span>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="single-intro-text mb-70">
+               <i class="lni-gallery"></i>
+               <h3>Meet New Faces</h3>
+               <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus mollitia, excepturi.
+               </p>
+               <span class="count-number">06</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- intro Section End -->
+  
+    <!-- Counter Area Start-->
+    <section class="counter-section section-padding">
+      <div class="container">
+        <div class="row">
+          <!-- Counter Item -->
+          <div class="col-lg-3 col-md-6 col-xs-12 work-counter-widget">
+            <div class="counter">
+              <div class="icon">
+                <i class="lni-mic"></i>
+              </div>
+              <div class="counter-content">
+                <div class="counterUp">42</div>
+                <p>Spekers</p>
+              </div>
+            </div>
+          </div>
+          <!-- Counter Item -->
+          <div class="col-lg-3 col-md-6 col-xs-12 work-counter-widget">
+            <div class="counter">
+              <div class="icon">
+                <i class="lni-bulb"></i>
+              </div>
+              <div class="counter-content">
+                <div class="counterUp">800</div>
+                <p>Seats</p>
+              </div>
+            </div>
+          </div>
+          <!-- Counter Item -->
+          <div class="col-lg-3 col-md-6 col-xs-12 work-counter-widget">
+            <div class="counter">
+              <div class="icon">
+                <i class="lni-briefcase"></i>
+              </div>
+              <div class="counter-content">
+                <div class="counterUp">24</div>
+                <p>Sponsors</p>
+              </div>
+            </div>
+          </div>
+          <!-- Counter Item -->
+          <div class="col-lg-3 col-md-6 col-xs-12 work-counter-widget">
+            <div class="counter">
+              <div class="icon">
+                <i class="lni-coffee-cup"></i>
+              </div>
+              <div class="counter-content">
+                <div class="counterUp">56</div>
+                <p>Sessions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Counter Area End-->
+
+    <!-- Schedule Section Start -->
+    <section id="schedules" class="schedule section-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="section-title-header text-center">
+              <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Eventos</h2>
+              <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          
+          <div class="col-12">
+            <div class="schedule-area row wow fadeInDown" data-wow-delay="0.3s">
+              <div class="schedule-tab-content col-12 clearfix">
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="monday" role="tabpanel" aria-labelledby="monday-tab">
+                    <div id="accordion">
+
+                      <% var id = 0 
+                        eventos.forEach( evento => { 
+                        id++
+                      %>
+                          
+                        <div class="card">
+                          <div id="heading<%= id %>">
+                            <div class="schedule-slot-time">
+                              <span style="text-align: center;"> <%= evento.fecha.toLocaleString('es-CL', {day: 'numeric', month: 'long'}) %><br> 12:00 - 14:45 hrs.</span> <br>
+                            </div>
+                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapse<%= id %>" aria-expanded="false" aria-controls="collapse<%= id %>">
+                              <div class="images-box">
+                                <img class="img-fluid" src="assets/img/speaker/speakers-1.jpg" alt="">
+                              </div>                     
+                              <h4><%= evento.titulo %></h4>
+                              <h5 class="name"> <%= evento.expositor %></h5>
+                            </div>
+                          </div>
+                          <div id="collapse<%= id %>" class="collapse" aria-labelledby="heading<%= id %>" data-parent="#accordion">
+                            <div class="card-body">
+                              <p> <%= evento.desc %> </p>
+                              <p> <a href="<%= evento.link %>" target="_blank">Slides</a> </p>
+                              <div class="location">
+                                <span>Ubicación:</span> <%= evento.ubicacion %>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      <% }) %>
+
+
+                      
+
+
+
+
+                      
+                      
+                  
+                  
+                  
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Schedule Section End -->
+
+    <!-- Team Section Start -->
+    <section id="team" class="section-padding text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="section-title-header text-center">
+              <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Directorio</h2>
+              <p class="wow fadeInDown" data-wow-delay="0.2s">Nuestro directorio está compuesto por excelentes profesionales.</p>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-bt">
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <!-- Team Item Starts -->
+            <div class="team-item wow fadeInUp" data-wow-delay="0.2s">
+              <div class="team-img">
+                <img class="img-fluid" src="assets/img/team/hector.jpg" alt="">
+
+              </div>
+              <div class="info-text">
+                <h3><a href="#">HECTOR ALLENDE</a></h3>
+                <p>Presidente, PUCV</p>
+              </div>
+            </div>
+            <!-- Team Item Ends -->
+          </div>
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <!-- Team Item Starts -->
+            <div class="team-item wow fadeInUp" data-wow-delay="0.4s">
+              <div class="team-img">
+                <img class="img-fluid" src="assets/img/team/Marco-Mora-_4_.jpg" width="500" height="500" alt="">
+              </div>
+              <div class="info-text">
+                <h3><a href="#">MARCO MORA</a></h3>
+                <p>Vice-presidente, UCM</p>
+              </div>
+            </div>
+            <!-- Team Item Ends -->
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <!-- Team Item Starts -->
+            <div class="team-item wow fadeInUp" data-wow-delay="0.6s">
+              <div class="team-img">
+                <img class="img-fluid" src="assets/img/team/cesar astudillo3.jpeg" alt="">
+              </div>
+              <div class="info-text">
+                <h3><a href="#">CESAR ASTUDILLO</a></h3>
+                <p>Secretario, U.Talca</p>
+              </div>
+            </div>
+            <!-- Team Item Ends -->
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <!-- Team Item Starts -->
+            <div class="team-item wow fadeInUp" data-wow-delay="0.8s">
+              <div class="team-img">
+                <img class="img-fluid" src="assets/img/team/Jose_Jara12.jpg" alt="">
+              </div>
+              <div class="info-text">
+                <h3><a href="#">JOSE LUIS JARA</a></h3>
+                <p>Tesorero, USACH</p>
+              </div>
+            </div>
+            <!-- Team Item Ends -->
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <!-- Team Item Starts -->
+            <div class="team-item wow fadeInUp" data-wow-delay="1s">
+              <div class="team-img">
+                <img class="img-fluid" src="assets/img/team/SERGIO VELASTIN.jpg" alt="">
+              </div>
+              <div class="info-text">
+                <h3><a href="#">SERGIO VELASTIN</a></h3>
+                <p>Director asuntos internacionales, U.Carlos III</p>
+              </div>
+            </div>
+            <!-- Team Item Ends -->
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <!-- Team Item Starts -->
+            <div class="team-item wow fadeInUp" data-wow-delay="1.2s">
+              <div class="team-img">
+                <img class="img-fluid" src="assets/img/team/Miguel-Guevara-Entrevista-03.jpg" alt="">
+              </div>
+              <div class="info-text">
+                <h3><a href="#">MIGUEL GUEVARA</a></h3>
+                <p>Comité de ética, UPLA</p>
+              </div>
+            </div>
+            <!-- Team Item Ends -->
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <!-- Team Item Starts -->
+            <div class="team-item wow fadeInUp" data-wow-delay="1.4s">
+              <div class="team-img">
+                <img class="img-fluid" src="assets/img/team/paulo.jpg" alt="">
+              </div>
+              <div class="info-text">
+                <h3><a href="#">PAULO GONZÁLEZ</a></h3>
+                <p>Comité de ética, UCM</p>
+              </div>
+            </div>
+            <!-- Team Item Ends -->
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <!-- Team Item Starts -->
+            <div class="team-item wow fadeInUp" data-wow-delay="1.8s">
+              <div class="team-img">
+                <img class="img-fluid" src="assets/img/team/john.jpg" alt="">
+              </div>
+              <div class="info-text">
+                <h3><a href="#">JOHN ATKINSON</a></h3>
+                <p>Comité de ética, UAI</p>
+              </div>
+            </div>
+          </div>
+            <!-- Team Item Ends -->
+            <div class="col-lg-3 col-md-6 col-xs-12">
+              <!-- Team Item Starts -->
+              <div class="team-item wow fadeInUp" data-wow-delay="2.0s">
+                <div class="team-img">
+                  <img class="img-fluid" src="assets/img/team/josedelpiano.png" alt="">
+                </div>
+                <div class="info-text">
+                  <h3><a href="#">JOSÉ DELPIANO</a></h3>
+                  <p>Comisión revisora de cuentas, U. Los Andes</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-xs-12">
+                <!-- Team Item Starts -->
+                <div class="team-item wow fadeInUp" data-wow-delay="2.2s">
+                  <div class="team-img">
+                    <img class="img-fluid" src="assets/img/team/carlosvalle.png" alt="">
+                  </div>
+                  <div class="info-text">
+                    <h3><a href="#">CARLOS VALLE</a></h3>
+                    <p>Comisión revisora de cuentas, UPLA</p>
+                  </div>
+                </div>
+              </div>
+                <!-- Team Item Ends -->
+
+                <div class="col-lg-3 col-md-6 col-xs-12">
+                  <!-- Team Item Starts -->
+                  <div class="team-item wow fadeInUp" data-wow-delay="2.4s">
+                    <div class="team-img">
+                      <img class="img-fluid" src="assets/img/team/mauricioaraya.jpg" alt="">
+                    </div>
+                    <div class="info-text">
+                      <h3><a href="#">MAURICIO ARAYA</a></h3>
+                      <p>Comisión revisora de cuentas, UTFSM</p>
+                    </div>
+                  </div>
+                </div>
+
+                  <!-- Team Item Ends -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Team Section End -->
+
+
+    <!-- Event Slides Section Start -->
+    <section id="event-up" class="section-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="section-title-header text-center">
+              <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Galería</h2>
+              <p class="wow fadeInDown" data-wow-delay="0.2s">Revive los momentos de nuestra organización. </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <% 
+            var i =0;
+            files.forEach( filename => { %>
+
+            <% if(i%4==0){%>
+              <br/>
+            <%}%>
+
+            <div class="col-lg-3 col-md-6 col-xs-12" style="padding-bottom: 34px;">
+              <div class="event-item">
+                <img class="img-fluid" src="/img/<%= filename %>" style="width: 500px; height:230px" alt="" >
+                <div class="overlay-text">
+                  <div class="content">
+                    <h3>Business Confrence</h3>
+                    <a href="#">View details</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <%
+            i++});%>
+          
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <div class="event-item">
+              <img class="img-fluid" src="assets/img/event/img2.jpg" alt="">
+              <div class="overlay-text">
+                <div class="content">
+                  <h3>Designer Confrence</h3>
+                  <a href="#">View details</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <div class="event-item">
+              <img class="img-fluid" src="assets/img/event/img3.jpg" alt="">
+              <div class="overlay-text">
+                <div class="content">
+                  <h3>Marketer Confrence</h3>
+                  <a href="#">View details</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <div class="event-item">
+              <img class="img-fluid" src="assets/img/event/img4.jpg" alt="">
+              <div class="overlay-text">
+                <div class="content">
+                  <h3>JS Confrence</h3>
+                  <a href="#">View details</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-12 text-center">
+            <a href="#" class="btn btn-common">VER MÁS</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Event Slides Section End -->
+<!-- Blog Section Start -->
+<section id="blog" class="section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-title-header text-center">
+          <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Noticias</h2>
+          <p class="wow fadeInDown" data-wow-delay="0.2s">Estas son las últimas novedades asociadas a nuestra organización.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+
+
+      <%noticias.forEach( noticia => {%>
+
+        <div class="col-lg-4 col-md-6 col-xs-12">
+        <div class="blog-item">
+          <div class="blog-image">
+            <a href="#">
+              <img class="img-fluid" src="/public/img/noticias/<%= noticia.imagen %>" alt="">
+            </a>
+          </div>
+          <div class="descr">
+            <h3 class="title">
+              <a href="#">
+                <%= noticia.titulo  %>
+              </a>
+            </h3>
+            <% console.log(noticia) %>
+            <p> <%= noticia.desc %> </p>
+          </div>
+          <div class="meta-tags">
+            <span class="date"><i class="lni-calendar"></i> <%= noticia.fecha.toLocaleString('es-CL').split(' ')[0] %></span> 
+          </div>
+        </div>
+      </div>
+
+      <%});%>
+      
+
+      
+      
+      <div class="col-12 text-center">
+        <a href="#" class="btn btn-common">Ver Más</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Blog Section End -->
+    
+
+    
+
+    <!-- Sponsors Section Start -->
+    <section id="sponsors" class="section-padding">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="section-title-header text-center">
+              <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Socios</h2>
+              <p class="wow fadeInDown" data-wow-delay="0.2s"> Max Chacón, Universidad de Santiago<br>
+
+               Diego Robles, Universidad Nacional Andrés Bello<br>
                 
+               Carola Figueroa, Universidad del Bío-Bío<br>
+                
+               José Luis Jara, Universidad de Santiago<br>
+                
+               Sergio Velastín, Universidad Carlos III<br>
+                
+               Gonzalo Acuña, Universidad de Santiago<br>
+                
+               Héctor Allende C., Pontificia Universidad Católica de Valparaíso<br>
+                
+               Juan Zamora, Universidad Técnica Federico Santa María<br>
+                
+               Héctor Allende O., Universidad Técnica Federico Santa María<br>
+                
+                 Marcos Lévano, Universidad Católica de Temuco<br>
+                
+                 María Angélica Pinninghoff, Universidad de Concepción<br>
+                
+                 Ricardo Contreras, Universidad de Concepción<br>
+                
+                 Marco Mora, Universidad Católica del Maule<br>
+                
+                 Ricardo Ñanculef, Universidad Técnica Federico Santa María<br>
+                
+                 Mauricio Araya, Universidad Técnica Federico Santa María<br>
+                
+                 Carolina Saavedra, Universidad de Valparaíso<br>
+                
+                 Sebastián Moreno, Universidad Adolfo Ibañez<br>
+                
+                 Mario Bruno, Universidad de Playa Ancha<br>
+                
+                 Miguel Guevara, Universidad de Playa Ancha<br>
+                
+                 Marcelo Mendoza, Universidad Técnica Federico Santa María<br>
+                
+                 José Delpiano, Universidad de los Andes<br>
+                
+                 Pablo Zegers, Universidad de los Andes<br>
+                
+                 Carlos Aspillaga, Corpbanca<br>
+                
+                 Nicolás Torres, Universidad Técnica Federico Santa María<br>
+                
+                 Paulo González, Universidad Católica del Maule<br>
+                
+                 Millaray Curilem, Universidad de la Frontera<br>
+                
+                 César San Martín, Universidad de la Frontera<br>
+                
+                 Carlos Valle, Universidad Técnica Federico Santa María<br>
+                
+                 Rodrigo Alfaro, Pontificia Universidad Católica de Valparaíso<br>
+                
+                 Cristhian Aguilera, Universidad Autónoma de Barcelona<br>
+                
+                 Ricardo Barrientos, Universidad Católica del Maule<br>
+                
+                 Saúl Calderón, Instituto Tecnológico de Costa Rica<br>
+                
+                 Daniel Méndez, Universidad Diego Portales<br>
+                
+                 Ricardo Crespo, Universidad de Santiago<br>
+                
+                 Luis Orellana, Universidad de Santiago<br>
+                
+                 Henry Rosales, Universidad de Chile<br>
+                
+                 Martìn Villanueva, Universidad Técnica Federico Santa María<br>
+                
+                 Diego Cisternas, Universidad de Playa Ancha<br>
+                
+                 Maurice Poirrier, Universidad Adolfo Ibañez<br>
+                
+                 Tomás Molina, Universidad de Playa Ancha<br>
+                
+                 Rodrigo Medina, Universidad de Playa Ancha<br>
+                
+                 Pedro Pinacho, Universidad Santo Tomás<br>
+                
+                 Juan Bekios, Universidad Católica del Norte<br>
+                
+                 Felipe Bello, Universidad de Santiago de Chile<br>
+                
+                 Billy Peralta, Universidad Católica de Temuco<br>
+                
+                 David Fonseca, Universidad Católica de Temuco<br>
+                
+                 Pablo Ortega, Modyo y Novaviz Chile<br>
+                
+                 Víctor Flores, Universidad Católica del Norte<br>
+                
+                 Sebastián Maldonado, Universidad de Los Andes<br>
+                
+                 Rodrigo Salas, Universidad de Valparaíso<br>
+                
+                 John Atkinson, Universidad Adolfo Ibáñez<br>
+                
+                 César Astudillo, Universidad de Talca <br></p>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-30 text-center wow fadeInDown" data-wow-delay="0.3s">
+          <div class="col-lg-12">
+            <div class="sponsors-logo text-center">
+               <a href=""><img src="assets/img/sponsors/socios.png" alt=""></a>
 
-            } catch(e) {
-                this.error(new String(e));
-            }
-        } else {
-            this.echo('');
-        }
-    }, {
-        greetings: 'Bienvenido, este es un simulador de un servidor en bash desde la web!\n escribe los comandos básicos para empezar',
-        name: 'js_demo',
-        prompt: path,
-        height: 200,
-    });
-});
+            </div><!-- sponsors logo end-->
+         </div>
+        </div>
+      </div>
+    </section>
+    <!-- Sponsors Section End -->
 
-</script>
+    <!-- Contact Us Section -->
+    <section id="contact-map" class="section-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="section-title-header text-center">
+              <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Contacto</h2>
+              <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-md-12 col-xs-12">
+            <div class="container-form wow fadeInLeft" data-wow-delay="0.2s">
+              <div class="form-wrapper">
+                <form role="form" method="post" id="contactForm" name="contact-form" data-toggle="validator">
+                  <div class="row">
+                    <div class="col-md-6 form-line">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="name" name="email" placeholder="First Name" required data-error="Please enter your name">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 form-line">
+                      <div class="form-group">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required data-error="Please enter your Email">
+                        <div class="help-block with-errors"></div>
+                      </div> 
+                    </div>
+                    <div class="col-md-12 form-line">
+                      <div class="form-group">
+                        <input type="tel" class="form-control" id="msg_subject" name="subject" placeholder="Subject" required data-error="Please enter your message subject">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <textarea class="form-control" rows="4" id="message" name="message" required data-error="Write your message"></textarea>
+                      </div>
+                      <div class="form-submit">
+                        <button type="submit" class="btn btn-common" id="form-submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Send Message</button>
+                        <div id="msgSubmit" class="h3 text-center hidden"></div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Us Section End -->
+
+    <!-- Map Section Start -->
+    <section id="google-map-area">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <object style="border:0; height: 450px; width: 100%;" data="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3344.8060987228314!2d-71.59896808481133!3d-33.035238580894806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9689e08fd59cf72f%3A0xd4edb558ea6e3929!2sUniversidad%20T%C3%A9cnica%20Federico%20Santa%20Mar%C3%ADa!5e0!3m2!1ses!2scl!4v1607671831962!5m2!1ses!2scl"></object>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Map Section End -->
+
+    <!-- Contact text Start -->
+    <section id="contact-text">
+      <div class="container">
+        <div class="row contact-wrapper">
+          <div class="col-lg-4 col-md-5 col-xs-12">
+            <ul>
+              <li>
+                <i class="lni-home"></i>
+              </li>
+              <li><span>Universidad Técnica Federico Santa María</li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-3 col-xs-12">
+            <ul>
+              <li>
+                <i class="lni-phone"></i>
+              </li>
+              <li><span>+56-2-23037213</span></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-3 col-xs-12">
+            <ul>
+              <li>
+                <i class="lni-envelope"></i>
+              </li>
+              <li><span>marcelo.mendoza@usm.cl</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact text End -->
+
+    <footer>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-md-12 col-xs-12">
+            <div class="subscribe-inner wow fadeInDown" data-wow-delay="0.3s">
+              <h2 class="subscribe-title">Formulario de Inscripción de Nuevos Socios</h2>
+              <div class="col-12 text-center">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfugVxAuim4nY5GyxAzLzsSWqr9TPCcS92SQGAVg3-zqMii1A/viewform" class="btn btn-common">Formulario de Inscripción</a></a>
+              </div>
+            
+            </div>
+            <div class="footer-logo">
+              <img src="assets/img/logo.png" alt="">
+            </div>
+            <div class="social-icons-footer">
+              <ul>
+                <li class="facebook"><a target="_blank" href="https://www.facebook.com/achirp"><i class="lni-facebook-filled"></i></a></li>
+                <li class="twitter"><a target="_blank" href="https://twitter.com/icprs16"><i class="lni-twitter-filled"></i></a></li>
+              </ul>
+            </div>
+            <div class="site-info">
+             <p>Por Alen y Bady. Asociados de <a href="http://isitthursday.org/" rel="nofollow">ABMODEL</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Go to Top Link -->
+    <a href="#" class="back-to-top">
+    	<i class="lni-chevron-up"></i>
+    </a>
+
+    <div id="preloader">
+      <div class="sk-circle">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div>
+      </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="assets/js/jquery-min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.countdown.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/jquery.nav.js"></script>
+    <script src="assets/js/jquery.easing.min.js"></script>
+    <script src="assets/js/wow.js"></script>
+    <script src="assets/js/nivo-lightbox.js"></script>
+    <script src="assets/js/video.js"></script>
+    <script src="assets/js/main.js"></script>      
+  </body>
+</html>
