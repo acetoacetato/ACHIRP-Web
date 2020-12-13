@@ -105,7 +105,7 @@ const httpsServer = https.createServer(/*credentials,*/ app);
 
 //Se abre el servidor en el puerto que salga o en el 9000 si es devStart
 
-//app.listen(process.env.PORT || 80)
+app.listen(process.env.PORT || 80)
 
 
 
