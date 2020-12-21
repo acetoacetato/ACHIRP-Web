@@ -11,7 +11,8 @@ const fs = require('fs')
 
 // Express manda el hola mundo a la solicitud get del servidor
 router.get('/', async (req, res) => {
-    console.log("hola")
+
+
     fs.readdir('./public/img/', (err, files) => {
         
         res.render('img/index', { files: files });

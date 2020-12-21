@@ -7,22 +7,36 @@
 
     <title>EventUp - Event and Conference Template</title>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" >
-    <!-- Icon -->
-    <link rel="stylesheet" type="text/css" href="assets/fonts/line-icons.css">
-    <!-- Nivo Lightbox -->
-    <link rel="stylesheet" type="text/css" href="assets/css/nivo-lightbox.css" >
-    <!-- Animate -->
-    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
-    <!-- Main Style -->
-    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
-    <!-- Responsive Style -->
-    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+    
 
   </head>
   <body>
-
+    <!-- Hero Area Start -->
+    <div id="hero-area" class="hero-area-bg">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-9 col-sm-12">
+            <div class="contents text-center">
+              <div class="icon">
+                <!-- <i class="lni-mic"></i> -->
+                <img src="assets/img/logo.png" width="300" height="100" alt="">
+              </div>
+             <!-- <p class="banner-info">15, Oct 20- Maria Hall, NY, United states</p> -->
+              
+              <h2 class="head-title">Asociación Chilena de Reconocimiento de Patrones</h2>
+              <p class="banner-desc">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, nobis nesciunt atque perferendis, ipsa doloremque deserunt cum qui.</p>
+              <div class="banner-btn">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Hero Area End -->
+    <br><br><br><br><br><br>
     <!-- Count Bar Start -->
     <section id="count">
       <div class="container">
@@ -307,12 +321,13 @@
     <!-- Counter Area End-->
 
     <!-- Schedule Section Start -->
-    <section id="schedules" class="schedule section-padding">
+    <!--TODO: recuperar eventos aca-->
+    <section id="charlas" class="schedule section-padding">
       <div class="container">
         <div class="row">
           <div class="col-12">
             <div class="section-title-header text-center">
-              <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Eventos</h2>
+              <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Charlas</h2>
               <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
             </div>
           </div>
@@ -325,50 +340,37 @@
                 <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="monday" role="tabpanel" aria-labelledby="monday-tab">
                     <div id="accordion">
-
+  
                       <% var id = 0 
-                        eventos.forEach( evento => { 
+                        charlas.forEach( charla => { 
                         id++
                       %>
                           
                         <div class="card">
                           <div id="heading<%= id %>">
                             <div class="schedule-slot-time">
-                              <span style="text-align: center;"> <%= evento.fecha.toLocaleString('es-CL', {day: 'numeric', month: 'long'}) %><br> 12:00 - 14:45 hrs.</span> <br>
+                              <span style="text-align: center;"> <%= charla.fecha.toLocaleString('es-CL', {day: 'numeric', month: 'long'}) %><br> <%= charla.hora %> hrs.</span> <br>
                             </div>
                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapse<%= id %>" aria-expanded="false" aria-controls="collapse<%= id %>">
                               <div class="images-box">
                                 <img class="img-fluid" src="assets/img/speaker/speakers-1.jpg" alt="">
                               </div>                     
-                              <h4><%= evento.titulo %></h4>
-                              <h5 class="name"> <%= evento.expositor %></h5>
+                              <h4><%= charla.titulo %></h4>
+                              <h5 class="name"> <%= charla.expositor %></h5>
                             </div>
                           </div>
                           <div id="collapse<%= id %>" class="collapse" aria-labelledby="heading<%= id %>" data-parent="#accordion">
                             <div class="card-body">
-                              <p> <%= evento.desc %> </p>
-                              <p> <a href="<%= evento.link %>" target="_blank">Slides</a> </p>
+                              <p> <%= charla.desc %> </p>
+                              <p> <a href="<%= charla.slides %>" target="_blank">Slides</a> </p>
                               <div class="location">
-                                <span>Ubicación:</span> <%= evento.ubicacion %>
+                                <span>Ubicación:</span> <%= charla.ubicacion %>
                               </div>
                             </div>
                           </div>
                         </div>
-
-                      <% }) %>
-
-
-                      
-
-
-
-
-                      
-                      
-                  
-                  
-                  
-                  
+  
+                      <% }) %>                  
                 </div>
               </div>
             </div>
@@ -377,6 +379,156 @@
       </div>
     </section>
     <!-- Schedule Section End -->
+
+    <section id="eventos" class="schedule section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-title-header text-center">
+          <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Eventos</h2>
+          <p class="wow fadeInDown" data-wow-delay="0.2s"></p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 mb-5 text-center">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <%
+            var i = 0 
+            eventos.forEach(evento => { 
+            i++
+          %>
+            <li class="nav-item">
+            <a class="nav-link <% if( i == 1)  { %> active <% } %>" id="<%= evento.abreviacion %>-tab" data-toggle="tab" href="#<%= evento.abreviacion %>" role="tab" aria-controls="<%= evento.abreviacion %>" <% if( i == 1)  { %> aria-expanded="true" <% } %>>
+              <div class="item-text">
+                <h4><%= evento.abreviacion %></h4>
+              </div>
+            </a>
+          </li>
+            
+          <% }) %>
+
+        </ul>
+      </div>
+      <div class="col-12">
+        <div class="schedule-area row wow fadeInDown" data-wow-delay="0.3s">
+          <div class="schedule-tab-content col-12 clearfix">
+            <div class="tab-content" id="myTabContent">
+
+              <%
+                var i = 0 
+                eventos.forEach( evento => { 
+                i++
+              %>
+              
+                <div class="tab-pane fade <% if( i ==1) { %> show active <% } %>" id="<%= evento.abreviacion %>" role="tabpanel" aria-labelledby="<%= evento.abreviacion %>-tab">
+                  <div id="accordion">
+                    <div class="card">
+                      <div id="heading<%= i %>">
+                        <div class="schedule-slot-time">
+                          <span><%= evento.abreviacion %></span>
+                        </div>
+                        <div class="collapsed card-header" data-toggle="collapse" data-target="#collapse<%= i %>" aria-expanded="false" aria-controls="collapse<%= i %>">                    
+                          <h4><%= evento.nombre %></h4>
+                        </div>
+                      </div>
+                      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                          <p> <%= evento.descripcion %> </p><br>
+                          <div class="col-12 text-center"><a href="<%= evento.link  %>" class="btn btn-common">Para más información</a></div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              <% }) %>
+              
+              <div class="tab-pane fade" id="CIARP" role="tabpanel" aria-labelledby="CIARP-tab">
+                <div id="accordion2">
+                  <div class="card">
+                    <div id="headingOne">
+                      <div class="schedule-slot-time">
+                        <span>CIARP</span>
+                      </div>
+                      <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">                    
+                        <h4>Iberoamerican Congress on Pattern Recognition</h4>
+                      </div>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                      <div class="card-body">
+                        <p>CIARP 2017, UTFSM, Valparaíso, Chile<br> CIARP 2011, Pucón, Chile<br> CIARP 2007, Viña del Mar, Chile</p><br>
+                        <div class="col-12 text-center"><a href="https://ciarp.uci.cu/" class="btn btn-common">Para más información</a></div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="tab-pane fade" id="CCPR" role="tabpanel" aria-labelledby="CCPR-tab">
+                <div id="accordion3">
+                  <div class="card">
+                    <div id="headingOne">
+                      <div class="schedule-slot-time">
+                        <span>CCPR</span>
+                      </div>
+                      <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">                    
+                        <h4>Evento producido por el crecimiento de la CWPR, al cual reemplazó. Su nombre proviene de "Chilean Conference on Pattern Recognition".</h4>
+                      </div>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                      <div class="card-body">
+                        <p>6th CCPR, U Católica del Maule, Talca, 2014</p><br>
+                        <div class="col-12 text-center"><a href="http://www.jcc2014.ucm.cl/" class="btn btn-common">Para más información</a></div>
+                      </div>
+                    </div>
+                  </div>
+                  
+      
+                </div>
+              </div>
+              <div class="tab-pane fade" id="CWPR" role="tabpanel" aria-labelledby="CWPR-tab">
+                <div id="accordion4">
+                  <div class="card">
+                    <div id="headingOne">
+                      <div class="schedule-slot-time">
+                        <span>CWPR</span>
+                      </div>
+                      <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">                    
+                        <h4>Evento original organizado por ACHIRP en las Jornadas Chilenas de Computación. Su nombre proviene de "Chilean Workshop on Pattern Recognition".
+                        Su primera versión se realizó el año 2009. Alcanzó a tener 5 versiones, hasta el año 2013, año en que el evento creció y se transformó en conferencia.</h4>
+                      </div>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                      <div class="card-body">
+                        <p>5th CWPR, U Católica de Temuco, Temuco, 2013<br>
+
+                           4th CWPR, PUCV, Valparaíso, 2012<br>
+                          
+                           3rd CWPR, U de Talca, Curicó, 2011<br>
+                          
+                           2nd CWPR, U Católica del Norte, Antofagasta, 2010<br>
+                          
+                           1st CWPR, U de Santiago, Santiago, 2009</p><br>
+                           <div class="col-12 text-center"><a href="http://jcc2012.pucv.cl/call_CWPR.php" class="btn btn-common">Para más información</a></div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <!-- Team Section Start -->
     <section id="team" class="section-padding text-center">
@@ -488,18 +640,7 @@
             <!-- Team Item Ends -->
           </div>
 
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <!-- Team Item Starts -->
-            <div class="team-item wow fadeInUp" data-wow-delay="1.8s">
-              <div class="team-img">
-                <img class="img-fluid" src="assets/img/team/john.jpg" alt="">
-              </div>
-              <div class="info-text">
-                <h3><a href="#">JOHN ATKINSON</a></h3>
-                <p>Comité de ética, UAI</p>
-              </div>
-            </div>
-          </div>
+          
             <!-- Team Item Ends -->
             <div class="col-lg-3 col-md-6 col-xs-12">
               <!-- Team Item Starts -->
@@ -688,109 +829,12 @@
           <div class="col-12">
             <div class="section-title-header text-center">
               <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Socios</h2>
-              <p class="wow fadeInDown" data-wow-delay="0.2s"> Max Chacón, Universidad de Santiago<br>
-
-               Diego Robles, Universidad Nacional Andrés Bello<br>
+              <p class="wow fadeInDown" data-wow-delay="0.2s"> 
                 
-               Carola Figueroa, Universidad del Bío-Bío<br>
-                
-               José Luis Jara, Universidad de Santiago<br>
-                
-               Sergio Velastín, Universidad Carlos III<br>
-                
-               Gonzalo Acuña, Universidad de Santiago<br>
-                
-               Héctor Allende C., Pontificia Universidad Católica de Valparaíso<br>
-                
-               Juan Zamora, Universidad Técnica Federico Santa María<br>
-                
-               Héctor Allende O., Universidad Técnica Federico Santa María<br>
-                
-                 Marcos Lévano, Universidad Católica de Temuco<br>
-                
-                 María Angélica Pinninghoff, Universidad de Concepción<br>
-                
-                 Ricardo Contreras, Universidad de Concepción<br>
-                
-                 Marco Mora, Universidad Católica del Maule<br>
-                
-                 Ricardo Ñanculef, Universidad Técnica Federico Santa María<br>
-                
-                 Mauricio Araya, Universidad Técnica Federico Santa María<br>
-                
-                 Carolina Saavedra, Universidad de Valparaíso<br>
-                
-                 Sebastián Moreno, Universidad Adolfo Ibañez<br>
-                
-                 Mario Bruno, Universidad de Playa Ancha<br>
-                
-                 Miguel Guevara, Universidad de Playa Ancha<br>
-                
-                 Marcelo Mendoza, Universidad Técnica Federico Santa María<br>
-                
-                 José Delpiano, Universidad de los Andes<br>
-                
-                 Pablo Zegers, Universidad de los Andes<br>
-                
-                 Carlos Aspillaga, Corpbanca<br>
-                
-                 Nicolás Torres, Universidad Técnica Federico Santa María<br>
-                
-                 Paulo González, Universidad Católica del Maule<br>
-                
-                 Millaray Curilem, Universidad de la Frontera<br>
-                
-                 César San Martín, Universidad de la Frontera<br>
-                
-                 Carlos Valle, Universidad Técnica Federico Santa María<br>
-                
-                 Rodrigo Alfaro, Pontificia Universidad Católica de Valparaíso<br>
-                
-                 Cristhian Aguilera, Universidad Autónoma de Barcelona<br>
-                
-                 Ricardo Barrientos, Universidad Católica del Maule<br>
-                
-                 Saúl Calderón, Instituto Tecnológico de Costa Rica<br>
-                
-                 Daniel Méndez, Universidad Diego Portales<br>
-                
-                 Ricardo Crespo, Universidad de Santiago<br>
-                
-                 Luis Orellana, Universidad de Santiago<br>
-                
-                 Henry Rosales, Universidad de Chile<br>
-                
-                 Martìn Villanueva, Universidad Técnica Federico Santa María<br>
-                
-                 Diego Cisternas, Universidad de Playa Ancha<br>
-                
-                 Maurice Poirrier, Universidad Adolfo Ibañez<br>
-                
-                 Tomás Molina, Universidad de Playa Ancha<br>
-                
-                 Rodrigo Medina, Universidad de Playa Ancha<br>
-                
-                 Pedro Pinacho, Universidad Santo Tomás<br>
-                
-                 Juan Bekios, Universidad Católica del Norte<br>
-                
-                 Felipe Bello, Universidad de Santiago de Chile<br>
-                
-                 Billy Peralta, Universidad Católica de Temuco<br>
-                
-                 David Fonseca, Universidad Católica de Temuco<br>
-                
-                 Pablo Ortega, Modyo y Novaviz Chile<br>
-                
-                 Víctor Flores, Universidad Católica del Norte<br>
-                
-                 Sebastián Maldonado, Universidad de Los Andes<br>
-                
-                 Rodrigo Salas, Universidad de Valparaíso<br>
-                
-                 John Atkinson, Universidad Adolfo Ibáñez<br>
-                
-                 César Astudillo, Universidad de Talca <br></p>
+              <% directorio.forEach(dir => { %>
+                <%= dir.nombre %>, <%= dir.institucion %><br>
+              <% }) %>
+               
             </div>
           </div>
         </div>

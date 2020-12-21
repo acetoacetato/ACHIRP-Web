@@ -1,0 +1,25 @@
+  
+<label for="titulo">Titulo</label>
+<!--Reemplaza los datos del autor que se pasa por parámetro (< % = cosa)-->
+<input type="text" id="titulo" name="titulo" value="<%= evento.titulo %>">
+<br>
+<label for="descripcion">Descripción</label>
+<textarea  name="descripcion" id="descripcion" value="<%= evento.descripcion %>"></textarea>
+<br>
+<label for="fecha">Fecha</label>
+<input type="datetime-local" name="fecha" id="fecha" value="<%= evento.fecha %>">
+
+<label for="slides">Slides</label>
+<input type="text" name="slides" id="slides" value="<%= evento.slides %>">
+
+<label for="ubicacion">Ubicación</label>
+<input type="text" name="ubicacion" id="ubicacion" value="<%= evento.ubicacion %>">
+
+<label for="expositor">Expositor</label>
+<input type="text" name="expositor" id="expositor" value="<%= evento.expositor %>">
+
+<label for="hora">Hora</label>
+<input type="text" name="hora" id="hora" value="<%= evento.hora %>">
+
+<label for="imagen">Imagen</label>
+<input type="file" id="imagen" name="imagen">

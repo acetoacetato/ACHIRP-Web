@@ -1,30 +1,21 @@
 const mongoose = require('mongoose');
 
 const EventoSchema = new mongoose.Schema({
-    titulo: {
+    abreviacion: {
         type: String,
         required: true
+    },
+    nombre: {
+        type: String,
+        required: true
+    },
+    descripcion: {
+        type: String,
     },
     link: {
         type: String,
-    },
-    fecha: {
-        type: Date,
         required: true
-    },
-    desc: {
-        type: String,
-    },
-    ubicacion: {
-        type: String
-    },
-    expositor: {
-        type: String
-    },
-    hora:{
-        type: String,
-        required: true
-    }
+    }   
 
 });
 

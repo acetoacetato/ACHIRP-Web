@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Evento = require('../models/Evento')
+const Charla = require('../models/Charla')
 const crypto = require('crypto')
 const formidable = require('formidable')
 const path = require('path')
@@ -14,9 +14,9 @@ router.get('/', async (req, res) => {
         searchOptions.nombre = new RegExp(req.query.nombre.trim(), 'i')
     }
     try{
-        const eventos = await Evento.find(searchOptions)
-        res.render('evento/index', {
-            eventos: eventos,
+        const charlas = await Charla.find(searchOptions)
+        res.render('charla/index', {
+            charlas: charlas,
             searchOptions: req.query
         })
     }catch{
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 
 // Nuevo autor
 router.get('/new', (req, res) => {
-    res.render('evento/new', { evento : new Evento()});
+    res.render('charla/new', { evento : new Charla()});
 })
 
 // Crear el autor
@@ -37,10 +37,13 @@ router.post('/', async (req, res) => {
     
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
-        var abreviacion = fields.abreviacion
-        var nombre = fields.nombre
-        var descripcion = fields.descripcion
-        var link = fields.link
+        var titulo = fields.titulo
+        var desc = fields.descripcion
+        var fecha= new Date(fields.fecha) + (- new Date(fields.fecha).getTimezoneOffset() / 60)
+        var slides = fields.slides
+        var lugar = fields.lugar
+        var expositor = fields.expositor
+        var hora = fields.hora
 
 
         //var nombre = files.imagen.name
@@ -54,24 +57,27 @@ router.post('/', async (req, res) => {
         //})
 
         console.log(typeof(desc))
-        const evento = new Evento({
-            abreviacion : abreviacion,
-            nombre : nombre,
-            descripcion: descripcion,
-            link: link
+        const charla = new Charla({
+            titulo : titulo,
+            descripcion : desc,
+            fecha: fecha,
+            slides: slides,
+            expositor: expositor,
+            lugar: lugar,
+            hora: hora
         })
-        console.log(evento)
+        console.log(charla)
         try {
-            const newEvento =  evento.save()
-            return res.redirect('/evento')
+            const newCharla =  charla.save()
+            return res.redirect('/charla')
         }catch (e) {
             console.error(e)
-            res.render('evento/new',{
-                evento: evento,
-                errorMessage: 'No se pudo agregar el nuevo evento'
+            res.render('charla/new',{
+                charla: charla,
+                errorMessage: 'No se pudo agregar la nueva charla'
             })
         }
-        return res.redirect('/evento');
+        return res.redirect('/charla');
 
     });    
 

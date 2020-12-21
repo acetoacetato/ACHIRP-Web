@@ -1,6 +1,6 @@
 <head></head>
 <body>
-<h2>Buscar noticias</h2>
+<h2>Buscar charlas</h2>
 <form action="/authors" method="GET">
 <label for="titulo">Titulo:</label>
 <input type="text" name="titulo" id="titulo" value="<%= searchOptions.titulo %>">
@@ -9,8 +9,8 @@
 
 <br>
 
-<% eventos.forEach(evento => { %>
-    <div><%= evento.titulo %> : <%= evento.descripcion %> )</div>
+<% charlas.forEach(charla => { %>
+    <div><%= charla.titulo %> : <%= charla.descripcion %> )</div>
 <% }) %>
 
 </body>

@@ -9,6 +9,8 @@ const app = express()
 const fs = require('fs');
 const http = require('http');
 const https = require('https');
+const cookieParser = require('cookie-parser');
+
 
 // Para subida de archivos
 var formidable = require('formidable');
@@ -42,10 +44,12 @@ const authorRouter = require('./routes/asamblea.js')
 const imgRouter = require('./routes/img.js')
 const noticiaRouter = require('./routes/Noticia.js')
 const eventoRouter = require('./routes/Evento.js')
+const charlaRouter = require('./routes/Charla.js')
+const directorioRouter = require('./routes/Directorio.js')
+const usuarioRouter = require('./routes/user.js')
 //const libroRouter = require('./routes/libros.js')
 //const terminalRouter = require('./routes/terminal.js')
 //const ejercicioRouter = require('./routes/ejercicio.js')
-const cookieParser = require('cookie-parser')
 
 /**
  *      Base de datos
@@ -94,6 +98,10 @@ app.use('/authors', authorRouter)
 app.use('/img', imgRouter)
 app.use('/noticia', noticiaRouter)
 app.use('/evento', eventoRouter)
+app.use('/charla', charlaRouter)
+app.use('/directorio', directorioRouter)
+app.use('/user', usuarioRouter)
+app.use(cookieParser())
 //app.use('/libros', libroRouter)
 //app.use('/terminal', terminalRouter)
 //app.use('/ejercicio', ejercicioRouter)
@@ -105,16 +113,16 @@ const httpsServer = https.createServer(/*credentials,*/ app);
 
 //Se abre el servidor en el puerto que salga o en el 9000 si es devStart
 
-//app.listen(process.env.PORT || 8080)
+app.listen(process.env.PORT || 80)
 
 
 httpServer.listen(process.env.PORT, () => {
 	console.log('HTTP Server running on port 80');
 });
 
-//httpsServer.listen(443, () => {
-//	console.log('HTTPS Server running on port 443');
-//});
+httpsServer.listen(443, () => {
+	console.log('HTTPS Server running on port 443');
+});
 
 
 

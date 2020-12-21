@@ -17,6 +17,10 @@ const CharlaSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
+    hora: {
+        type: String,
+        required: true
+    },
     lugar: {
         type: String,
         default: "1. Nada",
@@ -24,10 +28,15 @@ const CharlaSchema = new mongoose.Schema({
     },
     slides: {
         type: String,
-        default: "1. Nada",
+        default: "#",
         required: true,
     },
+    imagen: {
+        type: String,
+        default: "",
+        required: false
+    }
 
 });
 
-module.exports = mongoose.model('Evento', CharlaSchema)
+module.exports = mongoose.model('Charla', CharlaSchema)
