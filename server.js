@@ -116,13 +116,13 @@ const httpsServer = https.createServer(/*credentials,*/ app);
 app.listen(process.env.PORT || 80)
 
 
-httpServer.listen(process.env.PORT, () => {
-	console.log('HTTP Server running on port 80');
-});
-
-httpsServer.listen(443, () => {
-	console.log('HTTPS Server running on port 443');
-});
+//httpServer.listen(process.env.PORT, () => {
+//	console.log('HTTP Server running on port 80');
+//});
+//
+//httpsServer.listen(443, () => {
+//	console.log('HTTPS Server running on port 443');
+//});
 
 
 
