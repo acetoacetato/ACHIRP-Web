@@ -1,0 +1,74 @@
+<style>
+    .navbar-light .navbar-nav .nav-link {
+color: whitesmoke;
+}
+.navbar-light .navbar-nav .nav-link:hover {
+color: black;
+}
+</style>
+
+<nav class="navbar navbar-expand-lg bg-inverse fixed-top scrolling-navbar">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <a href="index.html" class="navbar-brand"><img src="assets/img/logo.png" width="80" height="70" alt=""></a>       
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="lni-menu"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto w-100 justify-content-end">
+          <li class="nav-item" id="home">
+            <a class="nav-link" href="/">
+              <p style="color:black; ">  Home</p>
+            </a>
+          </li>
+          <li class="nav-item" id="directorio">
+            <a class="nav-link" href="/directorio">
+              <p style="color:black">  Directorio</p>
+
+            </a>
+          </li>
+          <li class="nav-item" id="asamblea">
+            <a class="nav-link" href="/asamblea">
+              <p style="color:black">  Asambleas</p>
+            </a>
+          </li>
+          <li class="nav-item" id="evento">
+            <a class="nav-link" href="/evento">
+              <p style="color:black">  Eventos</p>
+            </a>
+          </li>
+          <li class="nav-item" id="charla">
+            <a class="nav-link" href="/charla">
+              <p style="color:black">  Charlas</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/socio">
+              <p style="color:black">  Socios</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/galeria">
+              <p style="color:black">  Galeria</p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/noticia">
+              <p style="color:black">  Noticias</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/contacto">
+              <p style="color:black">  Contacto</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+     $("#<%= seccion  %>").addClass("active")
+  </script>

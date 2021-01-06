@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Evento = require('../models/Evento')
+const Imagen = require('../models/Imagen')
 const crypto = require('crypto')
 const formidable = require('formidable')
 const path = require('path')
@@ -12,19 +12,19 @@ const obtenerDict = require('../tools/tools')
 const exec = require('child_process').exec;
 // Express manda el hola mundo a la solicitud get del servidor
 router.get('/', auth, async (req, res) => {
-    var keys = obtenerDict(Evento.schema.paths)
+    var keys = obtenerDict(Noticia.schema.paths)
     let searchOptions = {}
     if(req.query.nombre != null && req.query.nombre.trim() !== ''){
         searchOptions.nombre = new RegExp(req.query.nombre.trim(), 'i')
     }
     try{
-        const eventos = await Evento.find(searchOptions)
+        const noticias = await Noticia.find(searchOptions)
         
-        res.render('evento/index', {
-            eventos: eventos,
+        res.render('noticia/index', {
+            noticias: noticias,
             searchOptions: req.query,
             variables: keys,
-            seccion: "evento"
+            seccion: "galeria"
         })
     }catch (e){
         console.log(e.message)
@@ -40,25 +40,31 @@ router.post('/', auth, async (req, res) => {
     
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
-        var abreviacion = fields['abreviacion']
-        var nombre = fields['nombre']
-        var descripcion = fields['descripcion']
-        var link = fields['link']
+        //console.log(fields)
+        var titulo = fields['titulo']
+        var desc = fields['desc']
+        var fecha = fields['fecha']
+        var imagen = fields['imagen']
+        var inSite = (fields['inSite'] == 'on')
+        var cuerpo = fields['cuerpo']
+        //console.log(inSite)
 
-        const evento = new Evento({
-            abreviacion : abreviacion,
-            nombre : nombre,
-            descripcion : descripcion,
-            link : link
+        const noticia = new Noticia({
+            titulo : titulo,
+            desc : desc,
+            fecha : fecha,
+            imagen : imagen,
+            inSite : (inSite)? inSite:false,
+            cuerpo : cuerpo
         })
         try {
-            const newAsamblea =  evento.save()
-            return res.redirect('/evento')
+            const newAsamblea =  noticia.save()
+            return res.redirect('/noticia')
         }catch (e) {
             console.error(e)
-            res.redirect('/evento')
+            res.redirect('/noticia')
         }
-        return res.redirect('/evento');
+        return res.redirect('/noticia');
 
     });    
 
@@ -72,18 +78,20 @@ router.post("/edit", auth, async (req, res) => {
     form.parse(req,  async (err, fields, files) => {
         
         filtro = {'_id' : fields['_id']}
-        var doc =  Evento.findOne(filtro)
+        var doc =  Noticia.findOne(filtro)
         resultado = await doc.exec()
 
-        resultado.abreviacion = fields['abreviacion']
-        resultado.nombre = fields['nombre']
-        resultado.descripcion = fields['descripcion']
-        resultado.link = fields['link']
-
+        resultado.titulo = fields['titulo'];
+        resultado.desc = fields['desc'];
+        resultado.fecha = fields['fecha'];
+        resultado.imagen = fields['imagen'];
+        //console.log(fields)
+        resultado.inSite = (fields['inSite'] == 'on')? true:false;
+        resultado.cuerpo = fields['cuerpo'];
 
         await resultado.save()
 
-        return res.redirect('/evento');
+        return res.redirect('/noticia');
 
     }); 
 
@@ -95,10 +103,10 @@ router.post("/del", auth, async (req, res) => {
     form.parse(req,  async (err, fields, files) => {
 
         filtro = {_id : fields['_id']}
-        Evento.deleteOne(filtro, function (err) {
+        Noticia.deleteOne(filtro, function (err) {
             if (err) return handleError(err);
             // deleted at most one tank document
-            res.redirect("/evento")
+            res.redirect("/noticia")
           });
 
     }); 

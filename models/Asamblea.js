@@ -1,26 +1,36 @@
 const mongoose = require('mongoose');
+// Modelo de una colección de la base de datos
+//  Mongodb es una base de datos no relacional, 
+//      por lo que las modificaciones hechas en este archivo, 
+//      se aplicarán sobre las inserciones siguientes, las anteriores se quedarán igual
 
 const AsambleaSchema = new mongoose.Schema({
     fecha: {
         type: Date,
         required: true
     },
+    lugar: {
+        type: String,
+        required: true
+    },
     inicio: {
-        type: Date,
+        type: String,
         required: true
     },
     fin: {
-        type: Date,
+        type: String,
         required: true
     },
     tabla: {
         type: String,
-        default: "1. Nada",
         required: true,
     },
+    // Después de que se realiza
     Acuerdos: {
         type: String,
-        default: "1. N/A"
+    },
+    Acta: {
+        type: String
     }
 });
 

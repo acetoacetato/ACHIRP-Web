@@ -22,9 +22,7 @@ router.post('/signup',
     ], async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({
-                errors: errors.array()
-            });
+            res.render("user/signup", { err: errors[0] })
         }
 
         const {
@@ -71,21 +69,19 @@ router.post('/signup',
     );
 
 router.get('/login', (req, res) => {
-    res.render('user/login');
+    res.render('user/login', { err: [undefined] });
 });
 
 router.post('/login',
     [
-        check("email", "Porfavor ingrese un mail válido").isEmail(),
-        check("password", "Porfavor ingrese una contraseña válida").isLength({
+        check("email", "Email o contraseña inválidos").isEmail(),
+        check("password", "Email o contraseña inválidos").isLength({
             min: 6
         })
     ], async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({
-                errors: errors.array()
-            });
+            return res.render("user/login", { err : [errors.errors[0]]})
         }
 
         const {
@@ -101,10 +97,7 @@ router.post('/login',
             
             const isMatch = await bcrypt.compare(password, user.passwd);
             if (!isMatch)
-                return res.status(400).json({
-                message: "Incorrect Password !"
-            });
-            console.log(user)
+                return res.render('user/login', { err : [{msg: "Contraseña incorrecta"}] });``
 
             const payload = {
                 user: {
@@ -119,8 +112,8 @@ router.post('/login',
                 },
                 (err, token) => {
                     if (err) throw err;
-                    res.cookie('jwt', token)
-                    res.status(200).redirect('/user/me');
+                    res.cookie('jwt', token, { expires: new Date(Date.now() + 3600) })
+                    res.status(200).redirect('/noticia');
                 }
             );
         } catch(err) {

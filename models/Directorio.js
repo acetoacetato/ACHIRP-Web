@@ -5,7 +5,14 @@ const DirectorioSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    cargo: {
+
+    },
     institucion: {
+        type: String,
+        required: true
+    },
+    imagen: {
         type: String,
         required: true
     }

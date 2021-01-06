@@ -11,6 +11,75 @@
 
   </head>
   <body>
+
+
+    <header id="header-wrap">
+      <!-- Navbar Start -->
+      <nav class="navbar navbar-expand-lg bg-inverse fixed-top scrolling-navbar">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <a href="index.html" class="navbar-brand"><img src="/assets/img/logo.png" width="80" height="70" alt=""></a>       
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="lni-menu"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto w-100 justify-content-end">
+              <li class="nav-item active">
+                <a class="nav-link" href="#header-wrap">
+                  Home
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about">
+                  QuienSomos
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#charlas">
+                  Charlas
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#eventos">
+                  Eventos
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#team">
+                  Directorio
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#event-up">
+                  Galería
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#blog">
+                  Noticias
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="#sponsors">
+                  Socios
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#google-map-area">
+                  Contacto
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+  
+      
+  </header>
+
+  
+  <!--<br><br><br><br>-->
     <!-- Hero Area Start -->
     <div id="hero-area" class="hero-area-bg">
       <div class="overlay"></div>
@@ -53,6 +122,14 @@
     </section>
     <!-- Count Bar End -->
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
+
+  
+
+
+
+  
+
     <!-- About Section Start -->
     <section id="about" class="section-padding">
       <div class="container">
@@ -353,7 +430,18 @@
                             </div>
                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapse<%= id %>" aria-expanded="false" aria-controls="collapse<%= id %>">
                               <div class="images-box">
-                                <img class="img-fluid" src="assets/img/speaker/speakers-1.jpg" alt="">
+                                <%
+                                  // Para cambiar a la imagen por defecto
+                                  if(charla.imagen == ""){
+                                %>
+                                    <img class="img-fluid" src="assets/img/speaker/speakers-1.jpg" alt="">
+                                <%
+                                  } else{
+                                %>
+                                    <img class="img-fluid" src="public/img/charla/<%= charla.imagen %>" alt="">
+                                <%
+                                  }
+                                %>
                               </div>                     
                               <h4><%= charla.titulo %></h4>
                               <h5 class="name"> <%= charla.expositor %></h5>
@@ -361,10 +449,10 @@
                           </div>
                           <div id="collapse<%= id %>" class="collapse" aria-labelledby="heading<%= id %>" data-parent="#accordion">
                             <div class="card-body">
-                              <p> <%= charla.desc %> </p>
+                              <p> <%= charla.descripcion %> </p>
                               <p> <a href="<%= charla.slides %>" target="_blank">Slides</a> </p>
                               <div class="location">
-                                <span>Ubicación:</span> <%= charla.ubicacion %>
+                                <span>Ubicación:</span> <%= charla.lugar %>
                               </div>
                             </div>
                           </div>
@@ -434,7 +522,7 @@
                       </div>
                       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
-                          <p> <%= evento.descripcion %> </p><br>
+                          <p> <%- evento.descripcion.replace(/\r\n/g, "<br>") %> </p><br>
                           <div class="col-12 text-center"><a href="<%= evento.link  %>" class="btn btn-common">Para más información</a></div>
                           
                         </div>
@@ -542,147 +630,31 @@
           </div>
         </div>
         <div class="row justify-content-bt">
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <!-- Team Item Starts -->
-            <div class="team-item wow fadeInUp" data-wow-delay="0.2s">
-              <div class="team-img">
-                <img class="img-fluid" src="assets/img/team/hector.jpg" alt="">
 
-              </div>
-              <div class="info-text">
-                <h3><a href="#">HECTOR ALLENDE</a></h3>
-                <p>Presidente, PUCV</p>
-              </div>
-            </div>
-            <!-- Team Item Ends -->
-          </div>
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <!-- Team Item Starts -->
-            <div class="team-item wow fadeInUp" data-wow-delay="0.4s">
-              <div class="team-img">
-                <img class="img-fluid" src="assets/img/team/Marco-Mora-_4_.jpg" width="500" height="500" alt="">
-              </div>
-              <div class="info-text">
-                <h3><a href="#">MARCO MORA</a></h3>
-                <p>Vice-presidente, UCM</p>
-              </div>
-            </div>
-            <!-- Team Item Ends -->
-          </div>
-
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <!-- Team Item Starts -->
-            <div class="team-item wow fadeInUp" data-wow-delay="0.6s">
-              <div class="team-img">
-                <img class="img-fluid" src="assets/img/team/cesar astudillo3.jpeg" alt="">
-              </div>
-              <div class="info-text">
-                <h3><a href="#">CESAR ASTUDILLO</a></h3>
-                <p>Secretario, U.Talca</p>
-              </div>
-            </div>
-            <!-- Team Item Ends -->
-          </div>
-
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <!-- Team Item Starts -->
-            <div class="team-item wow fadeInUp" data-wow-delay="0.8s">
-              <div class="team-img">
-                <img class="img-fluid" src="assets/img/team/Jose_Jara12.jpg" alt="">
-              </div>
-              <div class="info-text">
-                <h3><a href="#">JOSE LUIS JARA</a></h3>
-                <p>Tesorero, USACH</p>
-              </div>
-            </div>
-            <!-- Team Item Ends -->
-          </div>
-
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <!-- Team Item Starts -->
-            <div class="team-item wow fadeInUp" data-wow-delay="1s">
-              <div class="team-img">
-                <img class="img-fluid" src="assets/img/team/SERGIO VELASTIN.jpg" alt="">
-              </div>
-              <div class="info-text">
-                <h3><a href="#">SERGIO VELASTIN</a></h3>
-                <p>Director asuntos internacionales, U.Carlos III</p>
-              </div>
-            </div>
-            <!-- Team Item Ends -->
-          </div>
-
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <!-- Team Item Starts -->
-            <div class="team-item wow fadeInUp" data-wow-delay="1.2s">
-              <div class="team-img">
-                <img class="img-fluid" src="assets/img/team/Miguel-Guevara-Entrevista-03.jpg" alt="">
-              </div>
-              <div class="info-text">
-                <h3><a href="#">MIGUEL GUEVARA</a></h3>
-                <p>Comité de ética, UPLA</p>
-              </div>
-            </div>
-            <!-- Team Item Ends -->
-          </div>
-
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <!-- Team Item Starts -->
-            <div class="team-item wow fadeInUp" data-wow-delay="1.4s">
-              <div class="team-img">
-                <img class="img-fluid" src="assets/img/team/paulo.jpg" alt="">
-              </div>
-              <div class="info-text">
-                <h3><a href="#">PAULO GONZÁLEZ</a></h3>
-                <p>Comité de ética, UCM</p>
-              </div>
-            </div>
-            <!-- Team Item Ends -->
-          </div>
-
-          
-            <!-- Team Item Ends -->
-            <div class="col-lg-3 col-md-6 col-xs-12">
-              <!-- Team Item Starts -->
-              <div class="team-item wow fadeInUp" data-wow-delay="2.0s">
-                <div class="team-img">
-                  <img class="img-fluid" src="assets/img/team/josedelpiano.png" alt="">
-                </div>
-                <div class="info-text">
-                  <h3><a href="#">JOSÉ DELPIANO</a></h3>
-                  <p>Comisión revisora de cuentas, U. Los Andes</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-xs-12">
+          <%
+            directorio.forEach(doc => {
+          %>
+              <div class="col-lg-3 col-md-6 col-xs-12">
                 <!-- Team Item Starts -->
-                <div class="team-item wow fadeInUp" data-wow-delay="2.2s">
+                <div class="team-item wow fadeInUp" data-wow-delay="0.2s">
                   <div class="team-img">
-                    <img class="img-fluid" src="assets/img/team/carlosvalle.png" alt="">
+                    <img class="img-fluid" src="public/img/directorio/<%= doc.imagen %>" alt="">
+
                   </div>
                   <div class="info-text">
-                    <h3><a href="#">CARLOS VALLE</a></h3>
-                    <p>Comisión revisora de cuentas, UPLA</p>
+                    <h3><a href="#"><%= doc.nombre %></a></h3>
+                    <p><%= doc.cargo %>, <%= doc.institucion %></p>
                   </div>
                 </div>
-              </div>
                 <!-- Team Item Ends -->
+              </div>  
+          <%
+            })
+          %>
 
-                <div class="col-lg-3 col-md-6 col-xs-12">
-                  <!-- Team Item Starts -->
-                  <div class="team-item wow fadeInUp" data-wow-delay="2.4s">
-                    <div class="team-img">
-                      <img class="img-fluid" src="assets/img/team/mauricioaraya.jpg" alt="">
-                    </div>
-                    <div class="info-text">
-                      <h3><a href="#">MAURICIO ARAYA</a></h3>
-                      <p>Comisión revisora de cuentas, UTFSM</p>
-                    </div>
-                  </div>
-                </div>
-
-                  <!-- Team Item Ends -->
-          </div>
+          
+          
+            
         </div>
       </div>
     </section>
@@ -717,8 +689,8 @@
                 <div class="overlay-text">
                   <div class="content">
                     <h3>Business Confrence</h3>
-                    <a href="#">View details</a>
-                  </div>
+                    <a href="#testModal" class="Modal" data-toggle="modal">View Details<i  data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                   </div>
                 </div>
               </div>
             </div>
@@ -726,40 +698,6 @@
           <%
             i++})};%>
           
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <div class="event-item">
-              <img class="img-fluid" src="assets/img/event/img2.jpg" alt="">
-              <div class="overlay-text">
-                <div class="content">
-                  <h3>Designer Confrence</h3>
-                  <a href="#">View details</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <div class="event-item">
-              <img class="img-fluid" src="assets/img/event/img3.jpg" alt="">
-              <div class="overlay-text">
-                <div class="content">
-                  <h3>Marketer Confrence</h3>
-                  <a href="#">View details</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <div class="event-item">
-              <img class="img-fluid" src="assets/img/event/img4.jpg" alt="">
-              <div class="overlay-text">
-                <div class="content">
-                  <h3>JS Confrence</h3>
-                  <a href="#">View details</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="row mt-5">
           <div class="col-12 text-center">
             <a href="#" class="btn btn-common">VER MÁS</a>
@@ -797,7 +735,6 @@
                 <%= noticia.titulo  %>
               </a>
             </h3>
-            <% console.log(noticia) %>
             <p> <%= noticia.desc %> </p>
           </div>
           <div class="meta-tags">
@@ -832,7 +769,7 @@
               <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Socios</h2>
               <p class="wow fadeInDown" data-wow-delay="0.2s"> 
                 
-              <% directorio.forEach(dir => { %>
+              <% socios.forEach(dir => { %>
                 <%= dir.nombre %>, <%= dir.institucion %><br>
               <% }) %>
                
@@ -866,29 +803,29 @@
           <div class="col-lg-8 col-md-12 col-xs-12">
             <div class="container-form wow fadeInLeft" data-wow-delay="0.2s">
               <div class="form-wrapper">
-                <form role="form" method="post" id="contactForm" name="contact-form" data-toggle="validator">
+                <form role="form" method="post" action="/contacto/send" id="contactForm" name="contact-form" data-toggle="validator" enctype="multipart/form-data">
                   <div class="row">
                     <div class="col-md-6 form-line">
                       <div class="form-group">
-                        <input type="text" class="form-control" id="name" name="email" placeholder="First Name" required data-error="Please enter your name">
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="First Name" required data-error="Porfavor ingrese su nombre">
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="col-md-6 form-line">
                       <div class="form-group">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required data-error="Please enter your Email">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required data-error="Porfavor ingrese su email">
                         <div class="help-block with-errors"></div>
                       </div> 
                     </div>
                     <div class="col-md-12 form-line">
                       <div class="form-group">
-                        <input type="tel" class="form-control" id="msg_subject" name="subject" placeholder="Subject" required data-error="Please enter your message subject">
+                        <input type="tel" class="form-control" id="asunto" name="asunto" placeholder="Subject" required data-error="Porfavor ingrese un asunto">
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="col-md-12">
                       <div class="form-group">
-                        <textarea class="form-control" rows="4" id="message" name="message" required data-error="Write your message"></textarea>
+                        <textarea class="form-control" rows="4" id="mensaje" name="mensaje" required data-error="Un mensaje es requerido"></textarea>
                       </div>
                       <div class="form-submit">
                         <button type="submit" class="btn btn-common" id="form-submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Send Message</button>
@@ -910,7 +847,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <object style="border:0; height: 450px; width: 100%;" data="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3344.8060987228314!2d-71.59896808481133!3d-33.035238580894806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9689e08fd59cf72f%3A0xd4edb558ea6e3929!2sUniversidad%20T%C3%A9cnica%20Federico%20Santa%20Mar%C3%ADa!5e0!3m2!1ses!2scl!4v1607671831962!5m2!1ses!2scl"></object>
+            <object style="border:0; height: 450px; width: 100%;" data="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1406.166084362298!2d-71.61466892201594!3d-33.044738263736264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8598d9e005eea641!2sEscuela%20de%20Ingenier%C3%ADa%20Inform%C3%A1tica%20PUCV!5e0!3m2!1ses!2scl!4v1609001063822!5m2!1ses!2scl" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></object>  
           </div>
         </div>
       </div>
@@ -926,7 +863,7 @@
               <li>
                 <i class="lni-home"></i>
               </li>
-              <li><span>Universidad Técnica Federico Santa María</li>
+              <li><span>Pontificia Universidad Católica de Valparaíso</li>
             </ul>
           </div>
           <div class="col-lg-4 col-md-3 col-xs-12">
@@ -942,7 +879,7 @@
               <li>
                 <i class="lni-envelope"></i>
               </li>
-              <li><span>marcelo.mendoza@usm.cl</span></li>
+              <li><span>hector.allende@pucv.cl</span></li>
             </ul>
           </div>
         </div>
@@ -972,6 +909,7 @@
             </div>
             <div class="site-info">
              <p>Por Alen y Bady.</p>
+             <p><a href="/user/login">Editar Contenido</a></p>
             </div>
           </div>
         </div>
@@ -999,6 +937,31 @@
         <div class="sk-circle12 sk-child"></div>
       </div>
     </div>
+
+    <div id="testModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form action="/asamblea/del" method="POST" enctype="multipart/form-data">
+          <div class="modal-header">
+            <h4 class="modal-title">Detalles (O el título de la imagen)</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>Acá debería aparecer el contenido</p>
+            
+
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+            <input type="submit" action="/galeria/del" class="btn btn-info" data-dismiss="modal" value="Editar">
+            <input type="submit" class="btn btn-danger" value="Eliminar">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="assets/js/jquery-min.js"></script>

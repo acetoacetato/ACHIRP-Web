@@ -16,6 +16,15 @@ const noticiaSchema = new mongoose.Schema({
     imagen: {
         type: String,
         required: true
+    },
+    inSite: {
+        type: Boolean,
+        required: true
+    },
+    // Si es in-site, esto es un textarea, en caso contrario, es un link
+    cuerpo: {
+        type: String,
+        required: true,
     }
 })
 

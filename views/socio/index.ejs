@@ -1,10 +1,6 @@
-
 <%- include('../partials/header-admin.ejs') %>
- 
-<br>
-<br>
-<br>
-<br>
+<br><br><br><br>
+
 
 <div class="container">
     <div class="table-wrapper">
@@ -17,7 +13,7 @@
             <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Añadir</span></a>
           </div>
           <div class="col-sm-4">
-            <form action="/directorio" method="GET">
+            <form action="/socio" method="GET">
               <label for="nombre">Nombre:</label>
               <input type="text" name="nombre" id="nombre-search" value="<%= searchOptions.nombre %>">
               <button type="submit">Buscar</button>
@@ -30,27 +26,22 @@
       <table class="table table-striped table-hover">
         <thead>
           <tr>
-            <th>Fecha</th>
-            <th>Titulo</th>
-            <th>Descripción</th>
+            <th>Nombre</th>
+            <th>Institucion</th>
             <th>Acción</th>
           </tr>
         </thead>
         <tbody>
             <%
                 var id = 0
-                noticias.forEach( doc => { 
+                socios.forEach( dir => { 
                 id++
             %>
                 <tr>
                 
-                <td id="<%= id %>-fecha" value="<%= doc.fecha.toLocaleString('af-ZA', {day: 'numeric', month: 'numeric', year: 'numeric'}) %>"><%= doc.fecha.toLocaleString('es-CL', {day: 'numeric', month: 'numeric', year: 'numeric'}) %></td>
-                <td id="<%= id%>-titulo" value="<%= doc.titulo %>"><%= doc.titulo %></td>
-                <td id="<%= id%>-desc" value="<%= doc.desc %>"><%= doc.desc %></td>
-                <div hidden id="<%= id%>-imagen" value="<%= doc.imagen %>"><%= doc.imagen %></div>
-                <div hidden id="<%= id%>-inSite" value="<%= doc.inSite %>"><%= doc.inSite %></div>
-                <div hidden id="<%= id%>-cuerpo" value="<%= doc.cuerpo %>"><%= doc.cuerpo %></div>
-                <div hidden id="<%= id %>-_id" value="<%= doc._id %>"></div>
+                <td id="<%= id %>-nombre" value="<%= dir.nombre %>"><%= dir.nombre %></td>
+                <td id="<%= id%>-institucion" value="<%= dir.institucion %>"><%= dir.institucion %></td>
+                <div hidden id="<%= id %>-_id" value="<%= dir._id %>"></div>
                 <td>
                 <a href="#editEmployeeModal" data-id="<%= id %>" class="edit Modal" data-toggle="modal">editar<i  data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                 <a href="#deleteEmployeeModal" data-id="<%= id %>"class="delete Modal" data-toggle="modal">eliminar<i  data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -68,7 +59,6 @@
       
     </div>
   </div>
-  
 
   
 
@@ -76,7 +66,7 @@
   <div id="addEmployeeModal" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form action="/noticia" method="POST" enctype="multipart/form-data">
+        <form action="/socio" method="POST" enctype="multipart/form-data">
           <div class="modal-header">
             <h4 class="modal-title">Añadir</h4>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -96,26 +86,7 @@
           %>
                 <div class="form-group">
                     <label><%= key %></label>
-                    <%
-
-                      switch(variables[key]){
-                        case "Date":
-                    %>
-                        <input type="date" class="form-control" name="<%= key %>" value="">
-                    <%
-                        break;
-                        case "Boolean":
-                    %>
-                        <input type="checkbox" class="form-control" name="<%= key %>">
-                    <%
-                        break;
-                        default:
-                    %>
-                        <textarea class="form-control" name="<%= key %>" value="" required></textarea>
-                    <!--input type="<% if(variables[key] == "Date") { %>date<% }else { %>textarea<% } %>" class="form-control" name="<%= key %>" value="" reActauired-->
-                    <%
-                      }
-                    %>
+                    <input type="<% if(variables[key] == "Date") { %> date <% }else { %>text <% } %>" class="form-control" name="<%= key %>" value="" required>
                 </div>
             <%     
               }
@@ -135,7 +106,7 @@
   <div id="editEmployeeModal" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form action="/noticia/edit" method="POST" enctype="multipart/form-data">
+        <form action="/socio/edit" method="POST" enctype="multipart/form-data">
           <div class="modal-header">
             <h4 class="modal-title">Editar</h4>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -154,26 +125,7 @@
           %>
                 <div class="form-group">
                     <label><%= key %></label>
-                     <%
-
-                      switch(variables[key]){
-                        case "Date":
-                    %>
-                        <input type="date" class="form-control" id="<%= key %>" name="<%= key %>" value="">
-                    <%
-                        break;
-                        case "Boolean":
-                    %>
-                        <input type="checkbox" class="form-control" id="<%= key %>" name="<%= key %>">
-                    <%
-                        break;
-                        default:
-                    %>
-                        <textarea class="form-control" id="<%= key %>" name="<%= key %>" value="" required></textarea>
-                    <!--input type="<% if(variables[key] == "Date") { %>date<% }else { %>textarea<% } %>" class="form-control" name="<%= key %>" value="" reActauired-->
-                    <%
-                      }
-                    %>
+                    <input type="text" class="form-control" id="<%= key %>" name="<%= key %>" value="" required>
                 </div>
             <%     
               }
@@ -192,7 +144,7 @@
   <div id="deleteEmployeeModal" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form action="/noticia/del" method="POST" enctype="multipart/form-data">
+        <form action="/socio/del" method="POST" enctype="multipart/form-data">
           <div class="modal-header">
             <h4 class="modal-title">Eliminar</h4>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -204,34 +156,12 @@
               for(var key in variables){ 
                 if(key[0] == '_'){
           %>
-                  <input type="text"  hidden id="del-<%= key %>" name="<%= key %>" value="">
+                  <input type="text"  hidden id="<%= key %>" name="<%= key %>" value="">
           <%
                   continue;
                 }
           %>
-                <div class="form-group">
-                    <label><%= key %></label>
-                     <%
-
-                      switch(variables[key]){
-                        case "Date":
-                    %>
-                        <input type="date" class="form-control" id="del-<%= key %>" name="<%= key %>" value="">
-                    <%
-                        break;
-                        case "Boolean":
-                    %>
-                        <input type="checkbox" class="form-control" id="del-<%= key %>" name="<%= key %>">
-                    <%
-                        break;
-                        default:
-                    %>
-                        <textarea class="form-control" id="del-<%= key %>" name="<%= key %>" value="" required></textarea>
-
-                        <%
-                      }
-                    %>
-                </div>
+                <input type="text" class="form-control" id="del-<%= key %>" name="<%= key %>" value="">
             <%     
               }
             %>
@@ -252,20 +182,13 @@
   <script>
     $(document).on("click", ".Modal", function () {
         var id = $(this).data('id');       
-        var myName = $("#" + id + "-nombre");
-        var myInst = $("#" + id + "-institucion");
+
         // As pointed out in comments, 
         <% for(var key in variables){ %>
-
-          //console.log($("#" + id + "-<%= key %>").attr('value'))
-          //console.log("#" + id + "-<%= key %>")
-          if($("#<%= key %>").attr('type') == "checkbox"){
-            $("#<%= key %>").attr('checked', $("#" + id + "-<%= key %>").attr('value') == 'true')
-            $("#del-<%= key %>").attr('checked', true)
-          } else {
-            $("#<%= key %>").val( $("#" + id + "-<%= key %>").attr('value') )
-            $("#del-<%= key %>").val( $("#" + id + "-<%= key %>").attr('value') )
-          }
+          //console.log(document.getElementById(document.getElementById(id + "-<%= key %>").getAttribute('value')).getAttribute('value'))
+          //console.log(id + "-<%= key %>")
+          $("#<%= key %>").val( $("#" + id + "-<%= key %>").attr('value') )
+          $("#del-<%= key %>").val( $("#" + id + "-<%= key %>").attr('value') )
         <%}%>
         
         //$("#institucion").val( myInst.text() );
@@ -281,7 +204,7 @@
 
     
   </script>
-  <script src="assets/js/jActauery-min.js"></script>
+  <script src="assets/js/jquery-min.js"></script>
     <script src="assets/js/admin.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/img.js"></script>

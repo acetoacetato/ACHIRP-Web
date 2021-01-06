@@ -1,7 +1,10 @@
+
 <%- include('../partials/header-admin.ejs') %>
-<br><br><br><br>
-
-
+ 
+<br>
+<br>
+<br>
+<br>
 <div class="container">
     <div class="table-wrapper">
       <div class="table-title">
@@ -28,22 +31,24 @@
           <tr>
             <th>Nombre</th>
             <th>Institucion</th>
-            <th>Cargo</th>
             <th>Acción</th>
           </tr>
         </thead>
         <tbody>
             <%
                 var id = 0
-                directorio.forEach( dir => { 
+                asambleas.forEach( dir => { 
                 id++
             %>
                 <tr>
                 
-                <td id="<%= id %>-nombre" value="<%= dir.nombre %>"><%= dir.nombre %></td>
-                <td id="<%= id%>-institucion" value="<%= dir.institucion %>"><%= dir.institucion %></td>
-                <td id="<%= id%>-cargo" value="<%= dir.cargo %>"><%= dir.cargo %></td>
-                <div hidden id="<%= id%>-imagen" value="/public/img/directorio/<%= dir.imagen %>"><%= dir.imagen %></div>
+                <td id="<%= id %>-fecha" value="<%= dir.fecha.toLocaleString('af-ZA', {day: 'numeric', month: 'numeric', year: 'numeric'}) %>"><%= dir.fecha.toLocaleString('es-CL', {day: 'numeric', month: 'numeric', year: 'numeric'}) %></td>
+                <td id="<%= id%>-lugar" value="<%= dir.lugar %>"><%= dir.lugar %></td>
+                <div hidden id="<%= id%>-inicio" value="<%= dir.inicio %>"><%= dir.inicio %></div>
+                <div hidden id="<%= id%>-fin" value="<%= dir.fin %>"><%= dir.fin %></div>
+                <div hidden id="<%= id%>-tabla" value="<%= dir.tabla %>"><%= dir.tabla %></div>
+                <div hidden id="<%= id%>-Acuerdos" value="<%= dir.Acuerdos %>"><%= dir.Acuerdos %></div>
+                <div hidden id="<%= id%>-Acta" value="<%= dir.Acta %>"><%= dir.Acta %></div>
                 <div hidden id="<%= id %>-_id" value="<%= dir._id %>"></div>
                 <td>
                 <a href="#editEmployeeModal" data-id="<%= id %>" class="edit Modal" data-toggle="modal">editar<i  data-toggle="tooltip" title="Edit">&#xE254;</i></a>
@@ -62,13 +67,21 @@
       
     </div>
   </div>
+  <!-- <%asambleas.forEach(asamblea => {
+    //Para reemplazar saltos de línea
+    //TODO: para reemplazar saltos de línea ocupar esto
+    %>
+      <%- asamblea.tabla.replace(/\r\n/g, "<br>") %>
+    <%
+  })%> -->
 
   
+
   <!-- Edit Modal HTML -->
   <div id="addEmployeeModal" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form action="/directorio" method="POST" enctype="multipart/form-data">
+        <form action="/asamblea" method="POST" enctype="multipart/form-data">
           <div class="modal-header">
             <h4 class="modal-title">Añadir</h4>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -89,42 +102,16 @@
                 <div class="form-group">
                     <label><%= key %></label>
                     <%
-
-                      switch(variables[key]){
-                        case "Date":
+                      if(variables[key] == "Date"){
                     %>
                         <input type="date" class="form-control" name="<%= key %>" value="">
                     <%
-                        break;
-                        case "Boolean":
+                      } else {
                     %>
-                        <input type="checkbox" class="form-control" name="<%= key %>">
-                    <%
-                        break;
-                        default:
-                          if(key == "imagen"){
-                    %>
-
-                        <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                          <input id="add-upload" type="file" onchange="readURL(this);" name="<%= key %>" class="form-control border-0 upload" required>
-                          <label id="add-upload-label" for="add-upload" class="font-weight-light text-muted upload-label">Elija archivo</label>
-                          <div class="input-group-append">
-                              <label for="add-upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Explorar</small></label>
-                          </div>
-                        </div>
-
-                        <!-- Uploaded image area-->
-                        <p class="font-italic text-white text-center">La imagen subida aparecerá abajo.</p>
-                        <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
-
-
-                    <%
-                      } else{ %>
-
                         <textarea class="form-control" name="<%= key %>" value="" required></textarea>
-
-                      <% }
-                    }
+                    <!--input type="<% if(variables[key] == "Date") { %>date<% }else { %>textarea<% } %>" class="form-control" name="<%= key %>" value="" reActauired-->
+                    <%
+                      }
                     %>
                 </div>
             <%     
@@ -145,7 +132,7 @@
   <div id="editEmployeeModal" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form action="/directorio/edit" method="POST" enctype="multipart/form-data">
+        <form action="/asamblea/edit" method="POST" enctype="multipart/form-data">
           <div class="modal-header">
             <h4 class="modal-title">Editar</h4>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -165,37 +152,11 @@
                 <div class="form-group">
                     <label><%= key %></label>
                      <%
-
-                      switch(variables[key]){
-                        case "Date":
+                      if(variables[key] == "Date"){
                     %>
                         <input type="date" class="form-control" id="<%= key %>" name="<%= key %>" value="">
                     <%
-                        break;
-                        case "Boolean":
-                    %>
-                        <input type="checkbox" class="form-control" id="<%= key %>" name="<%= key %>">
-                    <%
-                        break;
-                        default:
-                          if( key == "imagen"){
-                    %>
-
-
-                        <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                          <input id="upload" type="file" onchange="readURL(this);" name="<%= key %>" class="form-control border-0 upload">
-                          <label id="upload-label" for="upload" class="font-weight-light text-muted upload-label">Elija archivo</label>
-                          <div class="input-group-append">
-                              <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Explorar</small></label>
-                          </div>
-                        </div>
-
-                        <!-- Uploaded image area-->
-                        <p class="font-italic text-white text-center">La imagen subida aparecerá abajo.</p>
-                        <div class="image-area mt-4"><img id="imagen" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
-                    <%
-                            break;
-                          }
+                      } else {
                     %>
                         <textarea class="form-control" id="<%= key %>" name="<%= key %>" value="" required></textarea>
                     <!--input type="<% if(variables[key] == "Date") { %>date<% }else { %>textarea<% } %>" class="form-control" name="<%= key %>" value="" reActauired-->
@@ -220,7 +181,7 @@
   <div id="deleteEmployeeModal" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form action="/directorio/del" method="POST" enctype="multipart/form-data">
+        <form action="/asamblea/del" method="POST" enctype="multipart/form-data">
           <div class="modal-header">
             <h4 class="modal-title">Eliminar</h4>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -232,42 +193,12 @@
               for(var key in variables){ 
                 if(key[0] == '_'){
           %>
-                  <input type="text"  hidden id="del-<%= key %>" name="<%= key %>" value="">
+                  <input type="text"  hidden id="<%= key %>" name="<%= key %>" value="">
           <%
                   continue;
                 }
           %>
-                <div class="form-group">
-                    <label><%= key %></label>
-                     <%
-
-                      switch(variables[key]){
-                        case "Date":
-                    %>
-                        <input type="date" class="form-control" id="del-<%= key %>" name="<%= key %>" value="">
-                    <%
-                        break;
-                        case "Boolean":
-                    %>
-                        <input type="checkbox" class="form-control" id="del-<%= key %>" name="<%= key %>">
-                    <%
-                        break;
-                        default:
-                          if(key == "imagen"){
-
-                    %>
-                            <div class="image-area mt-4"><img id="del-imagen" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
-
-                    <%
-                            break;
-                          }
-                    %>
-                        <textarea class="form-control" id="del-<%= key %>" name="<%= key %>" value="" required></textarea>
-
-                        <%
-                      }
-                    %>
-                </div>
+                <input type="text" class="form-control" id="del-<%= key %>" name="<%= key %>" value="">
             <%     
               }
             %>
@@ -288,29 +219,15 @@
   <script>
     $(document).on("click", ".Modal", function () {
         var id = $(this).data('id');       
-
+        var myName = $("#" + id + "-nombre");
+        var myInst = $("#" + id + "-institucion");
         // As pointed out in comments, 
-        <% for(var key in variables){ 
-          
-          
-          if( key == "imagen"){
-            %>
+        <% for(var key in variables){ %>
 
-            $("#<%= key %>").attr("src", $("#" + id + "-<%= key %>").attr('value') )
-            $("#del-<%= key %>").attr("src", $("#" + id + "-<%= key %>").attr('value') )
-
-          <%
-              }
-            
-          %>
-
-          if($("#<%= key %>").attr('type') == "checkbox"){
-            $("#<%= key %>").attr('checked', $("#" + id + "-<%= key %>").attr('value') == 'true')
-            $("#del-<%= key %>").attr('checked', true)
-          } else {
-            $("#<%= key %>").val( $("#" + id + "-<%= key %>").attr('value') )
-            $("#del-<%= key %>").val( $("#" + id + "-<%= key %>").attr('value') )
-          }
+          //console.log($("#" + id + "-<%= key %>").attr('value'))
+          //console.log("#" + id + "-<%= key %>")
+          $("#<%= key %>").val( $("#" + id + "-<%= key %>").attr('value') )
+          $("#del-<%= key %>").val( $("#" + id + "-<%= key %>").attr('value') )
         <%}%>
         
         //$("#institucion").val( myInst.text() );
@@ -326,7 +243,7 @@
 
     
   </script>
-  <script src="assets/js/jquery-min.js"></script>
+  <script src="assets/js/jActauery-min.js"></script>
     <script src="assets/js/admin.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/img.js"></script>

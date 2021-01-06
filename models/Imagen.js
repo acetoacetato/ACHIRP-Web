@@ -5,10 +5,19 @@ const imgSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    fecnac: {
+    descripcion: {
+        type: String,
+        required: true
+    },
+    fecha: {
         type: Date,
         required: true
+    },
+    imagen: {
+        type: String,
+        required: true
     }
+
 })
 
 module.exports = mongoose.model('Img', imgSchema)
