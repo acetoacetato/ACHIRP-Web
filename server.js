@@ -49,7 +49,7 @@ const socioRouter = require('./routes/Socio.js')
 const usuarioRouter = require('./routes/user.js')
 const asambleaRouter = require('./routes/asamblea.js')
 const directorioRouter = require('./routes/Directorio.js')
-const contactoRouter = require('./routes/Contacto.js')
+const contactoRouter = require('./routes/contacto.js')
 
 
 /**
