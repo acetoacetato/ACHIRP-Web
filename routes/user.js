@@ -108,11 +108,11 @@ router.post('/login',
             jwt.sign(
                 payload,
                 "randomString", {
-                    expiresIn: 7200
+                    expiresIn: "3h"
                 },
                 (err, token) => {
                     if (err) throw err;
-                    res.cookie('jwt', token, { expires: new Date(Date.now() + 3600) })
+                    res.cookie('jwt', token, { expires: new Date(Date.now() + (3*60*60*1000) - 3) })
                     res.status(200).redirect('/noticia');
                 }
             );
