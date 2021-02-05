@@ -19,6 +19,11 @@ body {
   overflow-x: hidden;
 }
 
+.schedule-slot-time{
+  text-align: center;
+}
+
+
 h1, h2, h3, h4, h5 {
   font-size: 36px;
   font-weight: 700;
@@ -1242,6 +1247,7 @@ h1 {
 }
 
 .schedule .card .schedule-slot-time {
+  width: 30%;
   background-image: linear-gradient(65deg, #82A47E 0, #A5B5A2 100%);
   color: #fff;
   padding: 38px 28px;
