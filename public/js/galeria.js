@@ -41,7 +41,7 @@ function detalles(id) {
     var descripcion = document.getElementById('descripcion-' + id).innerText;
     var src = document.getElementById(id).getAttribute("src");
 
-    document.getElementById('modal-form').reset();
+    //document.getElementById('modal-form').reset();
     document.getElementById('modal-imagen').setAttribute('src', '');
 
     document.getElementById('modal-nombre').innerText = nombre;
