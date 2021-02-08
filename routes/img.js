@@ -3,9 +3,8 @@ const router = express.Router()
 const Img = require('../models/Imagen')
 const crypto = require('crypto')
 var formidable = require('formidable');
-const sys = require('sys')
 const exec = require('child_process').exec;
-const path = require('path')
+const {auth, redirect} = require('path')
 const fs = require('fs')
 
 

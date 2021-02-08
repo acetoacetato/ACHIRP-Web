@@ -951,6 +951,56 @@ a.back-to-top:hover, a.back-to-top:focus {
   opacity: 1;
 }
 
+
+
+#galeria .event-item {
+  position: relative;
+}
+
+#galeria .event-item .overlay-text {
+  text-align: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#galeria .event-item .content {
+  position: absolute;
+  top: 30%;
+  width: 100%;
+  color: #fff;
+  transform: translateY(-50%);
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#galeria .event-item .content h3 {
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+#galeria .event-item .content a {
+  color: #A5B5A2;
+  margin-top: 10px;
+}
+
+#galeria .event-item:hover .content {
+  top: 50%;
+}
+
+#galeria .event-item .overlay-text:hover {
+  opacity: 1;
+}
 /* ==========================================================================
    Video Section Style
    ========================================================================== */

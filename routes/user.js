@@ -5,12 +5,10 @@ const crypto = require('crypto')
 const formidable = require('formidable')
 const path = require('path')
 const fs = require('fs')
-const sys = require('sys')
-const exec = require('child_process').exec;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const auth = require("./auth")
-const { check, validationResult} = require("express-validator/check");
+const {auth, redirect} = require("./auth")
+const { check, validationResult} = require("express-validator");
 
 
 router.post('/signup',

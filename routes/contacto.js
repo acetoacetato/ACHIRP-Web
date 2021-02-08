@@ -5,14 +5,13 @@ const crypto = require('crypto')
 const formidable = require('formidable')
 const path = require('path')
 const fs = require('fs')
-const sys = require('sys')
-const auth = require("./auth")
+const {auth, redirect} = require("./auth")
 const obtenerDict = require('../tools/tools')
 const exec = require('child_process').exec;
 var nodemailer = require('nodemailer');
 
 // Express manda el hola mundo a la solicitud get del servidor
-router.get('/', auth, async (req, res) => {
+router.get('/', auth, redirect, async (req, res) => {
     //console.log(Directorio.schema.paths['nombre']['instance'])
     var keys = obtenerDict(Contacto.schema.paths)
 
@@ -37,7 +36,7 @@ router.get('/', auth, async (req, res) => {
 
 
 // Crear el autor
-router.post('/add', auth, async (req, res) => {
+router.post('/add', auth, redirect, async (req, res) => {
     
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
@@ -63,7 +62,7 @@ router.post('/add', auth, async (req, res) => {
 });
 
 
-router.post("/edit", auth, async (req, res) => {
+router.post("/edit", auth, redirect, async (req, res) => {
     
     var form = new formidable.IncomingForm();
     form.parse(req,  async (err, fields, files) => {
@@ -84,7 +83,7 @@ router.post("/edit", auth, async (req, res) => {
 
 })
 
-router.post("/del", auth, async (req, res) => {
+router.post("/del", auth, redirect, async (req, res) => {
     
     var form = new formidable.IncomingForm();
     form.parse(req,  async (err, fields, files) => {

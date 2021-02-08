@@ -5,17 +5,17 @@ const crypto = require('crypto')
 const formidable = require('formidable')
 const path = require('path')
 const fs = require('fs')
-const sys = require('sys')
-const auth = require("./auth")
+const {auth, redirect} = require('./auth')
 const obtenerDict = require('../tools/tools')
-
 const exec = require('child_process').exec;
 // Express manda el hola mundo a la solicitud get del servidor
-router.get('/', auth, async (req, res) => {
+router.get('/', auth, redirect, async (req, res) => {
     // Se obtienen los nombres y tipos de los parámetros de la colección de la base de datos
     //  se usan para crear los formularios de manera dinámica
     var keys = obtenerDict(Asamblea.schema.paths)
-
+    if(req.message !=  undefined){
+        return res.redirect('/user/login')
+    }
     //FIXME: Arreglar la búsqueda
     let searchOptions = {}
     if(req.query.nombre != null && req.query.nombre.trim() !== ''){
@@ -41,7 +41,7 @@ router.get('/', auth, async (req, res) => {
 
 
 // Crear el autor
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, redirect, async (req, res) => {
     
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
@@ -77,7 +77,7 @@ router.post('/', auth, async (req, res) => {
 });
 
 
-router.post("/edit", auth, async (req, res) => {
+router.post("/edit", auth, redirect, async (req, res) => {
     
     var form = new formidable.IncomingForm();
     form.parse(req,  async (err, fields, files) => {
@@ -102,7 +102,7 @@ router.post("/edit", auth, async (req, res) => {
 
 })
 
-router.post("/del", auth, async (req, res) => {
+router.post("/del", auth, redirect, async (req, res) => {
     
     var form = new formidable.IncomingForm();
     form.parse(req,  async (err, fields, files) => {

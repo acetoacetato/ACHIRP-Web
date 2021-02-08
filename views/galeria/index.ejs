@@ -1,0 +1,323 @@
+<%- include('../partials/header-admin.ejs') %>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" >
+<!-- Icon -->
+<link rel="stylesheet" type="text/css" href="/assets/fonts/line-icons.css">
+<!-- Nivo Lightbox -->
+<link rel="stylesheet" type="text/css" href="/assets/css/nivo-lightbox.css" >
+<!-- Animate -->
+<link rel="stylesheet" type="text/css" href="/assets/css/animate.css">
+<!-- Main Style -->
+<link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+<!-- Responsive Style -->
+<link rel="stylesheet" type="text/css" href="/assets/css/responsive.css">
+
+<link rel="stylesheet" type="text/css" href="/public/css/img.css">
+
+ <!-- Para subir archivos -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/js/fileinput.min.js" integrity="sha512-vDrq7v1F/VUDuBTB+eILVfb9ErriIMW7Dn3JC/HOQLI8ZzTBTRRKrKJO3vfMmZFQpEGVpi+EYJFatPgVFxOKGA==" crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/css/fileinput-rtl.min.css" integrity="sha512-gbMPOQLbjjNE5C83fw9XaOmsfpM5CXUZRvNsd0ZUjhcdOJj+N3JmPhn7d0T0Mq6/Z0CWOEIKVnZ9Ii27kCbdIw==" crossorigin="anonymous" />
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/css/fileinput.min.css" integrity="sha512-8KeRJXvPns3KF9uGWdZW18Azo4c1SG8dy2IqiMBq8Il1wdj7EWtR3EGLwj+DnvznrRjn0oyBU+OEwJk7A79n7w==" crossorigin="anonymous" />
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/js/locales/ar.min.js" integrity="sha512-3MKrBzDXkokqxL+TCAr95A5efNobsn0sSlLygHHNfI5hj7724BF2J+BCQ6114B3vAG6rusfAUUQiKz/bnAdl4g==" crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/themes/explorer/theme.min.css" integrity="sha512-1luLpz8PpmTlZ1kePgwik4pgLMw4A07rd7KoA/pM/leyQnhXRtj9XlO1McipB5A8kF4AELsvMSFpVDDipopD8w==" crossorigin="anonymous" />
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/themes/explorer-fas/theme.min.js" integrity="sha512-DC4oIxfFJZR3hiwmybhu+EUrKgTt6NacfE1ICsIFFun2tccvX6JlU/CM4hMIrAfd7ZtkVWtuj3Zf0UwHP2faDw==" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/themes/fa/theme.min.js" integrity="sha512-eur4+EF8SPJo3fhe8mMkdSwopFRsMtCU2NvPm8aKjxWFs3/9naJn5HbYi+KPGwAinR5xYzz0/njHcGzifM9KCg==" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/themes/fas/theme.min.js" integrity="sha512-BeQMmfGMfVp5kEkEGxUtlT5R9+m7jDVr5LDFCG2EK9VR50cEhR0kKzD5bn3XtSit/qNoYQUtr405lf5aSCSF8A==" crossorigin="anonymous"></script>
+<br>
+<br>
+<br>
+
+<a href="#addImageModal" onclick="modalAgregar()" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Añadir</span></a>
+
+<section id="event-up" class="section-padding">
+  <div class="container">
+    <div class="row" id="galeria">
+
+    </div>
+    <div class="row mt-5" id="btn-ver-mas">
+      <div class="col-12 text-center">
+        <a style="cursor: pointer;" onclick="siguientePagina()" class="btn btn-common">VER MÁS</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div id="testModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="POST" id="modal-form" enctype="multipart/form-data" >
+        <div class="modal-header">
+          <input type="text" name="nombre" class="form-control" id="modal-nombre">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <input hidden id="modal-id" name="_id">
+        <div class="modal-body">
+
+          <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+            <input id="upload" type="file" onchange="readURLs(this);" name="imagen" class="form-control border-0 upload">
+            <label id="upload-label" for="upload" class="font-weight-light text-muted upload-label">Elija archivo</label>
+            <div class="input-group-append">
+                <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Explorar</small></label>
+            </div>
+          </div>
+
+          <!-- Uploaded image area-->
+          <p class="font-italic text-white text-center">La imagen subida aparecerá abajo.</p>
+          <div class="image-area mt-4"><img id="modal-imagen" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+         
+
+          <div class="form-group" >
+            <input class="form-control" id="modal-descripcion" name="descripcion">
+          </div>
+        </div>
+        
+          
+
+
+        
+        <div class="modal-footer">
+          <input onclick="editar()" class="btn btn-info" data-dismiss="modal" value="Editar">
+          <input onclick="eliminar()" class="btn btn-danger" value="Eliminar">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div id="addImageModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="POST" id="modal-add-form" enctype="multipart/form-data" >
+        <div class="modal-header">
+          <input type="text" name="nombre" class="form-control" >
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+
+          <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+            <input id="add-upload" type="file" onchange="readURLs(this);" name="imagen" class="form-control border-0 upload">
+            <label id="upload-label-add" for="add-upload" class="font-weight-light text-muted upload-label">Elija archivo</label>
+            <div class="input-group-append">
+                <label for="add-upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Explorar</small></label>
+            </div>
+          </div>
+
+          <!-- Uploaded image area-->
+          <p class="font-italic text-white text-center">La imagen subida aparecerá abajo.</p>
+          <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+         
+
+          <div class="form-group" >
+            <input class="form-control" name="descripcion">
+          </div>
+        </div>
+        
+          
+
+
+        
+        <div class="modal-footer">
+          <input onclick="agregar()" class="btn btn-info" data-dismiss="modal" value="Agregar">
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<script src="public/js/galeria.js"></script>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="assets/js/jquery-min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.countdown.min.js"></script>
+<script src="assets/js/waypoints.min.js"></script>
+<script src="assets/js/jquery.counterup.min.js"></script>
+<script src="assets/js/jquery.nav.js"></script>
+<script src="assets/js/jquery.easing.min.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/nivo-lightbox.js"></script>
+<script src="assets/js/main.js"></script>  
+
+<script>
+
+  
+  siguientePagina();
+  
+  function modalAgregar(){
+    document.getElementById('modal-add-form').reset();
+    document.getElementById('modal-add-form').reset();
+    document.getElementById('imageResult').setAttribute('src', '');
+  }
+
+  function agregar() {
+    var datos = new FormData(document.getElementById('modal-add-form'));
+    opciones = {
+      method: 'POST',
+      body: datos
+    }
+
+
+    fetch('/galeria/', opciones).then( response => {
+      if(response.ok){
+        console.log(response);
+        return response.json();
+      } else{
+        throw "Error en la llamada Ajax";
+      }
+    }).then(r => {
+      if(r.result == "success"){
+        var id = r._id;
+        var img = encontrarPorId(id);
+        if(typeof imgs != "undefined")
+          cargaImagen(id, imgs.name)
+      } else{
+        alert("Porfavor vuelva a iniciar sesión")
+        window.location.href = '/user/login';
+        console.log(r.message)
+      }
+      console.log(r);
+    }).catch(e => {
+      console.log(e);
+    })
+  }
+  function editar(){
+    // Obtener los datos desde el modal
+    var datos = new FormData(document.getElementById('modal-form'));
+    //var imagen = document.getElementById('modal-img').innerText
+
+
+    opciones = {
+      method: 'POST',
+      body: datos
+    }
+    //delete opciones.headers['Content-Type'];
+    // Armar la petición POST
+    fetch('/galeria/edit', opciones).then( response => {
+      if(response.ok){
+        console.log(response);
+        return response.json();
+      } else{
+        throw "Error en la llamada Ajax";
+      }
+    }).then(r => {
+      if(r.result == "success"){
+        var id = document.getElementById('modal-id').getAttribute('value');
+        var nombre = document.getElementById('modal-nombre').getAttribute('value');
+        var descripcion = document.getElementById('modal-descripcion').getAttribute('value');
+        var imgs = document.getElementById('upload').files[0];
+
+        document.getElementById('nombre-' + id).innerText = nombre;
+        document.getElementById('descripcion-' + id).innerText = descripcion;
+        if(typeof imgs != "undefined")
+          cargaImagen(id, imgs.name)
+      } else{
+        alert("Porfavor vuelva a iniciar sesión")
+        window.location.href = '/user/login';
+        console.log(r.message)
+      }
+      console.log(r);
+    }).catch(e => {
+      console.log(e);
+    })
+    // Manejar la respuesta y eliminar el elemento de la galeria
+  }
+
+
+  function eliminar() {
+    var datos = new FormData(document.getElementById('modal-form'));
+    opciones = {
+      method: 'POST',
+      body: datos
+    }
+
+    fetch('/galeria/del', opciones).then( response => {
+      console.log(response)
+      if(response.ok){
+        return response.json()
+      } else{
+        console.log(response);
+        throw "Error al llamar AJAX";
+      }
+    }).then( r => {
+      if(r.type == "login"){
+        alert("Porfavor vuelva a iniciar sesión")
+        window.location.href = '/user/login';
+        return;
+      }
+      var id = document.getElementById('modal-id').getAttribute('value');
+      var imagen = document.getElementById('img-' + id);
+      document.getElementById("galeria").removeChild(imagen);
+      $('#testModal').modal('hide');
+      $('#testModal .close').trigger('click');
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+  function encontrarPorId(id){
+    fetch('/galeria/id/' + id).then(r => {
+      if(r.ok){
+        return r.json();
+      } else{
+        throw "Error en la respuesta, contacte al administrador.";
+      }
+    }).then( response => {
+      var galeria = document.getElementById("galeria");
+      creaImagen(response.imagen, galeria);
+    }).catch( e => {
+      alert(e);
+    })
+  }
+
+  function readURLs(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#modal-imagen')
+                .attr('src', e.target.result);
+            $('#upload-label')
+                .attr('value', input.files[0].name)
+            $('#imageResult')
+                .attr('src', e.target.result);
+            $('#upload-label-add')
+                .attr('value', input.files[0].name)
+            
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+
+
+  /*  ==========================================
+      SHOW UPLOADED IMAGE NAME
+  * ========================================== */
+  var input = document.getElementsByClassName( 'upload' );
+  var infoArea = document.getElementsByClassName( 'upload-label' );
+
+  for(var i=0 ; i< input.length ; i++){
+      input[i].addEventListener( 'change', showFileName );
+      function showFileName( event ) {
+          var input = event.srcElement;
+          var fileName = input.files.name;
+          var infoArea = document.getElementsByClassName( 'upload-label' );
+          for(el in infoArea){
+              el.textContent =  'File name: ' + fileName;
+          }
+      }
+  }
+</script>
