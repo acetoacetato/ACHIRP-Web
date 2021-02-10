@@ -8,6 +8,7 @@ const fs = require('fs')
 const {auth, redirect, apiResponse} = require("./auth")
 const obtenerDict = require('../tools/tools')
 const exec = require('child_process').exec;
+const { ifError } = require('assert')
 // Express manda el hola mundo a la solicitud get del servidor
 router.get('/', auth, redirect, async (req, res) => {
     var keys = obtenerDict(Imagen.schema.paths)
@@ -108,6 +109,16 @@ router.post("/edit", auth, apiResponse, async (req, res) => {
                     console.error(err)
                 }
             })
+
+            var aux = 1;
+            var tempImagen = imagen;
+            while(fs.existsSync(newPath)){
+                var tempImagen = `${aux}-${imagen}`;
+                newPath = path.join(__dirname, '../img/' + tempImagen);
+                aux++;
+            }
+            imagen = tempImagen;
+
             fs.writeFile(newPath, rawData, (err) => {
                 if(err){
                     console.error(err)
@@ -174,6 +185,9 @@ router.get("/imagenes", async (req, res) => {
 router.get("/img/:fileid", (req, res) => {
     const { fileid } = req.params;
     var ruta = path.join(__dirname, "../img/" + fileid)
+    if(! fs.existsSync(ruta)){
+        ruta = path.join(__dirname, "../static_img/gallery.png");
+    }
     res.status(200).sendFile(ruta);
 })
 

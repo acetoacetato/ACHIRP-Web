@@ -55,6 +55,7 @@ function detalles(id) {
 
 
 function cargarNoticia(inSite, id){
+  console.log("funciono")
   fetch('/noticia/noticia/' + id).then( (response) => {
     if(response.ok){
       return response.json();
@@ -63,25 +64,39 @@ function cargarNoticia(inSite, id){
     }
   }).then( r => {
     noticia = r.noticia
-    if(inSite){
+    if(!inSite){
       if( ! /http(s?):\/\//.test(noticia.cuerpo))
         noticia.cuerpo = 'http://' + noticia.cuerpo
       window.open(noticia.cuerpo);
     } else{
+
+      var fecha = new Date(noticia.fecha).toLocaleDateString('es-CL', {day: 'numeric', month: 'long', year: 'numeric'})
       // Cargar Datos en Modal de Noticia
-      
+      $("#modal-titulo-noticia").html(noticia.titulo);
+      $("#modal-subtitulo-noticia").html(noticia.desc);
+      $("#modal-descripcion-noticia").html(noticia.cuerpo);
+      $("#modal-fecha-noticia").html(fecha);
+      $("#modal-imagen-noticia").attr('src', '/public/img/noticia/' + noticia.imagen);
       // Hacer Toggle cuando todo esté cargado
-      $("#modalNoticia").modal("toggle");
+      $("#noticiasModal").modal("toggle");
     }
   }).catch( e => {
     alert("Error: " +  e);
   })
 }
 
+function UrlExists(url)
+{
+    var http = new XMLHttpRequest();
+    http.open('HEAD', url, false);
+    http.send();
+    return http.status!=404;
+}
 
 function creaNotiObj(noticia){
 
   var fecha = new Date(noticia.fecha).toLocaleDateString('es-CL', {day: 'numeric', month: 'long', year: 'numeric'})
+  var imagen = UrlExists("/public/img/noticias/" + noticia.imagen)? "/public/img/noticias/" +noticia.imagen: ""
   var str = `<div class="col-lg-4 col-md-6 col-xs-12" hidden>
                 <div class="blog-item">
                   <div class="blog-image">
@@ -91,7 +106,7 @@ function creaNotiObj(noticia){
                   </div>
                   <div class="descr">
                     <h3 class="title">
-                      <a style="cursor: pointer;" onclick="cargarNoticia('${ noticia.inSite }', '${ noticia._id }')">
+                      <a style="cursor: pointer;" onclick="cargarNoticia(${ noticia.inSite }, '${ noticia._id }')">
                         ${noticia.titulo}
                       </a>
                     </h3>

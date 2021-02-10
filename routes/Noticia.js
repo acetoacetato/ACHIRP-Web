@@ -43,10 +43,26 @@ router.post('/', auth, redirect, async (req, res) => {
         var titulo = fields['titulo']
         var desc = fields['desc']
         var fecha = fields['fecha']
-        var imagen = fields['imagen']
         var inSite = (fields['inSite'] == 'on')
         var cuerpo = fields['cuerpo']
-        //console.log(inSite)
+        var imagen = files.imagen.name
+        var tempPath = files.imagen.path
+        var newPath = path.join(__dirname, '../public/img/noticia/' + imagen)
+        var rawData = fs.readFileSync(tempPath)
+
+        var aux = 1;
+        var tempImagen = imagen;
+        while(fs.existsSync(newPath)){
+            var tempImagen = `${aux}-${imagen}`;
+            newPath = path.join(__dirname, '../public/img/noticia/' + tempImagen);
+            aux++;
+        }
+        imagen = tempImagen;
+
+        fs.writeFile(newPath, rawData, (err) => {
+            if(err)
+                console.error(err)
+        })
 
         const noticia = new Noticia({
             titulo : titulo,
@@ -83,10 +99,40 @@ router.post("/edit", auth, redirect, async (req, res) => {
         resultado.titulo = fields['titulo'];
         resultado.desc = fields['desc'];
         resultado.fecha = fields['fecha'];
-        resultado.imagen = fields['imagen'];
         //console.log(fields)
         resultado.inSite = (fields['inSite'] == 'on')? true:false;
         resultado.cuerpo = fields['cuerpo'];
+
+        if(fields.imagen !== undefined){
+            var imagen = files.imagen.name
+            var tempPath = files.imagen.path
+            var newPath = path.join(__dirname, '../public/img/noticia/' + imagen)
+            var rawData = fs.readFileSync(tempPath)
+            var prevPath = path.join(__dirname, '../public/img/noticia/' + resultado.imagen)
+
+            var aux = 1;
+            var tempImagen = imagen;
+            while(fs.existsSync(newPath)){
+                var tempImagen = `${aux}-${imagen}`;
+                newPath = path.join(__dirname, '../public/img/noticia/' + tempImagen);
+                aux++;
+            }
+            imagen = tempImagen;
+
+            fs.unlink(prevPath, (err) => {
+                if(err)
+                    console.error(err)
+                    return
+            })
+            fs.writeFile(newPath, rawData, (err) => {
+                if(err)
+                    console.error(err)
+            })
+            
+            resultado.imagen = imagen;
+
+        }
+        
 
         await resultado.save()
 
@@ -104,6 +150,13 @@ router.post("/del", auth, redirect, async (req, res) => {
         filtro = {_id : fields['_id']}
         Noticia.deleteOne(filtro, function (err) {
             if (err) return handleError(err);
+
+            var prevPath = path.join(__dirname, '../public/img/noticia/' + doc.imagen);
+            fs.unlink(prevPath, (err) => {
+                if(err){
+                    console.error(err)
+                }
+            })
             // deleted at most one tank document
             res.redirect("/noticia")
           });
@@ -113,12 +166,10 @@ router.post("/del", auth, redirect, async (req, res) => {
 })
 
 router.get("/noticias", async (req, res) => {
-    console.log("Ingresa")
     var pag = ( typeof req.query.npag == "undefined")? 0:req.query.npag - 1;
     const nPorPagina = 4;
     var galeria = await Noticia.find({});
     var noticias = galeria.slice(nPorPagina*pag, nPorPagina*pag+nPorPagina);
-    console.log(noticias)
     res.status(200).send({ 'noticias' : noticias});
 });
 

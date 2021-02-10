@@ -1,10 +1,6 @@
-
 <%- include('../partials/header-admin.ejs') %>
- 
-<br>
-<br>
-<br>
-<br>
+<br><br><br><br>
+
 
 <div class="container">
     <div class="table-wrapper">
@@ -44,9 +40,10 @@
             %>
                 <tr>
                 
-                <td id="<%= id %>-fecha" value="<%= doc.fecha.toLocaleString('af-ZA', {day: 'numeric', month: 'numeric', year: 'numeric'}) %>"><%= doc.fecha.toLocaleString('es-CL', {day: 'numeric', month: 'numeric', year: 'numeric'}) %></td>
+                <td id="<%= id %>-fecha" value="<%= doc.fecha %>"><%= doc.fecha.toLocaleString('es-CL', {day: 'numeric', month: 'numeric', year: 'numeric'}) %></td>
                 <td id="<%= id%>-titulo" value="<%= doc.titulo %>"><%= doc.titulo %></td>
                 <td id="<%= id%>-desc" value="<%= doc.desc %>"><%= doc.desc %></td>
+                
                 <div hidden id="<%= id%>-imagen" value="<%= doc.imagen %>"><%= doc.imagen %></div>
                 <div hidden id="<%= id%>-inSite" value="<%= doc.inSite %>"><%= doc.inSite %></div>
                 <div hidden id="<%= id%>-cuerpo" value="<%= doc.cuerpo %>"><%= doc.cuerpo %></div>
@@ -68,10 +65,8 @@
       
     </div>
   </div>
-  
 
   
-
   <!-- Edit Modal HTML -->
   <div id="addEmployeeModal" class="modal fade">
     <div class="modal-dialog">
@@ -110,11 +105,29 @@
                     <%
                         break;
                         default:
+                          if(key == "imagen"){
                     %>
-                        <textarea class="form-control" name="<%= key %>" value="" required></textarea>
-                    <!--input type="<% if(variables[key] == "Date") { %>date<% }else { %>textarea<% } %>" class="form-control" name="<%= key %>" value="" reActauired-->
+
+                        <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                          <input id="add-upload" type="file" onchange="readURL(this);" name="<%= key %>" class="form-control border-0 upload" required>
+                          <label id="add-upload-label" for="add-upload" class="font-weight-light text-muted upload-label">Elija archivo</label>
+                          <div class="input-group-append">
+                              <label for="add-upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Explorar</small></label>
+                          </div>
+                        </div>
+
+                        <!-- Uploaded image area-->
+                        <p class="font-italic text-white text-center">La imagen subida aparecerá abajo.</p>
+                        <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+
                     <%
-                      }
+                      } else{ %>
+
+                        <textarea class="form-control" name="<%= key %>" value="" required></textarea>
+
+                      <% }
+                    }
                     %>
                 </div>
             <%     
@@ -168,6 +181,24 @@
                     <%
                         break;
                         default:
+                          if( key == "imagen"){
+                    %>
+
+
+                        <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                          <input id="upload" type="file" onchange="readURL(this);" name="<%= key %>" class="form-control border-0 upload">
+                          <label id="upload-label" for="upload" class="font-weight-light text-muted upload-label">Elija archivo</label>
+                          <div class="input-group-append">
+                              <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Explorar</small></label>
+                          </div>
+                        </div>
+
+                        <!-- Uploaded image area-->
+                        <p class="font-italic text-white text-center">La imagen subida aparecerá abajo.</p>
+                        <div class="image-area mt-4"><img id="imagen" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                    <%
+                            break;
+                          }
                     %>
                         <textarea class="form-control" id="<%= key %>" name="<%= key %>" value="" required></textarea>
                     <!--input type="<% if(variables[key] == "Date") { %>date<% }else { %>textarea<% } %>" class="form-control" name="<%= key %>" value="" reActauired-->
@@ -225,6 +256,14 @@
                     <%
                         break;
                         default:
+                          if(key == "imagen"){
+
+                    %>
+                            <div class="image-area mt-4"><img id="del-imagen" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+                    <%
+                            break;
+                          }
                     %>
                         <textarea class="form-control" id="del-<%= key %>" name="<%= key %>" value="" required></textarea>
 
@@ -252,13 +291,22 @@
   <script>
     $(document).on("click", ".Modal", function () {
         var id = $(this).data('id');       
-        var myName = $("#" + id + "-nombre");
-        var myInst = $("#" + id + "-institucion");
-        // As pointed out in comments, 
-        <% for(var key in variables){ %>
 
-          //console.log($("#" + id + "-<%= key %>").attr('value'))
-          //console.log("#" + id + "-<%= key %>")
+        // As pointed out in comments, 
+        <% for(var key in variables){ 
+          
+          
+          if( key == "imagen"){
+            %>
+
+            $("#<%= key %>").attr("src", '/public/img/noticia/' +  $("#" + id + "-<%= key %>").attr('value') )
+            $("#del-<%= key %>").attr("src", '/public/img/noticia/' + $("#" + id + "-<%= key %>").attr('value') )
+
+          <%
+              }
+            
+          %>
+
           if($("#<%= key %>").attr('type') == "checkbox"){
             $("#<%= key %>").attr('checked', $("#" + id + "-<%= key %>").attr('value') == 'true')
             $("#del-<%= key %>").attr('checked', true)
@@ -281,7 +329,7 @@
 
     
   </script>
-  <script src="assets/js/jActauery-min.js"></script>
+  <script src="assets/js/jquery-min.js"></script>
     <script src="assets/js/admin.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/img.js"></script>
