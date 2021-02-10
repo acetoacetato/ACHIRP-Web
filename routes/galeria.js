@@ -174,14 +174,14 @@ router.get("/imagenes", async (req, res) => {
 router.get("/img/:fileid", (req, res) => {
     const { fileid } = req.params;
     var ruta = path.join(__dirname, "../img/" + fileid)
-    res.sendFile(ruta);
+    res.status(200).sendFile(ruta);
 })
 
 router.get("/id/:fileid",async (req, res) => {
     const { fileid } = req.params;
     var img = await  Imagen.findById(fileid).exec();
 
-    res.send({'result': 'success', 'imagen' : img});
+    res.status(200).send({'result': 'success', 'imagen' : img});
 })
 
 // Exporta el router para poder usarlo donde sea

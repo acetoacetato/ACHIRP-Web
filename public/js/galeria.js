@@ -1,7 +1,7 @@
 
-var nPag = 1;
+var nPagGal = 1;
 function siguientePagina(){
-    fetch('/galeria/imagenes/?' + new URLSearchParams({npag: nPag}))
+    fetch('/galeria/imagenes/?' + new URLSearchParams({npag: nPagGal}))
         .then( (response) =>  response.json()).then( r => {
         var galeria = document.getElementById("galeria");
         for( key in r.imagenes){
@@ -9,7 +9,7 @@ function siguientePagina(){
             creaImagen(imagen, galeria);
         }
         
-        if(r.imagenes.length > 0 ) nPag++;
+        if(r.imagenes.length > 0 ) nPagGal++;
         return 'ok';
     }).catch( e => {
         alert('hubo un error: ' + e);
@@ -58,23 +58,23 @@ function detalles(id) {
 
 function creaImgObj(imagen){
 
-  
-    var str = `<div hidden class="col-lg-3 col-md-6 col-xs-12" style="padding-bottom: 34px;" id="img-${imagen._id}">
-              <div class="event-item">
-                <img class="img-fluid" id="${imagen._id}" src="" style="width: 500px; height:230px" alt="" >
-                
-                <div class="overlay-text">
-                  <div class="content">
-                    <h3 id="nombre-${imagen._id}">${imagen.nombre}</h3>
-                    <div hidden id="descripcion-${imagen._id}">${imagen.descripcion}</div>
-                    <a class="Modal" href="#testModal" onclick="detalles('${imagen._id}')" data-toggle="modal" data-id="1" >View details</a>
-                  </div>
+  var fecha = new Date(imagen.fecha).toLocaleDateString('es-CL', {day: 'numeric', month: 'long', year: 'numeric'})
+  var str = `<div hidden class="col-lg-3 col-md-6 col-xs-12" style="padding-bottom: 34px;" id="img-${imagen._id}">
+            <div class="event-item">
+              <img class="img-fluid" id="${imagen._id}" src="" style="width: 500px; height:230px" alt="" >
+              
+              <div class="overlay-text">
+                <div class="content">
+                  <h3 id="nombre-${imagen._id}">${imagen.nombre}</h3>
+                  <div hidden id="descripcion-${imagen._id}">${imagen.descripcion}</div>
+                  <a class="Modal" href="#testModal" onclick="detalles('${imagen._id}')" data-toggle="modal" data-id="1" >View details</a>
                 </div>
               </div>
-            </div>`;
-    var parser = new DOMParser();
-    var doc = parser.parseFromString(str, 'text/html');
-    return doc.body.firstChild;
+            </div>
+          </div>`;
+  var parser = new DOMParser();
+  var doc = parser.parseFromString(str, 'text/html');
+  return doc.body.firstChild;
 }
 
 

@@ -112,5 +112,25 @@ router.post("/del", auth, redirect, async (req, res) => {
 
 })
 
+router.get("/noticias", async (req, res) => {
+    console.log("Ingresa")
+    var pag = ( typeof req.query.npag == "undefined")? 0:req.query.npag - 1;
+    const nPorPagina = 4;
+    var galeria = await Noticia.find({});
+    var noticias = galeria.slice(nPorPagina*pag, nPorPagina*pag+nPorPagina);
+    console.log(noticias)
+    res.status(200).send({ 'noticias' : noticias});
+});
+
+
+router.get("/noticia/:id", async (req, res) => {
+    var { id } = req.params;
+    var noticia = await Noticia.findById(id).exec();
+    res.status(200).send({ 'result': 'success', 'noticia' : noticia });
+});
+
+
+
+
 // Exporta el router para poder usarlo donde sea
 module.exports = router
