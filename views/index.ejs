@@ -545,6 +545,7 @@
             })
           %>
 
+
           
           
             
@@ -555,8 +556,18 @@
 
     <section id="event-up" class="section-padding">
   <div class="container">
+    <div class="section-title-header text-center">
+          <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Galería</h2>    
+      <p class="wow fadeInDown" data-wow-delay="0.2s">Revive los momentos de nuestra organización.</p>
+    </div>
+  
     <div class="row" id="galeria">
+      <div class="row">
+        <div class="col-12">
 
+        </div>
+      </div>
+      
     </div>
     <div class="row mt-5" id="btn-ver-mas">
       <div class="col-12 text-center">
@@ -567,27 +578,19 @@
 </section>
 
 
-<div id="testModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
+<div id="testModal" class="modal" style="background: black;">
+  <div class="modal-dialog" style="position: absolute;top: -15%;right: 0%;bottom: 0;left: 0;overflow: auto;overflow-y: auto;">
+    
+    <div class="content text-center">
       <form action="/asamblea/del" method="POST" enctype="multipart/form-data">
-        <div class="modal-header">
-          <h4 class="modal-title" id="modal-nombre">Titulo de imagen</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-
-          <img class="img-fluid"  id="modal-imagen" src=""  data-toggle="modal">
-         
-
-          <div class="form-group" >
-            <label id="modal-descripcion">Descripción</label>
+          <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white;">×</button>
+             <h4 class="section-title-header" id="modal-nombre" style="color:beige; text-size-adjust: 15px;">Titulo de imagen</h4>
+          <img class="img-fluid border"  id="modal-imagen" src=""  data-toggle="modal">
+            <div class="form-group" >
+             <label id="modal-descripcion" style="color: beige;">Descripción</label>
+            </div>
           </div>
-        </div>
-        
-          
-
-
       </form>
     </div>
   </div>
@@ -612,6 +615,52 @@
     </div>
   </div>
 </section>
+
+
+<div id="noticiasModal" class="modal fade" style="margin-top: -5%;">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white; margin-top: 10%;margin-right: 30%;">×</button>
+  <div class="modal-dialog">
+
+    <div class="content text-center" style="background: white;">
+      <form action="/asamblea/del" method="POST" enctype="multipart/form-data">
+        
+          <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+            
+             
+
+            
+             <div class="container">
+               <div class="featured" style="margin-top: -20%;">
+                 <h3 id="modal-titulo" style="color:black; text-size-adjust: 15px;">TITULO DE LA NOTICIA</h3>
+               </div>
+               <div class="art_title">
+                <h4 id="modal-subtitulo" style="color:black; text-size-adjust: 15px;">Subtitulo de la noticia</h4>
+               </div>
+               <img class="img-fluid border"  id="modal-imagen-noticia" src=""  data-toggle="modal" style="margin-top: 5%;">
+               <div>
+                <hr size="10" noshade="noshade" style="color:#000000; background-color:#000000; border-color:transparent;">
+               </div>
+               <div class="byline">
+                 <p id="modal-fecha-noticia">March 29, 2019</p>
+               </div>
+               <div class="article">
+                <label id="modal-descripcion-noticia" style="color: black; font-family: 'Times New Roman', Times, serif; margin-top: 10%; text-align: left;">
+                  <p>Ut pretium velit at lacinia aliquet. Aenean finibus, sapien in vulputate pharetra, risus lacus tempus quam, eget tempus ante risus sit amet justo. Morbi eu vulputate orci, ut sollicitudin nisl. Quisque aliquet placerat lacus sit amet aliquam. Nullam iaculis eget turpis nec sodales. Maecenas lacinia ultricies pellentesque. Nunc facilisis dictum mi a accumsan. Etiam elementum est diam, vitae vehicula diam tempor sed. Maecenas id felis eget nulla sagittis pharetra. Mauris lectus lacus, vehicula id volutpat ac, ultricies sit amet ipsum. Ut ullamcorper vel urna eu tincidunt. Duis augue sapien, cursus vel pulvinar eget, rutrum nec mauris.</p>
+                  <p>Quisque finibus purus in nisl pellentesque, eu posuere tellus vulputate. Nullam sollicitudin imperdiet viverra. Donec sit amet pharetra magna. Aliquam quis massa condimentum, condimentum nunc vitae, imperdiet nibh. Pellentesque molestie velit lacus, vel blandit libero fringilla et. Nullam elementum porta diam id lacinia. Nulla vel nunc semper, facilisis nulla ac, condimentum neque. Sed convallis imperdiet ante eu ultrices. Sed libero enim, feugiat eu turpis ut, faucibus laoreet elit. Nullam at sagittis felis, sed egestas massa. In hac habitasse platea dictumst.</p>
+                  <p>Nam at malesuada mi. Etiam sit amet massa neque. Donec et ornare odio, et malesuada nisi. Etiam sagittis non quam quis lacinia. Pellentesque sit amet tincidunt sapien. In arcu mauris, imperdiet id vulputate vel, mollis sit amet lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam in magna nec risus interdum cursus at et orci. Etiam nec odio elementum, laoreet nunc ut, malesuada leo.</p>
+                  <p>Nullam ultrices nibh eu eros feugiat maximus. Ut porta nisi vitae libero suscipit pulvinar. In id commodo metus, a bibendum ligula. Morbi id fringilla lorem, non tempus nisl. Proin auctor erat eu volutpat condimentum. Nunc nec rhoncus mauris. Etiam pretium nunc augue, efficitur volutpat nulla ornare id.</p>
+                  <p>Pellentesque sagittis nulla risus, nec venenatis diam convallis ut.</p>
+                  <p id="inarticle">"Loren ipsum quote #2198412"</p>
+                  <p>Nullam congue ligula eget neque facilisis placerat. Nam nec nulla turpis. Sed iaculis nunc ut neque tempor, eget scelerisque orci convallis. In hac habitasse platea dictumst. Praesent gravida leo orci, nec pulvinar odio efficitur ut. Aenean at condimentum velit. Fusce interdum ultricies tortor, non pharetra quam accumsan vel. Nullam congue tempus efficitur. Duis a tempor sem, id pellentesque ante. Pellentesque feugiat a ante quis facilisis.</p>
+                  <p id="inarticle2">Mauris tristique, elit quis faucibus tempor, erat ex blandit nisi, quis consectetur magna mauris sit amet mauris. Maecenas aliquam dui mi, quis convallis neque cursus consequat. Duis tempor, velit in tempus congue, purus enim consectetur nulla, semper elementum dolor dolor eu odio. In facilisis odio ac turpis placerat, id aliquam lorem ultricies. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam ac dolor orci. Donec aliquet metus eget lectus faucibus efficitur.</p>
+                   </label>
+                 </div>
+                 </div>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
 <!-- Blog Section End -->
     
 
