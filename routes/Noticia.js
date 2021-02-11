@@ -12,6 +12,7 @@ const exec = require('child_process').exec;
 // Express manda el hola mundo a la solicitud get del servidor
 router.get('/', auth, redirect, async (req, res) => {
     var keys = obtenerDict(Noticia.schema.paths)
+    var alternativos = { inSite : '¿Noticia en el mismo sitio? ', desc : "Subtitulo", cuerpo : "Link al sitio de la noticia" }
     let searchOptions = {}
     if(req.query.nombre != null && req.query.nombre.trim() !== ''){
         searchOptions.nombre = new RegExp(req.query.nombre.trim(), 'i')
@@ -23,7 +24,8 @@ router.get('/', auth, redirect, async (req, res) => {
             noticias: noticias,
             searchOptions: req.query,
             variables: keys,
-            seccion: "noticia"
+            seccion: "noticias",
+            alternativos: alternativos
         })
     }catch (e){
         console.log(e.message)

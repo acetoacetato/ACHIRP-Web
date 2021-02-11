@@ -22,7 +22,7 @@ router.get('/', auth, redirect, async (req, res) => {
         res.render('galeria/index', {
             searchOptions: req.query,
             variables: keys,
-            seccion: "galeria"
+            seccion: "galerias"
         })
     }catch{
         res.render('/');

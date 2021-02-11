@@ -67,7 +67,7 @@ function creaImgObj(imagen){
                 <div class="content">
                   <h3 id="nombre-${imagen._id}">${imagen.nombre}</h3>
                   <div hidden id="descripcion-${imagen._id}">${imagen.descripcion}</div>
-                  <a class="Modal" href="#testModal" onclick="detalles('${imagen._id}')" data-toggle="modal" data-id="1" >View details</a>
+                  <a class="Modal" href="#testModal" onclick="detalles('${imagen._id}')" data-toggle="modal" data-id="1" >Mas Detalles</a>
                 </div>
               </div>
             </div>

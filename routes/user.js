@@ -111,7 +111,7 @@ router.post('/login',
                 (err, token) => {
                     if (err) throw err;
                     res.cookie('jwt', token, { expires: new Date(Date.now() + (3*60*60*1000) - 3) })
-                    res.status(200).redirect('/noticia');
+                    res.status(200).redirect('/directorio');
                 }
             );
         } catch(err) {

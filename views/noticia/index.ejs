@@ -82,6 +82,11 @@
           <%
               var aux = 0
               for(var key in variables){ 
+                var label = key
+                if(key in alternativos){
+                  label = alternativos[key]
+                }
+
                 if(key[0] == '_'){
           %>
                   <input type="text"  hidden name="<%= key %>" value="">
@@ -90,7 +95,7 @@
                 }
           %>
                 <div class="form-group">
-                    <label><%= key %></label>
+                    <label><%= label %></label>
                     <%
 
                       switch(variables[key]){
@@ -101,7 +106,7 @@
                         break;
                         case "Boolean":
                     %>
-                        <input type="checkbox" class="form-control" name="<%= key %>">
+                        <input type="checkbox" class="form-control  insite" id="add-inSite" name="<%= key %>">
                     <%
                         break;
                         default:
@@ -158,6 +163,11 @@
             <%
               var aux = 0
               for(var key in variables){ 
+
+                var label = key
+                if(key in alternativos){
+                  label = alternativos[key]
+                }
                 if(key[0] == '_'){
           %>
                   <input type="text"  hidden id="<%= key %>" name="<%= key %>" value="">
@@ -166,7 +176,7 @@
                 }
           %>
                 <div class="form-group">
-                    <label><%= key %></label>
+                    <label><%= label %></label>
                      <%
 
                       switch(variables[key]){
@@ -177,7 +187,7 @@
                         break;
                         case "Boolean":
                     %>
-                        <input type="checkbox" class="form-control" id="<%= key %>" name="<%= key %>">
+                        <input type="checkbox" class="form-control  insite" id="<%= key %>" name="<%= key %>">
                     <%
                         break;
                         default:
@@ -232,7 +242,12 @@
             <p>¿Está seguro de eliminar el elemento?</p>
             <%
               var aux = 0
-              for(var key in variables){ 
+              for(var key in variables){
+
+                var label = key
+                if(key in alternativos){
+                  label = alternativos[key]
+                }
                 if(key[0] == '_'){
           %>
                   <input type="text"  hidden id="del-<%= key %>" name="<%= key %>" value="">
@@ -241,7 +256,7 @@
                 }
           %>
                 <div class="form-group">
-                    <label><%= key %></label>
+                    <label><%= label %></label>
                      <%
 
                       switch(variables[key]){
@@ -252,7 +267,7 @@
                         break;
                         case "Boolean":
                     %>
-                        <input type="checkbox" class="form-control" id="del-<%= key %>" name="<%= key %>">
+                        <input type="checkbox" class="form-control insite" id="del-<%= key %>" name="<%= key %>">
                     <%
                         break;
                         default:
@@ -308,26 +323,43 @@
           %>
 
           if($("#<%= key %>").attr('type') == "checkbox"){
+
             $("#<%= key %>").attr('checked', $("#" + id + "-<%= key %>").attr('value') == 'true')
             $("#del-<%= key %>").attr('checked', true)
+            
+            actualizaLabel(document.getElementById("<%= key %>"));
+            actualizaLabel(document.getElementById("del-<%= key %>"));
+
+
           } else {
-            $("#<%= key %>").val( $("#" + id + "-<%= key %>").attr('value') )
-            $("#del-<%= key %>").val( $("#" + id + "-<%= key %>").attr('value') )
+            var val = $("#" + id + "-<%= key %>").attr('value')
+            <% if(key == "fecha"){ %>
+              val = new Date(val).toISOString().split('T')[0];
+            <% } %>
+            $("#<%= key %>").val( val )
+            $("#del-<%= key %>").val( val )
           }
         <%}%>
         
-        //$("#institucion").val( myInst.text() );
-        //$("#nombre").val( myName.text() );
-        //$("#_id").val(docId)
-        //$("#del-_id").val(docId)
-        //$("#del-institucion").val( myInst.text() );
-        //$("#del-nombre").val( myName.text() );
-        // it is unnecessary to have to manually call the modal.
-        // $('#addBookDialog').modal('show');
+        
     });  
 
 
-    
+    $(".insite").each( (key, element) => {
+      $('#' + element.id).change( (event) => {
+        var id = event.target.id;
+        actualizaLabel(document.getElementById(id));
+    })})
+
+    function actualizaLabel(checkbox){
+      var id = checkbox.id
+      var label = "Link al sitio de la noticia";
+        if( $("#" + id).is(":checked") ){
+          label = "Cuerpo de la noticia";
+        }
+        var labels = checkbox.parentElement.parentElement.getElementsByClassName("form-group");
+        labels[labels.length - 1].getElementsByTagName("label")[0].innerText = label
+    }
   </script>
   <script src="assets/js/jquery-min.js"></script>
     <script src="assets/js/admin.js"></script>

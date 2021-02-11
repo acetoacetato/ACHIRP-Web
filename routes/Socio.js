@@ -23,7 +23,7 @@ router.get('/', auth, redirect, async (req, res) => {
             socios: socios,
             searchOptions: req.query,
             variables: keys,
-            seccion: "socio"
+            seccion: "socios"
         })
     }catch{
         res.render('/');
