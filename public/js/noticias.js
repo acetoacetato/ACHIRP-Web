@@ -35,6 +35,8 @@ function cargaImagen(id, path){
     })
 }
 
+formateaFecha = (fecha) => ((new Date(fecha)).toISOString().split("T")[0]).split("-").reverse().join("-");
+
 function detalles(id) {
     var nombre = document.getElementById('nombre-' + id).innerText;
     var descripcion = document.getElementById('descripcion-' + id).innerText;
@@ -70,7 +72,7 @@ function cargarNoticia(inSite, id){
       window.open(noticia.cuerpo);
     } else{
 
-      var fecha = new Date(noticia.fecha).toLocaleDateString('es-CL', {day: 'numeric', month: 'long', year: 'numeric'})
+      var fecha = formateaFecha(noticia.fecha)
       // Cargar Datos en Modal de Noticia
       $("#modal-titulo-noticia").html(noticia.titulo);
       $("#modal-subtitulo-noticia").html(noticia.desc);
@@ -95,7 +97,7 @@ function UrlExists(url)
 
 function creaNotiObj(noticia){
 
-  var fecha = new Date(noticia.fecha).toLocaleDateString('es-CL', {day: 'numeric', month: 'long', year: 'numeric'})
+  var fecha = formateaFecha(noticia.fecha);
   var imagen = UrlExists("/public/img/noticias/" + noticia.imagen)? "/public/img/noticias/" +noticia.imagen: ""
   var str = `<div class="col-lg-4 col-md-6 col-xs-12" hidden>
                 <div class="blog-item">

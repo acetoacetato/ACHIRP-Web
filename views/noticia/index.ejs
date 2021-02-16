@@ -40,7 +40,7 @@
             %>
                 <tr>
                 
-                <td id="<%= id %>-fecha" value="<%= doc.fecha %>"><%= doc.fecha.toLocaleString('es-CL', {day: 'numeric', month: 'numeric', year: 'numeric'}) %></td>
+                <td id="<%= id %>-fecha" value="<%= doc.fecha %>"><%= new Date(doc.fecha).toISOString().split("T")[0].split("-").reverse().join("-") %></td>
                 <td id="<%= id%>-titulo" value="<%= doc.titulo %>"><%= doc.titulo %></td>
                 <td id="<%= id%>-desc" value="<%= doc.desc %>"><%= doc.desc %></td>
                 

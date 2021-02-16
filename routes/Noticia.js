@@ -19,7 +19,7 @@ router.get('/', auth, redirect, async (req, res) => {
     }
     try{
         const noticias = await Noticia.find(searchOptions)
-        
+    
         res.render('noticia/index', {
             noticias: noticias,
             searchOptions: req.query,
@@ -47,6 +47,7 @@ router.post('/', auth, redirect, async (req, res) => {
         var fecha = fields['fecha']
         var inSite = (fields['inSite'] == 'on')
         var cuerpo = fields['cuerpo']
+        console.log(fecha)
         var imagen = files.imagen.name
         var tempPath = files.imagen.path
         var newPath = path.join(__dirname, '../public/img/noticia/' + imagen)
@@ -101,7 +102,7 @@ router.post("/edit", auth, redirect, async (req, res) => {
         resultado.titulo = fields['titulo'];
         resultado.desc = fields['desc'];
         resultado.fecha = fields['fecha'];
-        //console.log(fields)
+        console.log(fecha)
         resultado.inSite = (fields['inSite'] == 'on')? true:false;
         resultado.cuerpo = fields['cuerpo'];
 
