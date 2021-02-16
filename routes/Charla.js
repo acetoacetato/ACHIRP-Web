@@ -101,7 +101,7 @@ router.post("/edit", auth, redirect, async (req, res) => {
         resultado.lugar = fields['lugar'];
         resultado.slides = fields['slides'];
 
-        if(fields.imagen !== undefined){
+        if(files.imagen !== undefined){
             var imagen = files.imagen.name
             var tempPath = files.imagen.path
             var newPath = path.join(__dirname, '../public/img/charla/' + imagen)
@@ -131,8 +131,15 @@ router.post("/del", auth, redirect, async (req, res) => {
     form.parse(req,  async (err, fields, files) => {
 
         filtro = {_id : fields['_id']}
-        Charla.deleteOne(filtro, function (err) {
+        Charla.findByIdAndDelete(filtro, function (err, doc) {
             if (err) return handleError(err);
+
+            var prevPath = path.join(__dirname, '../public/img/charla/' + doc.imagen);
+            fs.unlink(prevPath, (err) => {
+                if(err){
+                    console.error(err)
+                }
+            })
             // deleted at most one tank document
             res.redirect("/charla")
           });

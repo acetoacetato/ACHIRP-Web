@@ -87,7 +87,7 @@ router.post("/edit", auth, redirect, async (req, res) => {
         resultado.institucion = institucion
         resultado.cargo = cargo
 
-        if(fields.imagen !== undefined){
+        if(files.imagen !== undefined){
             var imagen = files.imagen.name
             var tempPath = files.imagen.path
             var newPath = path.join(__dirname, '../public/img/directorio/' + imagen)
@@ -124,9 +124,15 @@ router.post("/del", auth, redirect, async (req, res) => {
         institucion = fields.institucion
         id = fields['_id']
 
-        filtro = {'_id' : id }
-        Directorio.deleteOne(filtro, function (err) {
+        Directorio.findByIdAndDelete(id, function (err, doc) {
             if (err) return handleError(err);
+            
+            var prevPath = path.join(__dirname, '../public/img/directorio/' + doc.imagen);
+            fs.unlink(prevPath, (err) => {
+                if(err){
+                    console.error(err)
+                }
+            })
             // deleted at most one tank document
             res.redirect("/directorio")
           });

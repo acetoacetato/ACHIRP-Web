@@ -105,7 +105,8 @@ router.post("/edit", auth, redirect, async (req, res) => {
         resultado.inSite = (fields['inSite'] == 'on')? true:false;
         resultado.cuerpo = fields['cuerpo'];
 
-        if(fields.imagen !== undefined){
+        if(files.imagen !== undefined){
+
             var imagen = files.imagen.name
             var tempPath = files.imagen.path
             var newPath = path.join(__dirname, '../public/img/noticia/' + imagen)
@@ -149,8 +150,7 @@ router.post("/del", auth, redirect, async (req, res) => {
     var form = new formidable.IncomingForm();
     form.parse(req,  async (err, fields, files) => {
 
-        filtro = {_id : fields['_id']}
-        Noticia.deleteOne(filtro, function (err) {
+        Noticia.findByIdAndDelete(fields['_id'], function (err, doc) {
             if (err) return handleError(err);
 
             var prevPath = path.join(__dirname, '../public/img/noticia/' + doc.imagen);
