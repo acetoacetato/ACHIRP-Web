@@ -52,12 +52,14 @@
     <div class="modal-content">
       <form method="POST" id="modal-form" enctype="multipart/form-data" >
         <div class="modal-header">
-          <input type="text" name="nombre" class="form-control" id="modal-nombre">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <input hidden id="modal-id" name="_id">
         <div class="modal-body">
-
+          <div class="form-group">
+            <label>Titulo:</label>
+            <input  name="nombre" class="form-control" id="modal-nombre">
+          </div>
           <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
             <input id="upload" type="file" onchange="readURLs(this);" name="imagen" class="form-control border-0 upload">
             <label id="upload-label" for="upload" class="font-weight-light text-muted upload-label">Elija archivo</label>
@@ -73,6 +75,7 @@
          
 
           <div class="form-group" >
+            <label>Descripción:</label>
             <input class="form-control" id="modal-descripcion" name="descripcion">
           </div>
         </div>
@@ -96,11 +99,16 @@
     <div class="modal-content">
       <form method="POST" id="modal-add-form" enctype="multipart/form-data" >
         <div class="modal-header">
-          <input type="text" name="nombre" class="form-control" >
+          
+          
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="modal-body">
-
+          
+          <div class="form-group">
+            <label>Titulo:</label>
+            <input name="nombre" class="form-control" >
+          </div>
           <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
             <input id="add-upload" type="file" onchange="readURLs(this);" name="imagen" class="form-control border-0 upload">
             <label id="upload-label-add" for="add-upload" class="font-weight-light text-muted upload-label">Elija archivo</label>
@@ -116,6 +124,7 @@
          
 
           <div class="form-group" >
+            <label>Descripción:</label>
             <input class="form-control" name="descripcion">
           </div>
         </div>

@@ -29,8 +29,8 @@
       <table class="table table-striped table-hover">
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Institucion</th>
+            <th>Fecha</th>
+            <th>Lugar</th>
             <th>Acción</th>
           </tr>
         </thead>
@@ -42,7 +42,7 @@
             %>
                 <tr>
                 
-                <td id="<%= id %>-fecha" value="<%= dir.fecha.toLocaleString('af-ZA', {day: 'numeric', month: 'numeric', year: 'numeric'}) %>"><%= dir.fecha.toLocaleString('es-CL', {day: 'numeric', month: 'numeric', year: 'numeric'}) %></td>
+                <td id="<%= id %>-fecha" value="<%= dir.fecha %>"><%= new Date(dir.fecha).toISOString().split("T")[0].split("-").reverse().join("-") %></td>
                 <td id="<%= id%>-lugar" value="<%= dir.lugar %>"><%= dir.lugar %></td>
                 <div hidden id="<%= id%>-inicio" value="<%= dir.inicio %>"><%= dir.inicio %></div>
                 <div hidden id="<%= id%>-fin" value="<%= dir.fin %>"><%= dir.fin %></div>
@@ -226,8 +226,18 @@
 
           //console.log($("#" + id + "-<%= key %>").attr('value'))
           //console.log("#" + id + "-<%= key %>")
-          $("#<%= key %>").val( $("#" + id + "-<%= key %>").attr('value') )
-          $("#del-<%= key %>").val( $("#" + id + "-<%= key %>").attr('value') )
+          var val = $("#" + id + "-<%= key %>").attr('value');
+          
+          <%
+            if(variables[key] == 'Date'){
+              %>
+              val = formateaFecha(val, "aaaa-mm-dd");
+              <%
+            }
+          %>
+
+          $("#<%= key %>").val( val )
+          $("#del-<%= key %>").val( val )
         <%}%>
         
         //$("#institucion").val( myInst.text() );

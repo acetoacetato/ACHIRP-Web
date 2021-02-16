@@ -45,7 +45,7 @@
             %>
                 <tr>
                 
-                <td id="<%= id %>-fecha" value="<%= doc.fecha.toLocaleString('af-ZA', {day: 'numeric', month: 'numeric', year: 'numeric'}) %>"><%= doc.fecha.toLocaleString('es-CL', {day: 'numeric', month: 'numeric', year: 'numeric'}) %></td>
+                <td id="<%= id %>-fecha" value="<%= doc.fecha %>"><%= new Date(doc.fecha).toISOString().split("T")[0].split("-").reverse().join("-") %></td>
                 <td id="<%= id%>-hora" value="<%= doc.hora %>"><%= doc.hora %></td>
                 <td id="<%= id%>-titulo" value="<%= doc.titulo %>"><%= doc.titulo %></td>
                 <td id="<%= id%>-expositor" value="<%= doc.expositor %>"><%= doc.expositor %></td>
@@ -325,8 +325,12 @@
             $("#<%= key %>").attr('checked', $("#" + id + "-<%= key %>").attr('value') == 'true')
             $("#del-<%= key %>").attr('checked', true)
           } else {
-            $("#<%= key %>").val( $("#" + id + "-<%= key %>").attr('value') )
-            $("#del-<%= key %>").val( $("#" + id + "-<%= key %>").attr('value') )
+            var val = $("#" + id + "-<%= key %>").attr('value')
+            <% if(key == "fecha"){ %>
+              val = formateaFecha(val, "aaaa-mm-dd");
+            <% } %>
+            $("#<%= key %>").val( val )
+            $("#del-<%= key %>").val( val )
           }
         <%}%>
         

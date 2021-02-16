@@ -35,7 +35,6 @@ function cargaImagen(id, path){
     })
 }
 
-formateaFecha = (fecha) => ((new Date(fecha)).toISOString().split("T")[0]).split("-").reverse().join("-");
 
 function detalles(id) {
     var nombre = document.getElementById('nombre-' + id).innerText;
