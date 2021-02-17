@@ -66,7 +66,6 @@
         }, 600);
         return false;
       });
-      console.log("ready")
       siguientePagina();
       siguientePaginaNoti();
 
@@ -74,19 +73,16 @@
         $('.lazy-load').each(function() {
             if ( $(this).attr('data-lazy') && $(this).offset().top < ($(window).scrollTop() + $(window).height() + 100) ) {
                 var method = $(this).data('lazy');
-                console.log("en rango")
                 eval(method + "()");
                 $(this).removeAttr('data-lazy');
             }
         });
 
         $('.lazy-section').each(function (){
-          if ( $(this).attr('data-ruta') && $(this).offset().top < ($(window).scrollTop() + $(window).height() + 100) ) {
+          if ( $(this).attr('data-ruta') && $(this).offset().top < ($(window).scrollTop() + $(window).height() +100) ) {
             var ruta = $(this).data('ruta');
             var id = $(this).data('id');
             var obj = $(this)
-            obj.removeAttr('data-ruta');
-            obj.removeAttr('data-id');
             fetch(ruta).then(res => {
               
               if(res.ok){
@@ -95,7 +91,11 @@
             }).then( string =>{
 
               document.getElementById(id).innerHTML = string;
+              $('#' + id).fadeIn(10000);
             }).catch(e => { console.error(e) })
+            obj.removeAttr('data-ruta');
+            obj.removeAttr('data-id');
+            obj.removeClass('lazy-section')
           }
 
         })

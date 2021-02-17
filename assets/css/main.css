@@ -3,6 +3,9 @@ html {
   overflow-x: hidden;
 }
 
+.lazy-section {
+  display: none;
+}
 .material-icons{
   position: relative;
   bottom: -2px;

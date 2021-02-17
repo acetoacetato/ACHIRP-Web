@@ -1,0 +1,40 @@
+<section id="team" class="section-padding text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="section-title-header text-center">
+            <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Directorio</h2>
+            <p class="wow fadeInDown" data-wow-delay="0.2s">Nuestro directorio está compuesto por excelentes profesionales.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-bt" id="container-equipo">
+
+        <%
+          directorio.forEach(doc => {
+        %>
+            <div class="col-lg-3 col-md-6 col-xs-12">
+              <!-- Team Item Starts -->
+              <div class="team-item wow fadeInUp" data-wow-delay="0.2s">
+                <div class="team-img">
+                  <img class="img-fluid" data-src="public/img/directorio/<%= doc.imagen %>" src="" alt="">
+
+                </div>
+                <div class="info-text">
+                  <h3><a href="#"><%= doc.nombre %></a></h3>
+                  <p><%= doc.cargo %>, <%= doc.institucion %></p>
+                </div>
+              </div>
+              <!-- Team Item Ends -->
+            </div>  
+        <%
+          })
+        %>
+
+
+        
+        
+          
+      </div>
+    </div>
+  </section>

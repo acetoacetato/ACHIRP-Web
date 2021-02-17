@@ -33,6 +33,7 @@ router.get('/charlas', async (req, res) => {
     })
 })
 router.get('/directorios', async (req, res) => {
+    
     var dir = await directorio.find({});
     res.render('index/directorio', {
         directorio: dir
