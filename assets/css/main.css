@@ -3,6 +3,16 @@ html {
   overflow-x: hidden;
 }
 
+.material-icons{
+  position: relative;
+  bottom: -2px;
+  font-size: 15px !important;
+}
+
+td a{
+  padding-right: 10px;
+}
+
 body {
   background: #fff;
   font-size: 15px;
