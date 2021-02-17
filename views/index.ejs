@@ -249,7 +249,6 @@
     
 
     <!-- Schedule Section Start -->
-    <!--TODO: recuperar eventos aca-->
     <section id="charlas" class="schedule section-padding">
       <div class="container">
         <div class="row">
@@ -322,11 +321,8 @@
 <!-- Counter Area Start-->
     <section class="container-fluid section-padding text-center">
       <div class="container">
-        <div class="justify-content-center">
-    <iframe id="ytplayer" type="text/html" width="800" height="600"
-  src="http://www.youtube.com/embed?listType=playlist&list=UUKL_QLJ1Kg8m9D7mwupbKGQ&index=6"
-  frameborder="0"/>
-</iframe>
+        <div class="justify-content-center lazy-load" id="youtube-container" data-lazy="lazy_youtube">
+          
         </div>
       </div>
     </section>
@@ -399,79 +395,9 @@
 
               <% }) %>
               
-              <div class="tab-pane fade" id="CIARP" role="tabpanel" aria-labelledby="CIARP-tab">
-                <div id="accordion2">
-                  <div class="card">
-                    <div id="headingOne">
-                      <div class="schedule-slot-time">
-                        <span>CIARP</span>
-                      </div>
-                      <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">                    
-                        <h4>Iberoamerican Congress on Pattern Recognition</h4>
-                      </div>
-                    </div>
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                      <div class="card-body">
-                        <p>CIARP 2017, UTFSM, Valparaíso, Chile<br> CIARP 2011, Pucón, Chile<br> CIARP 2007, Viña del Mar, Chile</p><br>
-                        <div class="col-12 text-center"><a href="https://ciarp.uci.cu/" class="btn btn-common">Para más información</a></div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>
-              </div>
-              <div class="tab-pane fade" id="CCPR" role="tabpanel" aria-labelledby="CCPR-tab">
-                <div id="accordion3">
-                  <div class="card">
-                    <div id="headingOne">
-                      <div class="schedule-slot-time">
-                        <span>CCPR</span>
-                      </div>
-                      <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">                    
-                        <h4>Evento producido por el crecimiento de la CWPR, al cual reemplazó. Su nombre proviene de "Chilean Conference on Pattern Recognition".</h4>
-                      </div>
-                    </div>
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                      <div class="card-body">
-                        <p>6th CCPR, U Católica del Maule, Talca, 2014</p><br>
-                        <div class="col-12 text-center"><a href="http://www.jcc2014.ucm.cl/" class="btn btn-common">Para más información</a></div>
-                      </div>
-                    </div>
-                  </div>
-                  
-      
-                </div>
-              </div>
-              <div class="tab-pane fade" id="CWPR" role="tabpanel" aria-labelledby="CWPR-tab">
-                <div id="accordion4">
-                  <div class="card">
-                    <div id="headingOne">
-                      <div class="schedule-slot-time">
-                        <span>CWPR</span>
-                      </div>
-                      <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">                    
-                        <h4>Evento original organizado por ACHIRP en las Jornadas Chilenas de Computación. Su nombre proviene de "Chilean Workshop on Pattern Recognition".
-                        Su primera versión se realizó el año 2009. Alcanzó a tener 5 versiones, hasta el año 2013, año en que el evento creció y se transformó en conferencia.</h4>
-                      </div>
-                    </div>
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                      <div class="card-body">
-                        <p>5th CWPR, U Católica de Temuco, Temuco, 2013<br>
-
-                           4th CWPR, PUCV, Valparaíso, 2012<br>
-                          
-                           3rd CWPR, U de Talca, Curicó, 2011<br>
-                          
-                           2nd CWPR, U Católica del Norte, Antofagasta, 2010<br>
-                          
-                           1st CWPR, U de Santiago, Santiago, 2009</p><br>
-                           <div class="col-12 text-center"><a href="http://jcc2012.pucv.cl/call_CWPR.php" class="btn btn-common">Para más información</a></div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
+              
+              
+              
 
                 </div>
               </div>
@@ -495,7 +421,7 @@
             </div>
           </div>
         </div>
-        <div class="row justify-content-bt">
+        <div class="row justify-content-bt" id="container-equipo">
 
           <%
             directorio.forEach(doc => {
@@ -504,7 +430,7 @@
                 <!-- Team Item Starts -->
                 <div class="team-item wow fadeInUp" data-wow-delay="0.2s">
                   <div class="team-img">
-                    <img class="img-fluid" src="public/img/directorio/<%= doc.imagen %>" alt="">
+                    <img class="img-fluid" data-src="public/img/directorio/<%= doc.imagen %>" src="" alt="">
 
                   </div>
                   <div class="info-text">
@@ -618,14 +544,6 @@
                </div>
                <div class="article">
                 <label id="modal-descripcion-noticia" style="color: black; font-family: 'Times New Roman', Times, serif; margin-top: 10%; text-align: left;">
-                  <p>Ut pretium velit at lacinia aliquet. Aenean finibus, sapien in vulputate pharetra, risus lacus tempus quam, eget tempus ante risus sit amet justo. Morbi eu vulputate orci, ut sollicitudin nisl. Quisque aliquet placerat lacus sit amet aliquam. Nullam iaculis eget turpis nec sodales. Maecenas lacinia ultricies pellentesque. Nunc facilisis dictum mi a accumsan. Etiam elementum est diam, vitae vehicula diam tempor sed. Maecenas id felis eget nulla sagittis pharetra. Mauris lectus lacus, vehicula id volutpat ac, ultricies sit amet ipsum. Ut ullamcorper vel urna eu tincidunt. Duis augue sapien, cursus vel pulvinar eget, rutrum nec mauris.</p>
-                  <p>Quisque finibus purus in nisl pellentesque, eu posuere tellus vulputate. Nullam sollicitudin imperdiet viverra. Donec sit amet pharetra magna. Aliquam quis massa condimentum, condimentum nunc vitae, imperdiet nibh. Pellentesque molestie velit lacus, vel blandit libero fringilla et. Nullam elementum porta diam id lacinia. Nulla vel nunc semper, facilisis nulla ac, condimentum neque. Sed convallis imperdiet ante eu ultrices. Sed libero enim, feugiat eu turpis ut, faucibus laoreet elit. Nullam at sagittis felis, sed egestas massa. In hac habitasse platea dictumst.</p>
-                  <p>Nam at malesuada mi. Etiam sit amet massa neque. Donec et ornare odio, et malesuada nisi. Etiam sagittis non quam quis lacinia. Pellentesque sit amet tincidunt sapien. In arcu mauris, imperdiet id vulputate vel, mollis sit amet lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam in magna nec risus interdum cursus at et orci. Etiam nec odio elementum, laoreet nunc ut, malesuada leo.</p>
-                  <p>Nullam ultrices nibh eu eros feugiat maximus. Ut porta nisi vitae libero suscipit pulvinar. In id commodo metus, a bibendum ligula. Morbi id fringilla lorem, non tempus nisl. Proin auctor erat eu volutpat condimentum. Nunc nec rhoncus mauris. Etiam pretium nunc augue, efficitur volutpat nulla ornare id.</p>
-                  <p>Pellentesque sagittis nulla risus, nec venenatis diam convallis ut.</p>
-                  <p id="inarticle">"Loren ipsum quote #2198412"</p>
-                  <p>Nullam congue ligula eget neque facilisis placerat. Nam nec nulla turpis. Sed iaculis nunc ut neque tempor, eget scelerisque orci convallis. In hac habitasse platea dictumst. Praesent gravida leo orci, nec pulvinar odio efficitur ut. Aenean at condimentum velit. Fusce interdum ultricies tortor, non pharetra quam accumsan vel. Nullam congue tempus efficitur. Duis a tempor sem, id pellentesque ante. Pellentesque feugiat a ante quis facilisis.</p>
-                  <p id="inarticle2">Mauris tristique, elit quis faucibus tempor, erat ex blandit nisi, quis consectetur magna mauris sit amet mauris. Maecenas aliquam dui mi, quis convallis neque cursus consequat. Duis tempor, velit in tempus congue, purus enim consectetur nulla, semper elementum dolor dolor eu odio. In facilisis odio ac turpis placerat, id aliquam lorem ultricies. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam ac dolor orci. Donec aliquet metus eget lectus faucibus efficitur.</p>
                    </label>
                  </div>
                  </div>
@@ -726,8 +644,8 @@
     <section id="google-map-area">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12">
-            <object style="border:0; height: 450px; width: 100%;" data="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1406.166084362298!2d-71.61466892201594!3d-33.044738263736264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8598d9e005eea641!2sEscuela%20de%20Ingenier%C3%ADa%20Inform%C3%A1tica%20PUCV!5e0!3m2!1ses!2scl!4v1609001063822!5m2!1ses!2scl" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></object>  
+          <div class="col-12 lazy-load" id="map-container" data-lazy="lazy_map">
+             
           </div>
         </div>
       </div>
@@ -827,20 +745,62 @@
     <script src="public/js/noticias.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="assets/js/jquery-min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.countdown.min.js"></script>
     <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
     <script src="assets/js/jquery.nav.js"></script>
     <script src="assets/js/jquery.easing.min.js"></script>
     <script src="assets/js/wow.js"></script>
-    <script src="assets/js/nivo-lightbox.js"></script>
-    <script src="assets/js/video.js"></script>
     <script src="assets/js/main.js"></script> 
     <script>
-      siguientePagina();
-      siguientePaginaNoti();
+      function lazyLoad( parent ){
+
+        var images = $(parent).find('img');
+        $.each( images, function( i, img ){
+            var src = $(img).data('src');
+
+            // check if img set
+            if(src.length == 0){
+                return;
+            }
+
+            // show image
+            $(img).attr('src', src);
+
+      });
+
+  }
+
+  $(window).scroll(function() {
+    $.each($('img'), function() {
+        if ( $(this).attr('data-src') && $(this).offset().top < ($(window).scrollTop() + $(window).height() + 100) ) {
+            var source = $(this).data('src');
+            $(this).attr('src', source);
+            $(this).removeAttr('data-src');
+        }
+    })
+})
+
+        function lazy_youtube(){
+          var youtube = `<iframe id="ytplayer" type="text/html" width="800" height="600"
+                    src="http://www.youtube.com/embed?listType=playlist&list=UUKL_QLJ1Kg8m9D7mwupbKGQ&index=6"
+                    frameborder="0"/>
+                  </iframe>`;
+          var parser = new DOMParser();
+          var doc = parser.parseFromString(youtube, 'text/html');
+          var youtube_obj = doc.body.firstChild;
+          $("#youtube-container").append(youtube_obj) 
+        }
+
+        function lazy_map(){
+          var map = `<object style="border:0; height: 450px; width: 100%;" data="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1406.166084362298!2d-71.61466892201594!3d-33.044738263736264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8598d9e005eea641!2sEscuela%20de%20Ingenier%C3%ADa%20Inform%C3%A1tica%20PUCV!5e0!3m2!1ses!2scl!4v1609001063822!5m2!1ses!2scl" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></object> `;
+          parser = new DOMParser();
+          doc = parser.parseFromString(map, 'text/html');
+          var map_obj = doc.body.firstChild;
+          $("#map-container").append(map_obj);
+        }
+
+        
+      
       </script>     
   </body>
 </html>

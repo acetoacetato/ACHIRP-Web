@@ -20,13 +20,7 @@
     /* ==========================================================================
        countdown timer
        ========================================================================== */
-     jQuery('#clock').countdown('2020/2/21',function(event){
-      var $this=jQuery(this).html(event.strftime(''
-      +'<div class="time-entry days"><span>%-D</span> <b>:</b> Days</div> '
-      +'<div class="time-entry hours"><span>%H</span> <b>:</b> Hours</div> '
-      +'<div class="time-entry minutes"><span>%M</span> <b>:</b> Minutes</div> '
-      +'<div class="time-entry seconds"><span>%S</span> Seconds</div> '));
-    });
+    
 
     /* Auto Close Responsive Navbar on Click
     ========================================================*/
@@ -51,24 +45,7 @@
     });
     wow.init();
 
-    /* Nivo Lightbox 
-    ========================================================*/
-    $('.lightbox').nivoLightbox({
-        effect: 'fadeScale',
-        keyboardNav: true,
-      });
-
-    // one page navigation 
-    $('.navbar-nav').onePageNav({
-            currentClass: 'active'
-    }); 
-
-    /* Counter
-    ========================================================*/
-    $('.counterUp').counterUp({
-     delay: 10,
-     time: 1500
-    });
+    
 
     /* Back Top Link active
     ========================================================*/
@@ -89,7 +66,20 @@
         }, 600);
         return false;
       });
+      console.log("ready")
+      siguientePagina();
+      siguientePaginaNoti();
 
+      $(window).scroll(function() {
+        $('.lazy-load').each(function() {
+            if ( $(this).attr('data-lazy') && $(this).offset().top < ($(window).scrollTop() + $(window).height() + 100) ) {
+                var method = $(this).data('lazy');
+                console.log("en rango")
+                eval(method + "()");
+                $(this).removeAttr('data-lazy');
+            }
+        })
+    })
   });      
 
 }(jQuery));
