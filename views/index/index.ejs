@@ -178,22 +178,7 @@
         </div>
       </div>
     </section>
-    <!-- About Section End -->
-
-    <!-- Video Section Start 
-    <div class="ready-to-play">
-      <video id="bgvid" class="stop" loop>
-           Video Section End  <source src="assets/video/event.webm" type="video/mp4">
-      </video>
-      <div id="polina" class="video-text">
-        <div class="tb-t">
-            <div class="tb-c">
-              <div class="polina"><button><i class='lni-play'></i></button></div>
-            </div>
-        </div>
-      </div>
-    </div>
-    Video Section End -->
+    
 
      <!-- intro Section Start -->
      <section id="intro" class="intro section-padding">
@@ -248,75 +233,8 @@
   
     
 
-    <!-- Schedule Section Start -->
-    <section id="charlas" class="schedule section-padding">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="section-title-header text-center">
-              <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Charlas</h2>
-              <p class="wow fadeInDown" data-wow-delay="0.2s">No te pierdas de nuestras charlas:</p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          
-          <div class="col-12">
-            <div class="schedule-area row wow fadeInDown" data-wow-delay="0.3s">
-              <div class="schedule-tab-content col-12 clearfix">
-                <div class="tab-content" id="myTabContent">
-                  <div class="tab-pane fade show active" id="monday" role="tabpanel" aria-labelledby="monday-tab">
-                    <div id="accordion">
-  
-                      <% var id = 0 
-                        charlas.forEach( charla => { 
-                        id++
-                      %>
-                          
-                        <div class="card">
-                          <div id="heading<%= id %>">
-                            <div class="schedule-slot-time">
-                              <span style="text-align: center;"> <%= charla.fecha.toLocaleString('es-CL', {day: 'numeric', month: 'long'}) %><br> <%= charla.hora %> hrs.</span> <br>
-                            </div>
-                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapse<%= id %>" aria-expanded="false" aria-controls="collapse<%= id %>">
-                              <div class="images-box">
-                                <%
-                                  // Para cambiar a la imagen por defecto
-                                  if(charla.imagen == ""){
-                                %>
-                                    <img class="img-fluid" src="assets/img/speaker/speakers-1.jpg" alt="">
-                                <%
-                                  } else{
-                                %>
-                                    <img class="img-fluid" src="public/img/charla/<%= charla.imagen %>" alt="">
-                                <%
-                                  }
-                                %>
-                              </div>                     
-                              <h4><%= charla.titulo %></h4>
-                              <h5 class="name"> <%= charla.expositor %></h5>
-                            </div>
-                          </div>
-                          <div id="collapse<%= id %>" class="collapse" aria-labelledby="heading<%= id %>" data-parent="#accordion">
-                            <div class="card-body">
-                              <p> <%= charla.descripcion %> </p>
-                              <p> <a href="<%= charla.slides %>" target="_blank">Slides</a> </p>
-                              <div class="location">
-                                <span>Ubicación:</span> <%= charla.lugar %>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-  
-                      <% }) %>                  
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Schedule Section End -->
+    <!--%- include("./charlas.ejs") %-->
+    <div class="lazy-section" id="contenedor-charlas" data-id="contenedor-charlas" data-ruta="/charlas"></div>
 
 <!-- Counter Area Start-->
     <section class="container-fluid section-padding text-center">
@@ -330,127 +248,12 @@
 
 
 
-    <section id="eventos" class="schedule section-padding">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="section-title-header text-center">
-          <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Eventos</h2>
-          <p class="wow fadeInDown" data-wow-delay="0.2s"></p>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 mb-5 text-center">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <%
-            var i = 0 
-            eventos.forEach(evento => { 
-            i++
-          %>
-            <li class="nav-item">
-            <a class="nav-link <% if( i == 1)  { %> active <% } %>" id="<%= evento.abreviacion %>-tab" data-toggle="tab" href="#<%= evento.abreviacion %>" role="tab" aria-controls="<%= evento.abreviacion %>" <% if( i == 1)  { %> aria-expanded="true" <% } %>>
-              <div class="item-text">
-                <h4><%= evento.abreviacion %></h4>
-              </div>
-            </a>
-          </li>
-            
-          <% }) %>
-
-        </ul>
-      </div>
-      <div class="col-12">
-        <div class="schedule-area row wow fadeInDown" data-wow-delay="0.3s">
-          <div class="schedule-tab-content col-12 clearfix">
-            <div class="tab-content" id="myTabContent">
-
-              <%
-                var i = 0 
-                eventos.forEach( evento => { 
-                i++
-              %>
-              
-                <div class="tab-pane fade <% if( i ==1) { %> show active <% } %>" id="<%= evento.abreviacion %>" role="tabpanel" aria-labelledby="<%= evento.abreviacion %>-tab">
-                  <div id="accordion">
-                    <div class="card">
-                      <div id="heading<%= i %>">
-                        <div class="schedule-slot-time">
-                          <span><%= evento.abreviacion %></span>
-                        </div>
-                        <div class="collapsed card-header" data-toggle="collapse" data-target="#collapse<%= i %>" aria-expanded="false" aria-controls="collapse<%= i %>">                    
-                          <h4><%= evento.nombre %></h4>
-                        </div>
-                      </div>
-                      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                        <div class="card-body">
-                          <p> <%- evento.descripcion.replace(/\r\n/g, "<br>") %> </p><br>
-                          <div class="col-12 text-center"><a href="<%= evento.link  %>" class="btn btn-common">Para más información</a></div>
-                          
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              <% }) %>
-              
-              
-              
-              
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
+    <!--%- include('./eventos.ejs') %-->
+    <div class="lazy-section" id="contenedor-eventos" data-id="contenedor-eventos" data-ruta="/eventos"></div>
 
     <!-- Team Section Start -->
-    <section id="team" class="section-padding text-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="section-title-header text-center">
-              <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Directorio</h2>
-              <p class="wow fadeInDown" data-wow-delay="0.2s">Nuestro directorio está compuesto por excelentes profesionales.</p>
-            </div>
-          </div>
-        </div>
-        <div class="row justify-content-bt" id="container-equipo">
-
-          <%
-            directorio.forEach(doc => {
-          %>
-              <div class="col-lg-3 col-md-6 col-xs-12">
-                <!-- Team Item Starts -->
-                <div class="team-item wow fadeInUp" data-wow-delay="0.2s">
-                  <div class="team-img">
-                    <img class="img-fluid" data-src="public/img/directorio/<%= doc.imagen %>" src="" alt="">
-
-                  </div>
-                  <div class="info-text">
-                    <h3><a href="#"><%= doc.nombre %></a></h3>
-                    <p><%= doc.cargo %>, <%= doc.institucion %></p>
-                  </div>
-                </div>
-                <!-- Team Item Ends -->
-              </div>  
-          <%
-            })
-          %>
-
-
-          
-          
-            
-        </div>
-      </div>
-    </section>
+    <!--%- include('./directorio.ejs') %-->
+    <div class="lazy-section" id="contenedor-directorio" data-id="contenedor-directorio" data-ruta="/directorios"></div>
     <!-- Team Section End -->
 
     <section id="event-up" class="section-padding">
@@ -558,32 +361,8 @@
     
 
     <!-- Sponsors Section Start -->
-    <section id="sponsors" class="section-padding">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="section-title-header text-center">
-              <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Socios</h2>
-              <p class="wow fadeInDown" data-wow-delay="0.2s"> 
-                
-              <% socios.forEach(dir => { %>
-                <%= dir.nombre %>, <%= dir.institucion %><br>
-              <% }) %>
-               
-            </div>
-          </div>
-        </div>
-        <div class="row mb-30 text-center wow fadeInDown" data-wow-delay="0.3s">
-          <div class="col-lg-12">
-            <div class="sponsors-logo text-center">
-               <a href=""><img src="assets/img/sponsors/socios.png" alt=""></a>
-
-            </div><!-- sponsors logo end-->
-         </div>
-        </div>
-      </div>
-    </section>
+    <div class="lazy-section" id="contenedor-socios" data-id="contenedor-socios" data-ruta="/socios"></div>
+    <!--%- include('./socios.ejs') %-->
     <!-- Sponsors Section End -->
 
     <!-- Contact Us Section -->
@@ -801,13 +580,13 @@
           $("#map-container").append(map_obj);
         }
 
-        function lazy_test(){
-          fetch('/noticia/').then(res => {
+        function lazy_test(ruta, idContenedor){
+          fetch(ruta).then(res => {
             if(res.ok){
               return res.text();
             }
           }).then( string =>{
-            document.getElementById("TestLazy").innerHTML = string;
+            document.getElementById(idContenedor).innerHTML = string;
           }).catch(e => { console.error(e) })
         }
       

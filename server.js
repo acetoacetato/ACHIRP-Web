@@ -100,7 +100,6 @@ db.once('open', () => console.log('conectado a mongoose'))
 
 // Se agregan cada una de las rutas de la aplicación con su ruteador correspondiente
 app.use('/', indexRouter)
-app.use('/authors', authorRouter)
 app.use('/galeria', galeriaRouter)
 app.use('/noticia', noticiaRouter)
 app.use('/evento', eventoRouter)

@@ -78,6 +78,26 @@
                 eval(method + "()");
                 $(this).removeAttr('data-lazy');
             }
+        });
+
+        $('.lazy-section').each(function (){
+          if ( $(this).attr('data-ruta') && $(this).offset().top < ($(window).scrollTop() + $(window).height() + 100) ) {
+            var ruta = $(this).data('ruta');
+            var id = $(this).data('id');
+            var obj = $(this)
+            obj.removeAttr('data-ruta');
+            obj.removeAttr('data-id');
+            fetch(ruta).then(res => {
+              
+              if(res.ok){
+                return res.text();
+              }
+            }).then( string =>{
+
+              document.getElementById(id).innerHTML = string;
+            }).catch(e => { console.error(e) })
+          }
+
         })
     })
   });      
