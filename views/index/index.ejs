@@ -239,8 +239,11 @@
 <!-- Counter Area Start-->
     <section class="container-fluid section-padding text-center">
       <div class="container">
-        <div class="justify-content-center lazy-load" id="youtube-container" data-lazy="lazy_youtube">
-          
+        <div class="justify-content-center ">
+          <iframe id="ytplayer" type="text/html" width="800" height="600"
+                    src="http://www.youtube.com/embed?listType=playlist&list=UUKL_QLJ1Kg8m9D7mwupbKGQ&index=6&wmode=opaque"
+                    frameborder="0"/>
+                  </iframe>
         </div>
       </div>
     </section>
@@ -533,25 +536,14 @@
     <script src="assets/js/wow.js"></script>
     <script src="assets/js/main.js"></script> 
     <script>
-      function lazyLoad( parent ){
+      
 
-        var images = $(parent).find('img');
-        $.each( images, function( i, img ){
-            var src = $(img).data('src');
+      window.fadeIn = function(obj) {
+          $(obj).fadeIn(1000);
+      }
 
-            // check if img set
-            if(src.length == 0){
-                return;
-            }
 
-            // show image
-            $(img).attr('src', src);
-
-      });
-
-  }
-
-  $(window).scroll(function() {
+  /*$(window).scroll(function() {
     $.each($('img'), function() {
         if ( $(this).attr('data-src') && $(this).offset().top < ($(window).scrollTop() + $(window).height() + 100) ) {
             var source = $(this).data('src');
@@ -559,18 +551,9 @@
             $(this).removeAttr('data-src');
         }
     })
-})
+}) */
 
-        function lazy_youtube(){
-          var youtube = `<iframe id="ytplayer" type="text/html" width="800" height="600"
-                    src="http://www.youtube.com/embed?listType=playlist&list=UUKL_QLJ1Kg8m9D7mwupbKGQ&index=6"
-                    frameborder="0"/>
-                  </iframe>`;
-          var parser = new DOMParser();
-          var doc = parser.parseFromString(youtube, 'text/html');
-          var youtube_obj = doc.body.firstChild;
-          $("#youtube-container").append(youtube_obj) 
-        }
+        
 
         function lazy_map(){
           var map = `<object style="border:0; height: 450px; width: 100%;" data="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1406.166084362298!2d-71.61466892201594!3d-33.044738263736264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8598d9e005eea641!2sEscuela%20de%20Ingenier%C3%ADa%20Inform%C3%A1tica%20PUCV!5e0!3m2!1ses!2scl!4v1609001063822!5m2!1ses!2scl" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></object> `;
@@ -590,6 +573,35 @@
           }).catch(e => { console.error(e) })
         }
       
+
+        function carga_secciones() {
+          $('.lazy-section').each(function (){
+            if ( $(this).attr('data-ruta') ) {
+              var ruta = $(this).data('ruta');
+              var id = $(this).data('id');
+              var obj = $(this)
+              fetch(ruta).then(res => {
+                
+                if(res.ok){
+                  return res.text();
+                }
+              }).then( string =>{
+                document.getElementById(id).innerHTML = string;
+              }).catch(e => { console.error(e) })
+              obj.removeAttr('data-ruta');
+              obj.removeAttr('data-id');
+              obj.removeClass('lazy-section')
+            }
+
+          }).promise().done( () => {
+            setTimeout(() => {
+              $('#preloader').fadeOut();
+            }, 300);
+            
+          });
+          
+      }
+
       </script>     
   </body>
 </html>

@@ -1,4 +1,4 @@
-<section id="team" class="section-padding text-center">
+<section id="team" class="section-padding text-center wow bounceInUp">
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -13,11 +13,11 @@
         <%
           directorio.forEach(doc => {
         %>
-            <div class="col-lg-3 col-md-6 col-xs-12">
+            <div class="col-lg-3 col-md-6 col-xs-12 wow bounceInUp">
               <!-- Team Item Starts -->
               <div class="team-item wow fadeInUp" data-wow-delay="0.2s">
                 <div class="team-img">
-                  <img class="img-fluid" data-src="public/img/directorio/<%= doc.imagen %>" src="" alt="">
+                  <img class="img-fluid" onload="fadeIn(this)" src="public/img/directorio/<%= doc.imagen %>" alt="">
 
                 </div>
                 <div class="info-text">

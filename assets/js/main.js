@@ -6,7 +6,7 @@
 
   /*Page Loader active
     ========================================================*/
-    $('#preloader').fadeOut();
+    
 
   // Sticky Nav
     $(window).on('scroll', function() {
@@ -66,10 +66,11 @@
         }, 600);
         return false;
       });
+      
+      carga_secciones();
       siguientePagina();
       siguientePaginaNoti();
-
-      $(window).scroll(function() {
+      $(window).on('scroll', function() {
         $('.lazy-load').each(function() {
             if ( $(this).attr('data-lazy') && $(this).offset().top < ($(window).scrollTop() + $(window).height() + 100) ) {
                 var method = $(this).data('lazy');
@@ -78,28 +79,9 @@
             }
         });
 
-        $('.lazy-section').each(function (){
-          if ( $(this).attr('data-ruta') && $(this).offset().top < ($(window).scrollTop() + $(window).height() +100) ) {
-            var ruta = $(this).data('ruta');
-            var id = $(this).data('id');
-            var obj = $(this)
-            fetch(ruta).then(res => {
-              
-              if(res.ok){
-                return res.text();
-              }
-            }).then( string =>{
-
-              document.getElementById(id).innerHTML = string;
-              $('#' + id).fadeIn(10000);
-            }).catch(e => { console.error(e) })
-            obj.removeAttr('data-ruta');
-            obj.removeAttr('data-id');
-            obj.removeClass('lazy-section')
-          }
-
-        })
+        
     })
+    
   });      
 
 }(jQuery));

@@ -97,12 +97,12 @@ function UrlExists(url)
 function creaNotiObj(noticia){
 
   var fecha = formateaFecha(noticia.fecha);
-  var imagen = UrlExists("/public/img/noticias/" + noticia.imagen)? "/public/img/noticias/" +noticia.imagen: ""
+  var imagen = UrlExists("/public/img/noticia/" + noticia.imagen)? "/public/img/noticia/" +noticia.imagen: ""
   var str = `<div class="col-lg-4 col-md-6 col-xs-12" hidden>
                 <div class="blog-item">
                   <div class="blog-image">
-                    <a href="#">
-                      <img class="img-fluid" src="/public/img/noticias/${noticia.imagen}" alt="">
+                    <a style="cursor: pointer;" onclick="cargarNoticia(${ noticia.inSite }, '${ noticia._id }')">
+                      <img class="img-fluid" src="/public/img/noticia/${noticia.imagen}" alt="">
                     </a>
                   </div>
                   <div class="descr">
