@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+// Modelo de administradores de la organización. 
+//  Utilizado para la edición de los datos de la landing page
 const UsuarioSchema = new mongoose.Schema({
     email: {
         type: String,

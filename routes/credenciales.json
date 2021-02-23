@@ -1,0 +1,9 @@
+{
+    "mailer": {
+        "email": "alen.figueroa.m@mail.pucv.cl",
+        "password": "c5536652c"
+    },
+    "host": {
+        "recuperar": "localhost/user/restablecer"
+    }
+}

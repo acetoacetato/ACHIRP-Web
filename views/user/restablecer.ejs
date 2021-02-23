@@ -1,0 +1,31 @@
+<%
+    if(result == "error"){
+
+%>
+        <h1><%= message %></h1>
+
+<%
+    } else{
+%>
+
+<div class="card card-login mx-auto mt-5 col-md-8 col-lg-6">
+    <div class="card-header">Restablecer Contraseña</div>
+    <div class="card-body">
+      
+      <form action="/user/restablecer" method="POST">
+        <input type="text" hidden name="token" value="<%= token %>">
+        <div class="form-group">
+          <div class="form-label-group">
+            <label for="inputEmail">Nueva Contraseña :</label>
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Contraseña" required="required"/>
+          </div>
+        </div>
+        
+        <input type="submit" class="btn btn-primary btn-block" value="Login">Login </input>
+      </form>
+    </div>
+  </div>
+
+<%
+    }
+%>

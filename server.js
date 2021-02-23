@@ -1,3 +1,10 @@
+
+
+// Esto es para configurar las variables de entorno, 
+//  con 'npm run devStart', buscará el archivo .env, 
+//  que contendrá el string de conección a la base de datos
+//      Si es un entorno de producción ('npm run start'), entonces 
+//       buscará las variables de entorno PORT y DATABASE_URL
 if(process.env.NODE_ENV !== 'production'){
     dotenv = require('dotenv').config({path:__dirname + '/.env'})
 }
@@ -6,7 +13,8 @@ if(process.env.NODE_ENV !== 'production'){
 const express = require('express')
 const app = express()
 
-const fs = require('fs');
+
+// Si gustan habilitar https, se puede hacer con estos métodos.
 const http = require('http');
 const https = require('https');
 const cookieParser = require('cookie-parser');
@@ -15,10 +23,12 @@ const cookieParser = require('cookie-parser');
 // Para subida de archivos
 var formidable = require('formidable');
 
-//const privateKey = fs.readFileSync('/etc/letsencrypt/live/abmodel.cl/privkey.pem', 'utf8');
-//const certificate = fs.readFileSync('/etc/letsencrypt/live/abmodel.cl/cert.pem', 'utf8');
-//const ca = fs.readFileSync('/etc/letsencrypt/live/abmodel.cl/chain.pem', 'utf8');
 
+// Descomentar estas líneas para cargar los archivos que permiten el https.
+//  reemplazar 'nombre_dominio' por el dominio comprado (ejemplo 'achirp.cl')
+//const privateKey = fs.readFileSync('/etc/letsencrypt/live/nombre_dominio/privkey.pem', 'utf8');
+//const certificate = fs.readFileSync('/etc/letsencrypt/live/nombre_dominio/cert.pem', 'utf8');
+//const ca = fs.readFileSync('/etc/letsencrypt/live/nombre_dominio/chain.pem', 'utf8');
 
 //const credentials = {
 //	key: privateKey,
@@ -26,7 +36,9 @@ var formidable = require('formidable');
 //	ca: ca
 //};
 
+
 //Express layouts para usar trozos de html que vayan en cada pagina necesaria
+//  estos son los archivos .ejs
 const expressLayouts = require('express-ejs-layouts')
 
 const bodyParser = require('body-parser')
@@ -66,7 +78,7 @@ app.use(expressLayouts)
 app.use(cookieParser());
 
 
-// Agregamos headers para facilitar los formulatios
+// Agregamos headers para facilitar los formularios
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -93,20 +105,25 @@ mongoose.connect(process.env.DATABASE_URL, {
 app.use(express.static(__dirname, { dotfiles: 'allow' } ));
 
 
+
 const db = mongoose.connection
 db.on('error', err => console.error(err))
 db.once('open', () => console.log('conectado a mongoose'))
 
 
 // Se agregan cada una de las rutas de la aplicación con su ruteador correspondiente
+
+// Ruta principal, el landing page
 app.use('/', indexRouter)
+
+// Rutas de administración
 app.use('/galeria', galeriaRouter)
 app.use('/noticia', noticiaRouter)
 app.use('/evento', eventoRouter)
 app.use('/charla', charlaRouter)
 app.use('/socio', socioRouter)
 app.use('/user', usuarioRouter)
-app.use('/asamblea', asambleaRouter)
+//app.use('/asamblea', asambleaRouter)
 app.use('/directorio', directorioRouter)
 app.use('/contacto', contactoRouter)
 

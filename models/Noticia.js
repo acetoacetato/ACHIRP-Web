@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+// Modelo de una noticia
 const noticiaSchema = new mongoose.Schema({
     titulo: {
         type: String,

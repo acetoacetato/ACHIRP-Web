@@ -34,4 +34,5 @@ const AsambleaSchema = new mongoose.Schema({
     }
 });
 
+// Exporta el esquema de Asamblea para ser utilizado en otros .js con include()
 module.exports = mongoose.model('Asamblea', AsambleaSchema)

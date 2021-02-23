@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+// Modelo de una colección de la base de datos
+//  Mongodb es una base de datos no relacional, 
+//      por lo que las modificaciones hechas en este archivo, 
+//      se aplicarán sobre las inserciones siguientes, las anteriores se quedarán igual
 const CharlaSchema = new mongoose.Schema({
     titulo: {
         type: String,
@@ -39,4 +43,5 @@ const CharlaSchema = new mongoose.Schema({
 
 });
 
+// Exporta el esquema de Asamblea para ser utilizado en otros .js con include()
 module.exports = mongoose.model('Charla', CharlaSchema)

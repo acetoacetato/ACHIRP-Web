@@ -1,1 +1,154 @@
-<%= email %>
+<%- include('../partials/header-admin.ejs') %>
+
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container">
+
+    <div class="table-wrapper">
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm-4">
+              <h2>ADMINISTRACIÓN</b></h2>
+            </div>
+            <div class="col-sm-4">
+              <a href="#addModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Añadir</span></a>
+            </div>
+          </div>
+          
+          
+        </div>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+              <%
+                  var id = 0
+                  usuarios.forEach( dir => { 
+                  id++
+              %>
+                  <tr>
+                  
+                  <td id="<%= id %>-email" value="<%= dir.email %>"><%= dir.email %></td>
+                  <div hidden id="<%= id %>-_id" value="<%= dir._id %>"></div>
+                  <td>
+                  <a href="#deleteModal" data-id="<%= id %>"class="delete Modal" data-toggle="modal" onclick="eliminar('<%=dir._id%>', '<%=dir.email%>')">eliminar<span class="material-icons">remove_circle</span></a>
+                  </td>
+                  </tr>
+              <%
+                  });
+              %>
+  
+            
+  
+  
+          </tbody>
+        </table>
+        
+      </div>
+    </div>
+
+</div>
+
+<div id="addModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form action="/user/signup" method="POST" >
+          <div class="modal-header">
+            <h4 class="modal-title">Añadir</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">
+
+            <div class="form-group">
+                <div class="form-label-group">
+                    <label for="inputEmail">Email :</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Email" required="required"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-label-group">
+                    <label for="inputEmail">Contraseña :</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required="required"/>
+                </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+            <input onclick="agregar()" class="btn btn-success" value="Agregar">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<div id="deleteModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form action="/user/del" method="POST" enctype="multipart/form-data">
+          <div class="modal-header">
+            <h4 class="modal-title">Eliminar</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>¿Está seguro de eliminar al usuario?</p>
+            
+            <b>Email: </b> <i id="del-email"></i>
+            <input type="text" hidden id="del-_id" name="_id" value="">
+            <p class="text-warning"><small>Esta acción será permanente.</small></p>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+            <input type="submit" class="btn btn-danger" value="Delete">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+    function eliminar(id, email){
+        document.getElementById("del-email").innerText = email;
+        document.getElementById("del-_id").setAttribute("value", id);
+    }  
+    
+    function agregar(){
+        var mail = document.getElementById("email").value;
+        var pass = document.getElementById("password").value;
+
+        options = {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+            method: 'POST',
+            body : JSON.stringify({email: mail, password: pass})
+        }
+
+        fetch('/user/signup',  options).then(response => {
+            if(!response.ok)
+                console.error("error: ", response);
+            else
+                return response.json()
+        }).then( res => {
+            if(res.result == "success"){
+                alert("Usuario Creado Correctamente");
+                location.reload()
+            } else{
+                alert("Ocurrió un error: " + res.msj);
+            }
+        })
+
+    }
+
+</script>

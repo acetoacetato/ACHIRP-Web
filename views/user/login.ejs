@@ -10,7 +10,7 @@
               <%
                 err.forEach( error => {
               %>
-                  <p><%= error %></p>
+                  <p><%= error.msg %></p>
               <%
                 })
               %>
@@ -18,7 +18,7 @@
       <%
           }
       %>
-      <form action="/user/login" method="POST">
+      <form action="/user/login" method="POST" id="loginForm">
         <div class="form-group">
           <div class="form-label-group">
             <label for="inputEmail">Email :</label>
@@ -34,5 +34,41 @@
         
         <input type="submit" class="btn btn-primary btn-block" value="Login">Login </input>
       </form>
+      <a onclick="recuperaPass()" style="cursor: pointer;">Recuperar Contraseña</a>
     </div>
   </div>
+
+
+  <script>
+    function recuperaPass(){
+      email = document.getElementById("inputEmail").value;
+      if(email == "" || email == undefined){
+        alert("Debe escribir un correo.");
+        return;
+      }
+      opciones = {
+        method: 'POST',
+        headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+        body: JSON.stringify({ 'correo': email })
+      } 
+
+
+      fetch('/user/recuperar', opciones).then( response => {
+        if(response.ok)
+          return response.json();
+        else  
+          alert("Error: " + response.body.message);
+      }).then(res => {
+        console.log(res);
+        if(res.result == "success"){
+          alert("Se ha enviado un correo para el restablecimiento de la contraseña.");
+        } else{
+          alert("Error: " + res.message);
+        }
+      })
+
+    }  
+  </script>

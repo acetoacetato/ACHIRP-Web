@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Representación de un evento (ICPRS u otros)
 const EventoSchema = new mongoose.Schema({
     abreviacion: {
         type: String,

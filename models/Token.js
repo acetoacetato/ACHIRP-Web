@@ -4,23 +4,22 @@ const mongoose = require('mongoose');
 //      por lo que las modificaciones hechas en este archivo, 
 //      se aplicarán sobre las inserciones siguientes, las anteriores se quedarán igual
 
-// En este caso, Directorio representa el directorio de la organización
-const DirectorioSchema = new mongoose.Schema({
-    nombre: {
+// En este caso, Token representa un token para la aplicación
+const TokenSchema = new mongoose.Schema({
+    hash: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    correo: {
         type: String,
         required: true
     },
-    cargo: {
-
-    },
-    institucion: {
+    tipo: {
         type: String,
         required: true
     },
-    imagen: {
-        type: String,
-        required: true
-    }
+    expire_at: {type: Date, default: Date.now, expires: 3600}
 });
 
-module.exports = mongoose.model('Directorio', DirectorioSchema)
+module.exports = mongoose.model('Token', TokenSchema)

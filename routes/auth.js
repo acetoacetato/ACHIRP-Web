@@ -1,18 +1,30 @@
 const jwt = require("jsonwebtoken");
+const Usuario = require("../models/Usuario");
+const User = require("../models/Usuario");
 
-
-function auth(req, res, next) {
+async function auth(req, res, next) {
   //console.log(req.cookies)
   const token = req.cookies['jwt']
   if (!token) {
-    req.message = {'status': 'error', 'type': 'login'};
+    req.message = {'status': 'error', 'type': 'login', 'message': 'Sesión no iniciada o expirada.'};
     next();
+    return;
   }
 
   try {
     const decoded = jwt.verify(token, "randomString");
     req.user = decoded.user;
+    var doc = Usuario.findById(req.user.id);
+    var usuario = await doc.exec();
+    console.log(usuario);
+    if(!usuario){
+      req.message = {'status': 'error', 'type': 'login', 'message': 'Token no válido'};
+      next();
+      return;
+    }
+
     next();
+    return;
   } catch (e) {
     console.error(e);
     req.message = {'status': 'success', 'message': 'iniciado correctamente', 'type': 'login'};
