@@ -1,5 +1,5 @@
 <div class="card card-login mx-auto mt-5 col-md-8 col-lg-6">
-    <div class="card-header">Login</div>
+    <div class="card-header">Iniciar Sesión</div>
     <div class="card-body">
       <%
         console.log(err)
@@ -21,20 +21,22 @@
       <form action="/user/login" method="POST" id="loginForm">
         <div class="form-group">
           <div class="form-label-group">
-            <label for="inputEmail">Email :</label>
-            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus"/>
+            <label for="inputEmail">Correo :</label>
+            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="correo@dominio.com" required="required" autofocus="autofocus"/>
           </div>
         </div>
         <div class="form-group">
           <div class="form-label-group">
-            <label for="inputEmail">Password :</label>
-            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="required"/>
+            <label for="inputEmail">Contraseña :</label>
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Contraseña" required="required"/>
           </div>
         </div>
         
-        <input type="submit" class="btn btn-primary btn-block" value="Login">Login </input>
+        <input type="submit" class="btn btn-primary btn-block" value="Iniciar Sesión">
       </form>
-      <a onclick="recuperaPass()" style="cursor: pointer;">Recuperar Contraseña</a>
+      <div style="text-align: center; padding-top: 2%;">
+        <a onclick="recuperaPass()" style="cursor: pointer; color:blue; text-align: center;">Recuperar Contraseña</a>
+      </div>
     </div>
   </div>
 
@@ -62,7 +64,6 @@
         else  
           alert("Error: " + response.body.message);
       }).then(res => {
-        console.log(res);
         if(res.result == "success"){
           alert("Se ha enviado un correo para el restablecimiento de la contraseña.");
         } else{

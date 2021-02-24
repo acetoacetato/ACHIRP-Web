@@ -16,7 +16,6 @@ async function auth(req, res, next) {
     req.user = decoded.user;
     var doc = Usuario.findById(req.user.id);
     var usuario = await doc.exec();
-    console.log(usuario);
     if(!usuario){
       req.message = {'status': 'error', 'type': 'login', 'message': 'Token no válido'};
       next();

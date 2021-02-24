@@ -119,7 +119,6 @@ router.post("/send", async (req, res) => {
             correos += " " + contacto.correo
         })
         correos = correos.split(' ').join(', ')
-        console.log(correos)
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {

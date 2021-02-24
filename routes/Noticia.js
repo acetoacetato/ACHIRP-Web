@@ -47,7 +47,6 @@ router.post('/', auth, redirect, async (req, res) => {
         var fecha = fields['fecha']
         var inSite = (fields['inSite'] == 'on')
         var cuerpo = fields['cuerpo']
-        console.log(fecha)
         var imagen = files.imagen.name
         var tempPath = files.imagen.path
         var newPath = path.join(__dirname, '../public/img/noticia/' + imagen)
@@ -102,7 +101,6 @@ router.post("/edit", auth, redirect, async (req, res) => {
         resultado.titulo = fields['titulo'];
         resultado.desc = fields['desc'];
         resultado.fecha = fields['fecha'];
-        console.log(fecha)
         resultado.inSite = (fields['inSite'] == 'on')? true:false;
         resultado.cuerpo = fields['cuerpo'];
 

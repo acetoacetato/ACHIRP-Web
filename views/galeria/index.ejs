@@ -182,7 +182,6 @@
 
     fetch('/galeria/', opciones).then( response => {
       if(response.ok){
-        console.log(response);
         return response.json();
       } else{
         throw "Error en la llamada Ajax";
@@ -217,7 +216,6 @@
     // Armar la petición POST
     fetch('/galeria/edit', opciones).then( response => {
       if(response.ok){
-        console.log(response);
         return response.json();
       } else{
         throw "Error en la llamada Ajax";
@@ -254,11 +252,9 @@
     }
 
     fetch('/galeria/del', opciones).then( response => {
-      console.log(response)
       if(response.ok){
         return response.json()
       } else{
-        console.log(response);
         throw "Error al llamar AJAX";
       }
     }).then( r => {

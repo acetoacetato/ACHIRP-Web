@@ -43,9 +43,15 @@ const expressLayouts = require('express-ejs-layouts')
 
 const bodyParser = require('body-parser')
 const cors = require('cors')
+
+// Agregar el favicon
+var favicon = require('serve-favicon');
+app.use(favicon(__dirname + '/public/img/favicon.ico'));
+
 /**
  *      Ruteadores
  */
+
 
 app.use(cors());
 // El routeador principal, que maneja las rutas del index
@@ -97,10 +103,11 @@ app.use(bodyParser.json())
 //  process.env.DATABASE_URL se carga desde un archivo .env que 
 //      se incluye en la misma carpeta que este archivo.
 mongoose.connect(process.env.DATABASE_URL, { 
+    useCreateIndex: true,
     useNewUrlParser : true,
     useUnifiedTopology: true,
     useFindAndModify: false
-})
+});
 
 app.use(express.static(__dirname, { dotfiles: 'allow' } ));
 
