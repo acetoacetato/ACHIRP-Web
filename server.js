@@ -11,8 +11,10 @@ if(process.env.NODE_ENV !== 'production'){
 
 // Express para manejar las rutas de la aplicación
 const express = require('express')
-const app = express()
+const compression = require('compression');
 
+const app = express();
+app.use(compression());
 
 // Si gustan habilitar https, se puede hacer con estos métodos.
 const http = require('http');
