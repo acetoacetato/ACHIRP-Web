@@ -69,6 +69,11 @@
             <label>Descripción:</label>
             <input class="form-control" id="modal-descripcion" name="descripcion">
           </div>
+
+          <div class="form-group" >
+            <label>Fecha:</label>
+            <input type="date" class="form-control" id="modal-fecha" name="fecha" value="">
+          </div>
         </div>
         
           
@@ -117,6 +122,10 @@
           <div class="form-group" >
             <label>Descripción:</label>
             <input class="form-control" name="descripcion">
+          </div>
+          <div class="form-group" >
+            <label>Fecha:</label>
+            <input type="date" class="form-control" name="fecha" value="">
           </div>
         </div>
         
@@ -216,6 +225,7 @@
         var id = document.getElementById('modal-id').getAttribute('value');
         var nombre = document.getElementById('modal-nombre').getAttribute('value');
         var descripcion = document.getElementById('modal-descripcion').getAttribute('value');
+        var fecha = document.getElementById('modal-fecha').getAttribute('value');
         var imgs = document.getElementById('upload').files[0];
 
         document.getElementById('nombre-' + id).innerText = nombre;

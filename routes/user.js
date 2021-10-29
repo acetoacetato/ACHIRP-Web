@@ -222,7 +222,11 @@ router.post('/login',
             password
         } = req.body;
     
+        console.log(email);
+        console.log(password);
+
         try {
+
             let user = await Usuario.findOne({email});
             if(!user){  
                 return res.render('user/login', { err : [{msg: "Usuario inexistente"}] });
@@ -246,7 +250,7 @@ router.post('/login',
                 (err, token) => {
                     if (err) throw err;
                     res.cookie('jwt', token, { expires: new Date(Date.now() + (3*60*60*1000) - 3) })
-                    res.status(200).redirect('/directorio');
+                    res.status(200).redirect('/galeria');
                 }
             );
         } catch(err) {

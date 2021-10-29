@@ -71,7 +71,7 @@ function cargarNoticia(inSite, id){
       window.open(noticia.cuerpo);
     } else{
 
-      var fecha = formateaFecha(noticia.fecha)
+      var fecha = (noticia.fecha)
       // Cargar Datos en Modal de Noticia
       $("#modal-titulo-noticia").html(noticia.titulo);
       $("#modal-subtitulo-noticia").html(noticia.desc);

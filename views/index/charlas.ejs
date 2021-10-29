@@ -5,7 +5,7 @@
         <div class="col-12">
           <div class="section-title-header text-center">
             <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Charlas</h2>
-            <p class="wow fadeInDown" data-wow-delay="0.2s">No te pierdas de nuestras charlas:</p>
+            <p class="wow fadeInDown" data-wow-delay="0.2s"></p>
           </div>
         </div>
       </div>
@@ -26,7 +26,7 @@
                       <div class="card">
                         <div id="heading<%= id %>">
                           <div class="schedule-slot-time">
-                            <span style="text-align: center;"> <%= charla.fecha.toLocaleString('es-CL', {day: 'numeric', month: 'long'}) %><br> <%= charla.hora %> hrs.</span> <br>
+                            <span style="text-align: center;"> <%= charla.fecha.toLocaleString('es-CL', {day: 'numeric', month: 'long', year: 'numeric'}) %><br> <%= charla.hora.replace('(GMT-3)', '') %></span> <br>
                           </div>
                           <div class="collapsed card-header" data-toggle="collapse" data-target="#collapse<%= id %>" aria-expanded="false" aria-controls="collapse<%= id %>">
                             <div class="images-box">
@@ -50,7 +50,7 @@
                         <div id="collapse<%= id %>" class="collapse" aria-labelledby="heading<%= id %>" data-parent="#accordion">
                           <div class="card-body">
                             <p> <%= charla.descripcion %> </p>
-                            <p> <a href="<%= charla.slides %>" target="_blank">Slides</a> </p>
+                            <p> <a href="<%= charla.slides %>" target="_blank">Presentación</a> </p>
                             <div class="location">
                               <span>Ubicación:</span> <%= charla.lugar %>
                             </div>

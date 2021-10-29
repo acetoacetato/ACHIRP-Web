@@ -39,6 +39,7 @@ function cargaImagen(id, path){
 function detalles(id) {
     var nombre = document.getElementById('nombre-' + id).innerText;
     var descripcion = document.getElementById('descripcion-' + id).innerText;
+    var fecha = document.getElementById('fecha-' + id).innerText;
     var src = document.getElementById(id).getAttribute("src");
 
     //document.getElementById('modal-form').reset();
@@ -49,6 +50,7 @@ function detalles(id) {
     document.getElementById('modal-descripcion').innerText = descripcion;
     document.getElementById('modal-descripcion').setAttribute('value', descripcion);
     document.getElementById('modal-imagen').setAttribute('src', src);
+    document.getElementById('modal-fecha').setAttribute('value', formateaFecha(fecha, ''));
     document.getElementById('modal-id').setAttribute('value', id);
     
     
@@ -67,6 +69,7 @@ function creaImgObj(imagen){
                 <div class="content">
                   <h3 id="nombre-${imagen._id}">${imagen.nombre}</h3>
                   <div hidden id="descripcion-${imagen._id}">${imagen.descripcion}</div>
+                  <div hidden id="fecha-${imagen._id}">${imagen.fecha}</div>
                   <a class="Modal" href="#testModal" onclick="detalles('${imagen._id}')" data-toggle="modal" data-id="1" >Mas Detalles</a>
                 </div>
               </div>

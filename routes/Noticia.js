@@ -18,8 +18,8 @@ router.get('/', auth, redirect, async (req, res) => {
         searchOptions.nombre = new RegExp(req.query.nombre.trim(), 'i')
     }
     try{
-        const noticias = await Noticia.find(searchOptions)
-    
+        const noticias = await Noticia.find(searchOptions).sort({fecha: 'desc'});
+        
         res.render('noticia/index', {
             noticias: noticias,
             searchOptions: req.query,
@@ -169,7 +169,7 @@ router.post("/del", auth, redirect, async (req, res) => {
 router.get("/noticias", async (req, res) => {
     var pag = ( typeof req.query.npag == "undefined")? 0:req.query.npag - 1;
     const nPorPagina = 4;
-    var galeria = await Noticia.find({});
+    var galeria = await Noticia.find({}).sort({fecha: 'desc'});
     var noticias = galeria.slice(nPorPagina*pag, nPorPagina*pag+nPorPagina);
     res.status(200).send({ 'noticias' : noticias});
 });

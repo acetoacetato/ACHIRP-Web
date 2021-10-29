@@ -41,7 +41,7 @@ router.post('/', auth, apiResponse, async (req, res) => {
     form.parse(req, function (err, fields, files) {
         var nombre = fields['nombre']
         var descripcion = fields['descripcion']
-        var fecha = Date.now()
+        var fecha = fields['fecha']
         var imagen = fields['imagen']
 
         var imagen = files.imagen.name
@@ -173,7 +173,7 @@ router.post("/del", auth, apiResponse, async (req, res) => {
 router.get("/imagenes", async (req, res) => {
     var pag = ( typeof req.query.npag == "undefined")? 0:req.query.npag - 1;
     const nPorPagina = 4;
-    var galeria = await Imagen.find({});
+    var galeria = await Imagen.find({}).sort({fecha: 'desc'});
     var imagenes = galeria.slice(nPorPagina*pag, nPorPagina*pag+nPorPagina);
 
     res.status(200).send({ 'imagenes' : imagenes});

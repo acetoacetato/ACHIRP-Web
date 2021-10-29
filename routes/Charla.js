@@ -17,7 +17,7 @@ router.get('/', auth, redirect, async (req, res) => {
         searchOptions.nombre = new RegExp(req.query.nombre.trim(), 'i')
     }
     try{
-        const charlas = await Charla.find(searchOptions)
+        const charlas = await Charla.find(searchOptions).sort({fecha: 'desc'})
         
         res.render('charla/index', {
             charlas: charlas,

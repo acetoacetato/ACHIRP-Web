@@ -133,7 +133,7 @@ app.use('/charla', charlaRouter)
 app.use('/socio', socioRouter)
 app.use('/user', usuarioRouter)
 //app.use('/asamblea', asambleaRouter)
-app.use('/directorio', directorioRouter)
+//app.use('/directorio', directorioRouter)
 app.use('/contacto', contactoRouter)
 
 // Para incluir el manejo de cookies, se utiliza para mantener sesiones iniciadas
